@@ -4,6 +4,18 @@
  */
 package Pantallas;
 
+import dtos.UsuarioDTO;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import negocio.IUsuarioNegocio;
+import negocio.UsuarioNegocio;
+
 /**
  *
  * @author Arturo ITSON
@@ -12,6 +24,8 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
     
     FrmInicio inicio;
+    
+    static File selectedFile;
     
     /**
      * Creates new form FrmRegistrarse
@@ -95,6 +109,11 @@ public class FrmRegistrarse extends javax.swing.JFrame {
         jblImagen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         btnCargar.setText("Cargar");
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarActionPerformed(evt);
+            }
+        });
 
         btnRegistrarse.setBackground(new java.awt.Color(14, 153, 217));
         btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -145,23 +164,22 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                                 .addComponent(jblContrasena)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegistrarse1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(30, 30, 30)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jblApellidoM)
-                                            .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(77, 77, 77)
                                         .addComponent(btnCargar)))
-                                .addGap(50, 50, 50))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnRegistrarse1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(67, 67, 67))))))
+                                .addGap(50, 50, 50))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,17 +197,17 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jblCorreo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jblCorreo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(38, 38, 38)
                                 .addComponent(jblContrasena)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(15, 15, 15)))
                         .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCargar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
@@ -214,6 +232,22 @@ public class FrmRegistrarse extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    // Método para obtener la extensión del archivo
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        int lastIndex = fileName.lastIndexOf(".");
+        if (lastIndex > 0 && lastIndex < fileName.length() - 1) {
+            return fileName.substring(lastIndex + 1).toLowerCase();
+        }
+        return ""; // Sin extensión
+    }
+    
+    
+    
+    
+    
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         // TODO add your handling code here:
         inicio.setVisible(true);
@@ -223,7 +257,112 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
     private void btnRegistrarse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse1ActionPerformed
         // TODO add your handling code here:
+        
+        try{
+        
+            String nombres = txtNombres.getText();
+            String apellidoP = txtApellidoP.getText();
+            String apellidoM = txtApellidoM.getText();
+            String correo = txtCorreo.getText();
+            String contra = txtContrasena.getText();
+            
+            
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+        
+            
+            if(selectedFile == null){
+    
+                usuarioDTO.setApellidoM(apellidoM);
+                usuarioDTO.setApellidoP(apellidoP);
+                usuarioDTO.setContrasena(contra);
+                usuarioDTO.setCorreo(correo);
+                usuarioDTO.setImagen("src/main/java/ImagenesProyecto/NoImagen.jpg");
+                usuarioDTO.setNombres(nombres);
+
+
+                IUsuarioNegocio negocio = new UsuarioNegocio();
+                negocio.agregarUsuario(usuarioDTO);
+
+
+                JOptionPane.showMessageDialog(this, "usuario registrado con exito");
+                System.out.println(usuarioDTO.toString());
+                
+            }
+            
+            else{
+                
+                    // Crear un nombre único para el archivo (usar timestamp)
+                    String fileExtension = getFileExtension(selectedFile);
+                    String uniqueFileName = System.currentTimeMillis() + "." + fileExtension;
+                    
+                    // Ruta donde se guardará la imagen
+                    String destinationPath = "src/main/java/ImagenesUsuario/" + uniqueFileName;
+                    File destinationFile = new File(destinationPath);
+
+                    // Crear directorio si no existe
+                    destinationFile.getParentFile().mkdirs();
+
+                    // Copiar la imagen seleccionada
+                    Files.copy(selectedFile.toPath(), destinationFile.toPath());
+                    
+                // Guardar la ruta en una variable
+                    String savedImagePath = destinationFile.getAbsolutePath();
+                    System.out.println("Imagen guardada en: " + savedImagePath);
+                   
+            
+                    usuarioDTO.setApellidoM(apellidoM);
+                    usuarioDTO.setApellidoP(apellidoP);
+                    usuarioDTO.setContrasena(contra);
+                    usuarioDTO.setCorreo(correo);
+                    usuarioDTO.setImagen(destinationPath);
+                    usuarioDTO.setNombres(nombres);
+
+
+                    IUsuarioNegocio negocio = new UsuarioNegocio();
+                    negocio.agregarUsuario(usuarioDTO);
+
+
+                    JOptionPane.showMessageDialog(this, "usuario registrado con exito");
+                    System.out.println(usuarioDTO.toString());        
+            }
+        }   
+        
+        catch(IOException ex){
+                JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage());
+
+        }
     }//GEN-LAST:event_btnRegistrarse1ActionPerformed
+
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
+        // TODO add your handling code here:
+        try{
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Selecciona una imagen");
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imágenes", "jpg", "png", "jpeg", "gif"));
+
+
+            int result = fileChooser.showOpenDialog(this);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                selectedFile = fileChooser.getSelectedFile();
+
+                    // Mostrar la imagen
+                    ImageIcon image = new ImageIcon(selectedFile.getPath());
+                    Icon icon = new ImageIcon(
+                    image.getImage().getScaledInstance(jblImagen.getWidth(), jblImagen.getHeight(), Image.SCALE_DEFAULT));
+                    
+                    jblImagen.setIcon(icon);
+                    jblImagen.setText("");
+            
+            
+            }
+        }
+        
+        catch(Exception ex){
+              JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage());
+
+        }
+        
+    }//GEN-LAST:event_btnCargarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
