@@ -5,8 +5,13 @@
 package Pantallas;
 
 import dtos.ArtistaDTO;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import negocio.ArtistaNegocio;
 import negocio.IArtistaNegocio;
 import org.bson.types.ObjectId;
@@ -21,7 +26,8 @@ public class FrmBuscador extends javax.swing.JFrame {
     FrmUsuarioPerfil perfil;
     
     static List<ArtistaDTO> artistas;
-    static List<ArtistaDTO> artistasNuevo;
+   // static List<AlbumDTO> albumes;
+   // static List<CancionesDTO> canciones;
     
     IArtistaNegocio negocio = new ArtistaNegocio();
     
@@ -45,25 +51,65 @@ public class FrmBuscador extends javax.swing.JFrame {
         
         
         artistas = negocio.obtenerTodos();
-        artistasNuevo = new ArrayList<>();
         
-        for(int i = 0; i < artistas.size(); i++){
-            System.out.println(artistas.size());
-            ObjectId objecto = artistas.get(i).getId();
-            System.out.println(objecto.toString());
-            artistasNuevo.add(negocio.buscarArtista(objecto));
-            System.out.println("se logor");
-            
-        }
         
     }
     
     public void cargarDatos(){
     
-        jblNombreArtista1.setText(artistasNuevo.get(0).getNombreArtista());
-        System.out.println(artistasNuevo.get(0).toString());
-        System.out.println("tamanño" + artistasNuevo.size());
+        jblNombreArtista1.setText(artistas.get(0).getNombreArtista());
+        setImagenLabel(jblArtista1, artistas.get(0).getImagen());
+        
+        jblNombreArtista2.setText(artistas.get(1).getNombreArtista());
+        setImagenLabel(jblArtista2, artistas.get(1).getImagen());
+        
+        jblNombreArtista3.setText(artistas.get(2).getNombreArtista());
+        setImagenLabel(jblArtista3, artistas.get(2).getImagen());
+        
+        
+
+        jblNombreAlbum1.setText(artistas.get(0).getAlbumes().get(0).getNombre());
+        setImagenLabel(jblAlbum1, artistas.get(0).getAlbumes().get(0).getImagen());
+        
+        jblNombreAlbum2.setText(artistas.get(1).getAlbumes().get(1).getNombre());
+        setImagenLabel(jblAlbum2, artistas.get(1).getAlbumes().get(1).getImagen());
+        
+        jblNombreAlbum3.setText(artistas.get(2).getAlbumes().get(0).getNombre());
+        setImagenLabel(jblAlbum3, artistas.get(2).getAlbumes().get(0).getImagen());
+        
+        
+        
+        jblNombreCancion1.setText(artistas.get(0).getAlbumes().get(0).getCanciones().get(0).getNombreCancion());
+        setImagenLabel(jblCancion1, artistas.get(0).getAlbumes().get(0).getImagen());
+        
+        jblNombreCancion2.setText(artistas.get(1).getAlbumes().get(0).getCanciones().get(0).getNombreCancion());
+        setImagenLabel(jblCancion2, artistas.get(1).getAlbumes().get(0).getImagen());
+        
+        jblNombreCancion3.setText(artistas.get(2).getAlbumes().get(0).getCanciones().get(0).getNombreCancion());
+        setImagenLabel(jblCancion3, artistas.get(2).getAlbumes().get(0).getImagen());
+
     }
+    
+    
+        /**
+     * Metodo que coloca una imagen de el logo de cinepolis en la interfaz
+     * @param nombreJlb el jlabel que sera reemplazado por una imagen
+     * @param ruta la direccion donde se encuentra la imagen
+     */
+    private void setImagenLabel(JLabel nombreJlb, String ruta){
+    
+        ImageIcon image = new ImageIcon(ruta);
+        
+        Icon icon = new ImageIcon(
+        image.getImage().getScaledInstance(nombreJlb.getWidth(), nombreJlb.getHeight(), Image.SCALE_DEFAULT));
+        
+        nombreJlb.setIcon(icon);
+        
+        this.repaint();
+   
+    }
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,7 +277,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnRetrocederArtista.setBackground(new java.awt.Color(8, 148, 249));
-        btnRetrocederArtista.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRetrocederArtista.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnRetrocederArtista.setForeground(new java.awt.Color(0, 0, 0));
         btnRetrocederArtista.setText("<");
 
@@ -241,15 +287,23 @@ public class FrmBuscador extends javax.swing.JFrame {
         btnAvanzarArtista.setText(">");
 
         jblArtista1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblArtista1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblArtista1MouseClicked(evt);
+            }
+        });
 
         jblArtista2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jblArtista3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreArtista1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreArtista1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreArtista2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreArtista2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreArtista3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreArtista3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jblArtistaFavorito1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -264,14 +318,14 @@ public class FrmBuscador extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblNombreArtista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jblArtista1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jblArtistaFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblArtista2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(jblNombreArtista2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -281,13 +335,10 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblArtista3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(jblNombreArtista3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jblArtistaFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jblArtistaFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -305,11 +356,9 @@ public class FrmBuscador extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jblNombreArtista1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnRetrocederArtista)
-                                    .addComponent(btnAvanzarArtista)))
+                            .addComponent(jblNombreArtista1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jblNombreArtista2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jblNombreArtista3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -337,10 +386,13 @@ public class FrmBuscador extends javax.swing.JFrame {
 
         jblAlbum2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblAlbum3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblAlbum3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreAlbum1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreAlbum1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreAlbum2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreAlbum2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jblNombreAlbum3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -357,8 +409,8 @@ public class FrmBuscador extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jblAlbum1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
@@ -374,14 +426,14 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblAlbum3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(jblNombreAlbum3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jblAlbumFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jblAlbumFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,11 +450,10 @@ public class FrmBuscador extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnRetrocederAlbum)
-                                    .addComponent(btnAvanzarAlbum)))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jblNombreAlbum2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jblNombreAlbum3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -432,10 +483,13 @@ public class FrmBuscador extends javax.swing.JFrame {
 
         jblCancion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreCancion1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreCancion1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreCancion2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreCancion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreCancion3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreCancion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jblCancionFavorito1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -450,8 +504,8 @@ public class FrmBuscador extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRetrocederCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
+                .addComponent(btnRetrocederCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblNombreCancion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jblCancion1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
@@ -467,14 +521,14 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblCancion3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(jblNombreCancion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jblCancionFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jblCancionFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,11 +606,11 @@ public class FrmBuscador extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(93, 93, 93)
@@ -604,6 +658,12 @@ public class FrmBuscador extends javax.swing.JFrame {
         perfil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPerfilActionPerformed
+
+    private void jblArtista1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtista1MouseClicked
+        // TODO add your handling code here:
+        
+        JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+    }//GEN-LAST:event_jblArtista1MouseClicked
 
 
 
