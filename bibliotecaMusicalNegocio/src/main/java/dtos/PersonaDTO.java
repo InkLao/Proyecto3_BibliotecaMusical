@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package colecciones;
+package dtos;
 
 import org.bson.types.ObjectId;
 
@@ -10,19 +6,16 @@ import org.bson.types.ObjectId;
  *
  * @author eduar
  */
-public class Persona {
+public class PersonaDTO {
+
     private ObjectId id;
     private String nombreCompleto;
 
-    public Persona() {
+    public PersonaDTO() {
     }
 
-    public Persona(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    public Persona(ObjectId id, String nombreCompleto) {
-        this.id=id;
+    public PersonaDTO(ObjectId id, String nombreCompleto) {
+        this.id = id;
         this.nombreCompleto = nombreCompleto;
     }
 
@@ -44,6 +37,6 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + '}';
+        return "PersonaDTO{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + '}';
     }
 }

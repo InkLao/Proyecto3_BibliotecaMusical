@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package colecciones;
+package dtos;
 
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -11,21 +7,17 @@ import org.bson.types.ObjectId;
  *
  * @author eduar
  */
-public class GeneroNoDeseado {
+public class GeneroNoDeseadoDTO {
+
     private ObjectId id;
     private ObjectId idUsuario;
     private List<String> nombreGenero;
 
-    public GeneroNoDeseado() {
+    public GeneroNoDeseadoDTO() {
     }
 
-    public GeneroNoDeseado(ObjectId idUsuario, List<String> nombreGenero) {
-        this.idUsuario = idUsuario;
-        this.nombreGenero = nombreGenero;
-    }
-
-    public GeneroNoDeseado(ObjectId id, ObjectId idUsuario, List<String> nombreGenero) {
-        this.id=id;
+    public GeneroNoDeseadoDTO(ObjectId id, ObjectId idUsuario, List<String> nombreGenero) {
+        this.id = id;
         this.idUsuario = idUsuario;
         this.nombreGenero = nombreGenero;
     }
@@ -56,6 +48,6 @@ public class GeneroNoDeseado {
 
     @Override
     public String toString() {
-        return "GeneroNoDeseado{" + "id=" + id + ", idUsuario=" + idUsuario + ", nombreGenero=" + nombreGenero + '}';
+        return "GeneroNoDeseadoDTO{" + "id=" + id + ", idUsuario=" + idUsuario + ", nombreGenero=" + nombreGenero + '}';
     }
 }
