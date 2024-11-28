@@ -4,21 +4,17 @@
  */
 package daos;
 
-import colecciones.Usuario;
+import colecciones.Artista;
+import java.util.List;
 
 /**
  *
  * @author Arturo ITSON
  */
-public interface IUsuarioDAO {
+public interface IArtistaDAO {
     
+    List<Artista> obtenerTodos();
     
-    Usuario agregarUsuario(Usuario usuario);
-    
-    Usuario editarUsuario(Usuario usuario);
-    
-    Usuario buscarUsuario(Object id);
-    
-    Usuario buscarUsuarioIniciarSesion(String correo, String contra);
+    Artista buscarArtista(Object id);
     
 }

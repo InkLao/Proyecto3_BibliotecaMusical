@@ -49,6 +49,16 @@ public class UsuarioNegocio implements IUsuarioNegocio{
     }
     
     
+    @Override
+    public UsuarioDTO buscarUsuarioIniciarSesion(String correo, String contra){
+        
+        UsuarioDTO usuarioDTO = this.convertirUsuarioADTO(usuarioDAO.buscarUsuarioIniciarSesion(correo, contra));
+        
+        return usuarioDTO;
+    }
+    
+    
+    
     private Usuario convertirUsuarioDTOAColeccion(UsuarioDTO usuario){
     
         return new Usuario(usuario.getNombres(), usuario.getApellidoP(), usuario.getApellidoM(), usuario.getCorreo(), usuario.getContrasena(), usuario.getImagen());

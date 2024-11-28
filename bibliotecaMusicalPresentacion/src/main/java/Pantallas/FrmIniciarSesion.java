@@ -4,6 +4,11 @@
  */
 package Pantallas;
 
+import dtos.UsuarioDTO;
+import javax.swing.JOptionPane;
+import negocio.IUsuarioNegocio;
+import negocio.UsuarioNegocio;
+
 /**
  *
  * @author Arturo ITSON
@@ -67,6 +72,11 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(0, 0, 0));
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         btnRegistrarse.setBackground(new java.awt.Color(14, 153, 217));
         btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -143,6 +153,42 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        // TODO add your handling code here:
+        
+        String correo = txtCorreo.getText();
+        String contra = txtContrasena.getText();
+        
+        try{
+        
+            IUsuarioNegocio negocio = new UsuarioNegocio();
+            UsuarioDTO usuarioDTO = negocio.buscarUsuarioIniciarSesion(correo, contra);
+            
+            if(usuarioDTO != null){
+                FrmUsuarioPerfil perfil = new FrmUsuarioPerfil(this, usuarioDTO);
+                perfil.setVisible(true);
+                
+                this.setVisible(false);
+                
+            }
+        
+            else{
+                JOptionPane.showMessageDialog(this, "correo o contraseña incorrectos.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+        
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "correo o contraseña incorrectos.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+
+        
+        }
+        
+        
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

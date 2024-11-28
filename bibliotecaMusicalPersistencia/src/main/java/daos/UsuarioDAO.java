@@ -70,4 +70,16 @@ public class UsuarioDAO implements IUsuarioDAO{
         
     }
     
+    
+    @Override
+    public Usuario buscarUsuarioIniciarSesion(String correo, String contra){
+    
+        Document query = new Document("correo", correo).append("contrasena", contra);
+        
+        Usuario usuario = collectionUsuario.find(query).first();
+        
+        return usuario;
+        
+    }
+    
 }

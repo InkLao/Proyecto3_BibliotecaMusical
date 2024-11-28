@@ -4,20 +4,18 @@
  */
 package negocio;
 
-import dtos.UsuarioDTO;
+import dtos.ArtistaDTO;
+import java.util.List;
 
 /**
  *
  * @author Arturo ITSON
  */
-public interface IUsuarioNegocio {
+public interface IArtistaNegocio {
     
     
-    UsuarioDTO agregarUsuario(UsuarioDTO usuario);
+    List<ArtistaDTO> obtenerTodos();
     
-    UsuarioDTO editarUsuario(UsuarioDTO usuario);
+    ArtistaDTO buscarArtista(Object id);
     
-    UsuarioDTO buscarUsuario(Object id);
-    
-    UsuarioDTO buscarUsuarioIniciarSesion(String correo, String contra);
 }
