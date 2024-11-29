@@ -26,4 +26,5 @@ public interface IArtistaNegocio {
     
     List<AlbumDTO> obtenerTodosAlbumesEnArtista();
     
+    ArtistaDTO agregarArtista(ArtistaDTO artistaDTO);
 }

@@ -24,51 +24,43 @@ import org.bson.conversions.Bson;
  *
  * @author Arturo ITSON
  */
-public class ArtistaDAO implements IArtistaDAO{
-    
-    
+public class ArtistaDAO implements IArtistaDAO {
+
     MongoDatabase baseDeDatos;
     MongoCollection<Artista> collectionArtista;
-    
-    
-    public ArtistaDAO(){
+
+    public ArtistaDAO() {
         this.baseDeDatos = new ConexionBD().conexion();
         this.collectionArtista = baseDeDatos.getCollection("artistas", Artista.class);
     }
 
-    
-    
     @Override
     public List<Artista> obtenerTodos() {
 
         List<Artista> artistas;
-        
-        
+
         artistas = collectionArtista.find().into(new ArrayList<>());
-                
+
         return artistas;
     }
-    
-    
+
     @Override
     public Artista buscarArtista(Object id) {
 
         Document query = new Document("_id", id);
-        
+
         Artista artista = collectionArtista.find(query).first();
-        
+
         return artista;
-        
+
     }
-    
-    
+
     @Override
-    public List<Albumes> obtenerTodosAlbumesEnArtista(){
-   
+    public List<Albumes> obtenerTodosAlbumesEnArtista() {
 
         List<Artista> listaArtistas = collectionArtista.find().into(new ArrayList<>());
 
-         // Lista donde se almacenarán todos los álbumes
+        // Lista donde se almacenarán todos los álbumes
         List<Albumes> listaAlbumes = new ArrayList<>();
 
         // Recorrer el AggregateIterable
@@ -87,17 +79,14 @@ public class ArtistaDAO implements IArtistaDAO{
                 listaAlbumes.add(nuevoAlbum);
             }
         }
-        
+
         return listaAlbumes;
     }
-    
-    
-    
-    @Override
-    public List<Canciones> obtenerTodasCancionesEnArtista(){
-   
-        List<Artista> listaArtistas = collectionArtista.find().into(new ArrayList<>());
 
+    @Override
+    public List<Canciones> obtenerTodasCancionesEnArtista() {
+
+        List<Artista> listaArtistas = collectionArtista.find().into(new ArrayList<>());
 
         // Lista donde se almacenarán todas las canciones
         List<Canciones> listaCanciones = new ArrayList<>();
@@ -121,18 +110,16 @@ public class ArtistaDAO implements IArtistaDAO{
                 }
             }
         }
-        
+
         return listaCanciones;
-        
+
     }
-    
-    
+
     @Override
-    public String obtenerImagenPorIdCancion(String id){
-    
+    public String obtenerImagenPorIdCancion(String id) {
+
         List<Artista> listaArtistas = collectionArtista.find().into(new ArrayList<>());
-        
-        
+
         // Variable para almacenar la imagen del álbum
         String imagenAlbum = null;
 
@@ -147,16 +134,20 @@ public class ArtistaDAO implements IArtistaDAO{
                             if (cancion.getIdCancion().equals(id)) {
                                 // Encontramos la canción, obtenemos la imagen del álbum
                                 imagenAlbum = album.getImagen();
-                                
+
                                 return imagenAlbum;
-                                
+
                             }
                         }
                     }
-                    if (imagenAlbum != null) break; // Salir del bucle si ya encontramos la canción
+                    if (imagenAlbum != null) {
+                        break; // Salir del bucle si ya encontramos la canción
+                    }
                 }
             }
-            if (imagenAlbum != null) break; // Salir del bucle si ya encontramos la canción
+            if (imagenAlbum != null) {
+                break; // Salir del bucle si ya encontramos la canción
+            }
         }
 
         // Mostrar el resultado
@@ -165,10 +156,21 @@ public class ArtistaDAO implements IArtistaDAO{
         } else {
             System.out.println("No se encontró la canción con el ID proporcionado.");
         }
-        
+
         return null;
     }
-    
-    
- }
-    
+
+    @Override
+    public Artista agregarArtista(Artista artista) {
+        try {
+            // Insertar el artista en la colección
+            collectionArtista.insertOne(artista);
+            System.out.println("Artista agregado con éxito: " + artista.getNombreArtista());
+            return artista;
+        } catch (Exception e) {
+            System.err.println("Error al agregar el artista: " + e.getMessage());
+            return null;
+        }
+    }
+
+}

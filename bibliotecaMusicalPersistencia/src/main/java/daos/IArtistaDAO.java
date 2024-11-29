@@ -25,4 +25,6 @@ public interface IArtistaDAO {
     
     List<Albumes> obtenerTodosAlbumesEnArtista();
     
+    Artista agregarArtista(Artista artista);
+    
 }

@@ -17,7 +17,8 @@ import org.bson.types.ObjectId;
  *
  * @author eduar
  */
-public class PersonaDAO implements IPersonaDAO{
+public class PersonaDAO implements IPersonaDAO {
+
     MongoDatabase baseDeDatos;
     MongoCollection<Persona> collectionPersona;
 
@@ -42,4 +43,15 @@ public class PersonaDAO implements IPersonaDAO{
         collectionPersona.insertOne(persona);
         return persona;
     }
+
+    public void agregarPersonaComoIntegrante(Persona persona) {
+        PersonaDAO personaDAO = new PersonaDAO();
+        Persona personaInsertada = personaDAO.agregarPersona(persona);
+        if (personaInsertada != null) {
+            System.out.println("Persona agregada como integrante: " + personaInsertada.getNombreCompleto());
+        } else {
+            System.err.println("Error al agregar la persona como integrante.");
+        }
+    }
+
 }
