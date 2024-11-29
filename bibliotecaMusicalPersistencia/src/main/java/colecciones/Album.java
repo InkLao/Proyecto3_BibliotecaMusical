@@ -12,29 +12,32 @@ import java.util.List;
  * @author eduar
  */
 public class Album {
-    private String id;
+    
+    
+    private String idAlbum;
     private String nombre;
     private Date fechaLanzamiento;
     private String imagen;
     private List<Cancion> canciones;
 
+    
     public Album() {
     }
 
-    public Album(String id, String nombre, Date fechaLanzamiento, String imagen, List<Cancion> canciones) {
-        this.id = id;
+    public Album(String idAlbum, String nombre, Date fechaLanzamiento, String imagen, List<Cancion> canciones) {
+        this.idAlbum = idAlbum;
         this.nombre = nombre;
         this.fechaLanzamiento = fechaLanzamiento;
         this.imagen = imagen;
         this.canciones = canciones;
     }
 
-    public String getId() {
-        return id;
+    public String getIdAlbum() {
+        return idAlbum;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdCancion(String idAlbum) {
+        this.idAlbum = idAlbum;
     }
 
     public String getNombre() {
@@ -71,6 +74,6 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album{" + "id=" + id + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", imagen=" + imagen + ", canciones=" + canciones + '}';
+        return "Album{" + "idAlbum=" + idAlbum + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", imagen=" + imagen + ", canciones=" + canciones + '}';
     }
 }

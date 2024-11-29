@@ -9,31 +9,29 @@ import java.util.List;
  */
 public class AlbumDTO {
 
-    private String id;
+    private String idAlbum;
     private String nombre;
     private Date fechaLanzamiento;
-    private String genero;
     private String imagen;
     private List<CancionDTO> canciones;
 
     public AlbumDTO() {
     }
 
-    public AlbumDTO(String id, String nombre, Date fechaLanzamiento, String genero, String imagen, List<CancionDTO> canciones) {
-        this.id = id;
+    public AlbumDTO(String idAlbum, String nombre, Date fechaLanzamiento, String imagen, List<CancionDTO> canciones) {
+        this.idAlbum = idAlbum;
         this.nombre = nombre;
         this.fechaLanzamiento = fechaLanzamiento;
-        this.genero = genero;
         this.imagen = imagen;
         this.canciones = canciones;
     }
 
-    public String getId() {
-        return id;
+    public String getIdAlbum() {
+        return idAlbum;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdAlbum(String idAlbum) {
+        this.idAlbum = idAlbum;
     }
 
     public String getNombre() {
@@ -50,14 +48,6 @@ public class AlbumDTO {
 
     public void setFechaLanzamiento(Date fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public String getImagen() {
@@ -78,6 +68,8 @@ public class AlbumDTO {
 
     @Override
     public String toString() {
-        return "AlbumDTO{" + "id=" + id + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", genero=" + genero + ", imagen=" + imagen + ", canciones=" + canciones + '}';
+        return "AlbumDTO{" + "idAlbum=" + idAlbum + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", imagen=" + imagen + ", canciones=" + canciones + '}';
     }
+
+
 }

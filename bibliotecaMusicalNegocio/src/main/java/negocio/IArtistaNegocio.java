@@ -4,7 +4,9 @@
  */
 package negocio;
 
+import dtos.AlbumDTO;
 import dtos.ArtistaDTO;
+import dtos.CancionDTO;
 import java.util.List;
 
 /**
@@ -17,5 +19,11 @@ public interface IArtistaNegocio {
     List<ArtistaDTO> obtenerTodos();
     
     ArtistaDTO buscarArtista(Object id);
+    
+    String obtenerImagenPorIdCancion(String id);
+    
+    List<CancionDTO> obtenerTodasCancionesEnArtista();
+    
+    List<AlbumDTO> obtenerTodosAlbumesEnArtista();
     
 }

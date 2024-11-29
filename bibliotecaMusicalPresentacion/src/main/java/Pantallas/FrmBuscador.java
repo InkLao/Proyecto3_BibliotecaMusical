@@ -4,7 +4,9 @@
  */
 package Pantallas;
 
+import dtos.AlbumDTO;
 import dtos.ArtistaDTO;
+import dtos.CancionDTO;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,20 @@ public class FrmBuscador extends javax.swing.JFrame {
     FrmUsuarioPerfil perfil;
     
     static List<ArtistaDTO> artistas;
-   // static List<AlbumDTO> albumes;
-   // static List<CancionesDTO> canciones;
+    static List<AlbumDTO> albumes;
+    static List<CancionDTO> canciones;
+    
+    static int indiceArtistaA = 0;
+    static int indiceArtistaB = 1;
+    static int indiceArtistaC = 2;
+    
+    static int indiceAlbumA = 0;
+    static int indiceAlbumB = 1;
+    static int indiceAlbumC = 2;
+    
+    static int indiceCancionA = 0;
+    static int indiceCancionB = 1;
+    static int indiceCancionC = 2;
     
     IArtistaNegocio negocio = new ArtistaNegocio();
     
@@ -41,17 +55,28 @@ public class FrmBuscador extends javax.swing.JFrame {
         
         initComponents();
         
+        btnRetrocederAlbum.setEnabled(false);
+        btnRetrocederArtista.setEnabled(false);
+        btnRetrocederCancion.setEnabled(false);
         
-        obtenerArtistas();
+        obtenerDatos();
         cargarDatos();
     }
 
     
-    public void obtenerArtistas(){
+    public void obtenerDatos(){
         
         
         artistas = negocio.obtenerTodos();
         
+        albumes = negocio.obtenerTodosAlbumesEnArtista();
+                
+        canciones = negocio.obtenerTodasCancionesEnArtista();
+        
+        
+        System.out.println("alb" + albumes.size());
+
+        System.out.println("ca" + canciones.size());
         
     }
     
@@ -59,6 +84,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     
         jblNombreArtista1.setText(artistas.get(0).getNombreArtista());
         setImagenLabel(jblArtista1, artistas.get(0).getImagen());
+        System.out.println(artistas.get(0).toString());
         
         jblNombreArtista2.setText(artistas.get(1).getNombreArtista());
         setImagenLabel(jblArtista2, artistas.get(1).getImagen());
@@ -68,25 +94,27 @@ public class FrmBuscador extends javax.swing.JFrame {
         
         
 
-        jblNombreAlbum1.setText(artistas.get(0).getAlbumes().get(0).getNombre());
-        setImagenLabel(jblAlbum1, artistas.get(0).getAlbumes().get(0).getImagen());
+        jblNombreAlbum1.setText(albumes.get(0).getNombre());
+        setImagenLabel(jblAlbum1, artistas.get(0).getImagen());
+        System.out.println(albumes.get(0).toString());
         
-        jblNombreAlbum2.setText(artistas.get(1).getAlbumes().get(1).getNombre());
-        setImagenLabel(jblAlbum2, artistas.get(1).getAlbumes().get(1).getImagen());
+        jblNombreAlbum2.setText(albumes.get(1).getNombre());
+        setImagenLabel(jblAlbum2, albumes.get(1).getImagen());
         
-        jblNombreAlbum3.setText(artistas.get(2).getAlbumes().get(0).getNombre());
-        setImagenLabel(jblAlbum3, artistas.get(2).getAlbumes().get(0).getImagen());
+        jblNombreAlbum3.setText(albumes.get(2).getNombre());
+        setImagenLabel(jblAlbum3, albumes.get(2).getImagen());
         
         
         
-        jblNombreCancion1.setText(artistas.get(0).getAlbumes().get(0).getCanciones().get(0).getNombreCancion());
-        setImagenLabel(jblCancion1, artistas.get(0).getAlbumes().get(0).getImagen());
+        jblNombreCancion1.setText(canciones.get(0).getNombreCancion());
+        System.out.println(canciones.get(0).toString());
+        setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(0).getIdCancion()));
         
-        jblNombreCancion2.setText(artistas.get(1).getAlbumes().get(0).getCanciones().get(0).getNombreCancion());
-        setImagenLabel(jblCancion2, artistas.get(1).getAlbumes().get(0).getImagen());
+        jblNombreCancion2.setText(canciones.get(1).getNombreCancion());
+        setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(1).getIdCancion()));
         
-        jblNombreCancion3.setText(artistas.get(2).getAlbumes().get(0).getCanciones().get(0).getNombreCancion());
-        setImagenLabel(jblCancion3, artistas.get(2).getAlbumes().get(0).getImagen());
+        jblNombreCancion3.setText(canciones.get(2).getNombreCancion());
+        setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(2).getIdCancion()));
 
     }
     
@@ -225,7 +253,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        txtBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        txtBuscar.setBackground(new java.awt.Color(204, 204, 204));
         txtBuscar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -280,11 +308,21 @@ public class FrmBuscador extends javax.swing.JFrame {
         btnRetrocederArtista.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnRetrocederArtista.setForeground(new java.awt.Color(0, 0, 0));
         btnRetrocederArtista.setText("<");
+        btnRetrocederArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederArtistaActionPerformed(evt);
+            }
+        });
 
         btnAvanzarArtista.setBackground(new java.awt.Color(8, 148, 249));
-        btnAvanzarArtista.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAvanzarArtista.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnAvanzarArtista.setForeground(new java.awt.Color(0, 0, 0));
         btnAvanzarArtista.setText(">");
+        btnAvanzarArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarArtistaActionPerformed(evt);
+            }
+        });
 
         jblArtista1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jblArtista1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -294,8 +332,18 @@ public class FrmBuscador extends javax.swing.JFrame {
         });
 
         jblArtista2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblArtista2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblArtista2MouseClicked(evt);
+            }
+        });
 
         jblArtista3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblArtista3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblArtista3MouseClicked(evt);
+            }
+        });
 
         jblNombreArtista1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreArtista1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -318,54 +366,60 @@ public class FrmBuscador extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblNombreArtista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jblArtista1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jblNombreArtista1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jblArtista1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jblArtistaFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblArtista2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(jblNombreArtista2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jblArtista2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblNombreArtista2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jblArtistaFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblArtista3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(jblNombreArtista3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jblArtistaFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jblNombreArtista3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jblArtista3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jblArtistaFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblArtista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jblArtista2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(jblArtista3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jblArtistaFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblNombreArtista1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jblNombreArtista2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblNombreArtista3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jblArtistaFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblArtistaFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblArtistaFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jblArtista3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jblArtistaFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jblArtista1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jblArtistaFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jblArtista2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblNombreArtista1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAvanzarArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jblNombreArtista2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblNombreArtista3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRetrocederArtista, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -373,21 +427,46 @@ public class FrmBuscador extends javax.swing.JFrame {
         jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnRetrocederAlbum.setBackground(new java.awt.Color(8, 148, 249));
-        btnRetrocederAlbum.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRetrocederAlbum.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnRetrocederAlbum.setForeground(new java.awt.Color(0, 0, 0));
         btnRetrocederAlbum.setText("<");
+        btnRetrocederAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederAlbumActionPerformed(evt);
+            }
+        });
 
         btnAvanzarAlbum.setBackground(new java.awt.Color(8, 148, 249));
-        btnAvanzarAlbum.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAvanzarAlbum.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnAvanzarAlbum.setForeground(new java.awt.Color(0, 0, 0));
         btnAvanzarAlbum.setText(">");
+        btnAvanzarAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarAlbumActionPerformed(evt);
+            }
+        });
 
         jblAlbum1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblAlbum1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblAlbum1MouseClicked(evt);
+            }
+        });
 
         jblAlbum2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblAlbum2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblAlbum2MouseClicked(evt);
+            }
+        });
 
         jblAlbum3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblAlbum3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblAlbum3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblAlbum3MouseClicked(evt);
+            }
+        });
 
         jblNombreAlbum1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreAlbum1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -410,23 +489,24 @@ public class FrmBuscador extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jblAlbum1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jblAlbumFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jblAlbum1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jblAlbumFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblAlbum2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(jblNombreAlbum2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jblAlbum2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblNombreAlbum2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jblAlbumFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblAlbum3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(jblNombreAlbum3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(49, 49, 49)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jblAlbum3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblNombreAlbum3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jblAlbumFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -442,24 +522,24 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblAlbum1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jblAlbum2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(jblAlbum3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                            .addComponent(jblAlbum1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblAlbum2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblAlbum3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jblAlbumFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jblAlbumFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jblAlbumFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jblNombreAlbum1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jblNombreAlbum2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jblNombreAlbum3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblAlbumFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblAlbumFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jblAlbumFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -468,27 +548,55 @@ public class FrmBuscador extends javax.swing.JFrame {
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         btnRetrocederCancion.setBackground(new java.awt.Color(8, 148, 249));
-        btnRetrocederCancion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnRetrocederCancion.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnRetrocederCancion.setForeground(new java.awt.Color(0, 0, 0));
         btnRetrocederCancion.setText("<");
+        btnRetrocederCancion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRetrocederCancionActionPerformed(evt);
+            }
+        });
 
         btnAvanzarCancion.setBackground(new java.awt.Color(8, 148, 249));
-        btnAvanzarCancion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAvanzarCancion.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         btnAvanzarCancion.setForeground(new java.awt.Color(0, 0, 0));
         btnAvanzarCancion.setText(">");
+        btnAvanzarCancion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvanzarCancionActionPerformed(evt);
+            }
+        });
 
         jblCancion1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblCancion1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCancion1MouseClicked(evt);
+            }
+        });
 
         jblCancion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblCancion2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCancion2MouseClicked(evt);
+            }
+        });
 
         jblCancion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jblCancion3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCancion3MouseClicked(evt);
+            }
+        });
 
+        jblNombreCancion1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jblNombreCancion1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreCancion1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreCancion2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jblNombreCancion2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreCancion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
+        jblNombreCancion3.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jblNombreCancion3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jblNombreCancion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -504,31 +612,31 @@ public class FrmBuscador extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnRetrocederCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblNombreCancion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jblCancion1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRetrocederCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jblNombreCancion1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblCancion1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jblCancionFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblCancion2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(jblNombreCancion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jblCancionFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblCancion3, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(jblNombreCancion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jblCancionFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jblCancion2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jblCancionFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jblNombreCancion2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jblNombreCancion3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jblCancion3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jblCancionFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,25 +645,23 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblCancion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jblCancion2, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addComponent(jblCancion3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jblCancionFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jblCancionFavorito3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblCancion2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblCancion1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblCancion3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblCancionFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jblNombreCancion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnRetrocederCancion)
-                                    .addComponent(btnAvanzarCancion)))
-                            .addComponent(jblNombreCancion2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblNombreCancion3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jblNombreCancion3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jblNombreCancion1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jblNombreCancion2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnRetrocederCancion)
+                                        .addComponent(btnAvanzarCancion))))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblCancionFavorito2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblCancionFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jblCancionFavorito1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -609,13 +715,13 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(93, 93, 93)
+                    .addGap(121, 121, 121)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(122, Short.MAX_VALUE)))
+                    .addContainerGap(123, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,12 +730,12 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(626, Short.MAX_VALUE)))
+                    .addContainerGap(634, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -664,6 +770,450 @@ public class FrmBuscador extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(this, "aqui va a haber algo");
     }//GEN-LAST:event_jblArtista1MouseClicked
+
+    private void btnAvanzarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarArtistaActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            btnRetrocederArtista.setEnabled(true);
+            indiceArtistaA = indiceArtistaA + 3;
+            if(artistas.get(indiceArtistaA) != null){ 
+
+                jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
+                setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
+            
+                try{
+                    indiceArtistaB = indiceArtistaA + 3;
+                    if(artistas.get(indiceArtistaB) != null){ 
+
+                        jblNombreArtista1.setText(artistas.get(indiceArtistaB).getNombreArtista());
+                        setImagenLabel(jblArtista1, artistas.get(indiceArtistaB).getImagen());
+                        
+                        try{
+                            indiceArtistaB = indiceArtistaA + 3;
+                            if(artistas.get(indiceArtistaC) != null){ 
+
+                                jblNombreArtista1.setText(artistas.get(indiceArtistaC).getNombreArtista());
+                                setImagenLabel(jblArtista1, artistas.get(indiceArtistaC).getImagen());
+                            }
+                        }
+                        
+                        catch(Exception e){
+                            btnRetrocederArtista.setEnabled(false);
+                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                            indiceArtistaC = indiceArtistaC - 3;
+                            jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
+                            setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
+                        }
+                    
+                    }
+            }
+            
+                catch(Exception e){
+                    btnRetrocederArtista.setEnabled(false);
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                    indiceArtistaB = indiceArtistaB - 3;
+                    jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
+                    setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
+            }
+            
+            
+            }
+
+        }
+        
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            btnRetrocederArtista.setEnabled(false);
+            JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+            indiceArtistaA = indiceArtistaA - 3;
+            jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
+            setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
+
+        }
+        
+        
+    }//GEN-LAST:event_btnAvanzarArtistaActionPerformed
+
+    private void btnAvanzarCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarCancionActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            
+            btnRetrocederCancion.setEnabled(true);
+            indiceCancionA = indiceCancionA + 3;
+            if(canciones.get(indiceCancionA) != null){ 
+
+                jblNombreCancion1.setText(canciones.get(indiceCancionA).getNombreCancion());
+                setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+            
+                try{
+                    System.out.println("indice cacnion a" + indiceCancionA);
+                    indiceCancionB = indiceCancionB + 3;
+                    if(canciones.get(indiceCancionB) != null){ 
+
+                        jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
+                        setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                        
+                        try{
+                            indiceCancionC = indiceCancionC + 3;
+                            if(canciones.get(indiceCancionC) != null){ 
+
+                                jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
+                                setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                            }
+                        }
+                        
+                        catch(Exception e){
+                            btnAvanzarCancion.setEnabled(false);
+                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(this, "No hay mas canciones", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                            indiceCancionC = indiceCancionC - 3;
+                            jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
+                            setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                        }
+                    
+                    }
+            }
+            
+                catch(Exception e){
+                    btnAvanzarCancion.setEnabled(false);
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "No hay mas Canciones", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                    indiceCancionB = indiceCancionB - 3;
+                    jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
+                    setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+            }
+            
+            
+            }
+
+        }
+        
+        catch(Exception e){
+            btnAvanzarCancion.setEnabled(false);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "No hay mas canciones", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+            indiceCancionA = indiceCancionA - 3;
+            jblNombreCancion1.setText(canciones.get(indiceCancionA).getNombreCancion());
+            setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+
+        }        
+    }//GEN-LAST:event_btnAvanzarCancionActionPerformed
+
+    private void btnAvanzarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarAlbumActionPerformed
+        // TODO add your handling code here:
+       try{
+            
+            btnRetrocederAlbum.setEnabled(true);
+            indiceAlbumA = indiceAlbumA + 3;
+            if(albumes.get(indiceAlbumA) != null){ 
+
+                jblNombreAlbum1.setText(albumes.get(indiceAlbumA).getNombre());
+                setImagenLabel(jblAlbum1, albumes.get(indiceAlbumA).getImagen());
+            
+                try{
+                    System.out.println("indice album a" + indiceAlbumA);
+                    indiceAlbumB = indiceAlbumB + 3;
+                    if(albumes.get(indiceAlbumB) != null){ 
+
+                        jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
+                        setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
+                        
+                        try{
+                            indiceAlbumC = indiceAlbumC + 3;
+                            if(albumes.get(indiceAlbumC) != null){ 
+
+                                jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
+                                setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
+                            }
+                        }
+                        
+                        catch(Exception e){
+                            btnAvanzarAlbum.setEnabled(false);
+                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(this, "No hay mas albumes", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                            indiceAlbumC = indiceAlbumC - 3;
+                            jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
+                            setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
+                        }
+                    
+                    }
+            }
+            
+                catch(Exception e){
+                    btnAvanzarAlbum.setEnabled(false);
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "No hay mas albumes", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                    indiceAlbumB = indiceAlbumB - 3;
+                    jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
+                    setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
+            }
+            
+            
+            }
+
+        }
+        
+        catch(Exception e){
+            btnAvanzarAlbum.setEnabled(false);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "No hay mas albumes", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+            indiceAlbumA = indiceAlbumA - 3;
+            jblNombreAlbum1.setText(albumes.get(indiceAlbumA).getNombre());
+            setImagenLabel(jblAlbum1, albumes.get(indiceAlbumA).getImagen());
+
+        }        
+     
+        
+    }//GEN-LAST:event_btnAvanzarAlbumActionPerformed
+
+    private void btnRetrocederCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederCancionActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+             btnAvanzarCancion.setEnabled(true);
+            indiceCancionA = indiceCancionA - 3;
+            if(canciones.get(indiceCancionA) != null){ 
+
+                jblNombreCancion1.setText(canciones.get(indiceCancionA).getNombreCancion());
+                setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+            
+                try{
+                    System.out.println("indice cacnion a" + indiceCancionA);
+                    indiceCancionB = indiceCancionB - 3;
+                    if(canciones.get(indiceCancionB) != null){ 
+
+                        jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
+                        setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                        
+                        try{
+                            indiceCancionC = indiceCancionC - 3;
+                            if(canciones.get(indiceCancionC) != null){ 
+
+                                jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
+                                setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                            }
+                        }
+                        
+                        catch(Exception e){
+                            btnRetrocederCancion.setEnabled(false);
+                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(this, "No hay mas canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
+                            indiceCancionC = indiceCancionC + 3;
+                            jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
+                            setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                        }
+                    
+                    }
+            }
+            
+                catch(Exception e){
+                    btnRetrocederCancion.setEnabled(false);
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "No hay mas Canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
+                    indiceCancionB = indiceCancionB + 3;
+                    jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
+                    setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+            }
+            
+            
+            }
+
+        }
+        
+        catch(Exception e){
+            btnRetrocederCancion.setEnabled(false);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "No hay mas canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
+            indiceCancionA = indiceCancionA + 3;
+            jblNombreCancion1.setText(canciones.get(indiceCancionA).getNombreCancion());
+            setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+
+        }        
+    
+        
+    }//GEN-LAST:event_btnRetrocederCancionActionPerformed
+
+    private void btnRetrocederAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederAlbumActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            btnAvanzarAlbum.setEnabled(true);
+            indiceAlbumA = indiceAlbumA - 3;
+            if(albumes.get(indiceAlbumA) != null){ 
+
+                jblNombreAlbum1.setText(albumes.get(indiceAlbumA).getNombre());
+                setImagenLabel(jblAlbum1, albumes.get(indiceAlbumA).getImagen());
+            
+                try{
+                    System.out.println("indice album a" + indiceCancionA);
+                    indiceAlbumB = indiceAlbumB - 3;
+                    if(albumes.get(indiceAlbumB) != null){ 
+
+                        jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
+                        setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
+                        
+                        try{
+                            indiceAlbumC = indiceAlbumC - 3;
+                            if(albumes.get(indiceAlbumC) != null){ 
+
+                                jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
+                                setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
+                            }
+                        }
+                        
+                        catch(Exception e){
+                            btnRetrocederAlbum.setEnabled(false);
+                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
+                            indiceAlbumC = indiceAlbumC + 3;
+                            jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
+                            setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
+                        }
+                    
+                    }
+            }
+            
+                catch(Exception e){
+                    btnRetrocederAlbum.setEnabled(false);
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
+                    indiceAlbumB = indiceAlbumB + 3;
+                    jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
+                    setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
+            }
+            
+            
+            }
+
+        }
+        
+        catch(Exception e){
+            btnRetrocederAlbum.setEnabled(false);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
+            indiceAlbumA = indiceAlbumA + 3;
+            jblNombreAlbum1.setText(albumes.get(indiceAlbumA).getNombre());
+            setImagenLabel(jblAlbum1, albumes.get(indiceAlbumA).getImagen());
+
+        }
+
+    }//GEN-LAST:event_btnRetrocederAlbumActionPerformed
+
+    private void btnRetrocederArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederArtistaActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            btnAvanzarArtista.setEnabled(true);
+            indiceArtistaA = indiceArtistaA - 3;
+            if(artistas.get(indiceArtistaA) != null){ 
+
+                jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
+                setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
+            
+                try{
+                    indiceArtistaB = indiceArtistaB - 3;
+                    if(artistas.get(indiceArtistaB) != null){ 
+
+                        jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
+                        setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
+                        
+                        try{
+                            indiceArtistaC = indiceArtistaC - 3;
+                            if(artistas.get(indiceArtistaC) != null){ 
+
+                                jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
+                                setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
+                            }
+                        }
+                        
+                        catch(Exception e){
+                            btnRetrocederArtista.setEnabled(false);
+                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                            indiceArtistaC =- 3;
+                            jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
+                            setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
+                        }
+                    
+                    }
+            }
+            
+                catch(Exception e){
+                    btnRetrocederArtista.setEnabled(false);
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                    indiceAlbumB = indiceAlbumB - 3;
+                    jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
+                    setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
+            }
+            
+            
+            }
+
+        }
+        
+        catch(Exception e){
+            btnRetrocederArtista.setEnabled(false);
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+            indiceAlbumA = indiceAlbumA - 3;
+            jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
+            setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
+
+        }
+    }//GEN-LAST:event_btnRetrocederArtistaActionPerformed
+
+    private void jblArtista2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtista2MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblArtista2MouseClicked
+
+    private void jblArtista3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtista3MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblArtista3MouseClicked
+
+    private void jblAlbum1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbum1MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblAlbum1MouseClicked
+
+    private void jblAlbum2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbum2MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblAlbum2MouseClicked
+
+    private void jblAlbum3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbum3MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblAlbum3MouseClicked
+
+    private void jblCancion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancion1MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblCancion1MouseClicked
+
+    private void jblCancion2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancion2MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblCancion2MouseClicked
+
+    private void jblCancion3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancion3MouseClicked
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+
+    }//GEN-LAST:event_jblCancion3MouseClicked
 
 
 

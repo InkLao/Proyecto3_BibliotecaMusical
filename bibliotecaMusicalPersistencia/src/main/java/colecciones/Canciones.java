@@ -10,25 +10,25 @@ package colecciones;
  */
 public class Canciones {
  
-    private String id;
+    private String idCancion;
     private String nombreCancion;
     private String duracion;
 
     public Canciones() {
     }
 
-    public Canciones(String id, String nombreCancion, String duracion) {
-        this.id = id;
+    public Canciones(String idCancion, String nombreCancion, String duracion) {
+        this.idCancion = idCancion;
         this.nombreCancion = nombreCancion;
         this.duracion = duracion;
     }
 
-    public String getId() {
-        return id;
+    public String getIdCancion() {
+        return idCancion;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdCancion(String idCancion) {
+        this.idCancion = idCancion;
     }
 
     public String getNombreCancion() {
@@ -49,7 +49,7 @@ public class Canciones {
 
     @Override
     public String toString() {
-        return "Canciones{" + "id=" + id + ", nombreCancion=" + nombreCancion + ", duracion=" + duracion + '}';
+        return "Canciones{" + "idCancion=" + idCancion + ", nombreCancion=" + nombreCancion + ", duracion=" + duracion + '}';
     }
     
     
