@@ -8,6 +8,7 @@ import colecciones.Albumes;
 import colecciones.Artista;
 import colecciones.Canciones;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -26,5 +27,18 @@ public interface IArtistaDAO {
     List<Albumes> obtenerTodosAlbumesEnArtista();
     
     Artista agregarArtista(Artista artista);
+    
+    List<Canciones> obtenerTodasCancionesEnArtistaEspecifico(ObjectId id);
+    
+    List<Albumes> obtenerTodosAlbumesEnArtistaEspecifico(ObjectId id);
+    
+    Albumes buscarAlbumPorId(String id);
+    
+    Canciones buscarCancionPorId(String id);
+    
+    Artista buscarArtistaPorIdAlbum(String id);
+    
+    Artista buscarArtistaPorIdCancion(String id);
+    
     
 }

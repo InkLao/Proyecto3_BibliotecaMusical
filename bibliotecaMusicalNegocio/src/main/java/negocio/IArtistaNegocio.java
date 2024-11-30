@@ -8,6 +8,7 @@ import dtos.AlbumDTO;
 import dtos.ArtistaDTO;
 import dtos.CancionDTO;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -27,4 +28,17 @@ public interface IArtistaNegocio {
     List<AlbumDTO> obtenerTodosAlbumesEnArtista();
     
     ArtistaDTO agregarArtista(ArtistaDTO artistaDTO);
+    
+    List<CancionDTO> obtenerTodasCancionesEnArtistaEspecifico(ObjectId id);
+    
+    List<AlbumDTO> obtenerTodosAlbumesEnArtistaEspecifico(ObjectId id);
+    
+    AlbumDTO buscarAlbumPorId(String id);
+    
+    CancionDTO buscarCancionPorId(String id);
+    
+    ArtistaDTO buscarArtistaPorIdAlbum(String id);
+    
+    ArtistaDTO buscarArtistaPorIdCancion(String id);
+    
 }

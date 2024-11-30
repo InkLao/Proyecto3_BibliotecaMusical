@@ -95,7 +95,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         
 
         jblNombreAlbum1.setText(albumes.get(0).getNombre());
-        setImagenLabel(jblAlbum1, artistas.get(0).getImagen());
+        setImagenLabel(jblAlbum1, albumes.get(0).getImagen());
         System.out.println(albumes.get(0).toString());
         
         jblNombreAlbum2.setText(albumes.get(1).getNombre());
@@ -119,8 +119,8 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
     
-        /**
-     * Metodo que coloca una imagen de el logo de cinepolis en la interfaz
+     /**
+     * Metodo que coloca una imagen un jbl
      * @param nombreJlb el jlabel que sera reemplazado por una imagen
      * @param ruta la direccion donde se encuentra la imagen
      */
@@ -767,8 +767,17 @@ public class FrmBuscador extends javax.swing.JFrame {
 
     private void jblArtista1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtista1MouseClicked
         // TODO add your handling code here:
+        if(jblNombreArtista1.getText().equalsIgnoreCase("sin datos")){
         
-        JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        }
+        
+        else{
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtista(artistas.get(indiceArtistaA).getId());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, null, null);
+        perfilArtista.setVisible(true);
+        }        
     }//GEN-LAST:event_jblArtista1MouseClicked
 
     private void btnAvanzarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvanzarArtistaActionPerformed
@@ -783,14 +792,14 @@ public class FrmBuscador extends javax.swing.JFrame {
                 setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
             
                 try{
-                    indiceArtistaB = indiceArtistaA + 3;
+                    indiceArtistaB = indiceArtistaB + 3;
                     if(artistas.get(indiceArtistaB) != null){ 
 
                         jblNombreArtista1.setText(artistas.get(indiceArtistaB).getNombreArtista());
                         setImagenLabel(jblArtista1, artistas.get(indiceArtistaB).getImagen());
                         
                         try{
-                            indiceArtistaB = indiceArtistaA + 3;
+                            indiceArtistaC = indiceArtistaC + 3;
                             if(artistas.get(indiceArtistaC) != null){ 
 
                                 jblNombreArtista1.setText(artistas.get(indiceArtistaC).getNombreArtista());
@@ -799,24 +808,26 @@ public class FrmBuscador extends javax.swing.JFrame {
                         }
                         
                         catch(Exception e){
-                            btnRetrocederArtista.setEnabled(false);
+                            btnRetrocederArtista.setEnabled(true);
+                            btnAvanzarArtista.setEnabled(false);
                             System.out.println(e.getMessage());
                             JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                             indiceArtistaC = indiceArtistaC - 3;
-                            jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
-                            setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
+                            jblNombreArtista3.setText("sin datos");
+                            setImagenLabel(jblArtista3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
                         }
                     
                     }
             }
             
                 catch(Exception e){
-                    btnRetrocederArtista.setEnabled(false);
+                    btnRetrocederArtista.setEnabled(true);
+                    btnAvanzarArtista.setEnabled(false);
                     System.out.println(e.getMessage());
                     JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                     indiceArtistaB = indiceArtistaB - 3;
-                    jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
-                    setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
+                    jblNombreArtista2.setText("sin datos");
+                    setImagenLabel(jblArtista2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
             }
             
             
@@ -826,7 +837,8 @@ public class FrmBuscador extends javax.swing.JFrame {
         
         catch(Exception e){
             System.out.println(e.getMessage());
-            btnRetrocederArtista.setEnabled(false);
+            btnRetrocederArtista.setEnabled(true);
+            btnAvanzarArtista.setEnabled(false);
             JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
             indiceArtistaA = indiceArtistaA - 3;
             jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
@@ -869,10 +881,9 @@ public class FrmBuscador extends javax.swing.JFrame {
                         catch(Exception e){
                             btnAvanzarCancion.setEnabled(false);
                             System.out.println(e.getMessage());
-                            JOptionPane.showMessageDialog(this, "No hay mas canciones", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                             indiceCancionC = indiceCancionC - 3;
-                            jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
-                            setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                            jblNombreCancion3.setText("sin datos");
+                            setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
                         }
                     
                     }
@@ -881,10 +892,9 @@ public class FrmBuscador extends javax.swing.JFrame {
                 catch(Exception e){
                     btnAvanzarCancion.setEnabled(false);
                     System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(this, "No hay mas Canciones", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                     indiceCancionB = indiceCancionB - 3;
-                    jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
-                    setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                    jblNombreCancion2.setText("sin datos");
+                    setImagenLabel(jblCancion2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
             }
             
             
@@ -933,11 +943,10 @@ public class FrmBuscador extends javax.swing.JFrame {
                         
                         catch(Exception e){
                             btnAvanzarAlbum.setEnabled(false);
-                            System.out.println(e.getMessage());
-                            JOptionPane.showMessageDialog(this, "No hay mas albumes", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
+                            System.out.println("albumC " + e.getMessage());
                             indiceAlbumC = indiceAlbumC - 3;
-                            jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
-                            setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
+                            jblNombreAlbum3.setText("sin datos");
+                            setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
                         }
                     
                     }
@@ -945,11 +954,15 @@ public class FrmBuscador extends javax.swing.JFrame {
             
                 catch(Exception e){
                     btnAvanzarAlbum.setEnabled(false);
-                    System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(this, "No hay mas albumes", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
-                    indiceAlbumB = indiceAlbumB - 3;
-                    jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
-                    setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
+                    System.out.println("albumB " + e.getMessage());
+                   // indiceAlbumB = indiceAlbumB - 3;
+                    jblNombreAlbum2.setText("sin datos");
+                    setImagenLabel(jblAlbum2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    
+                    System.out.println(indiceAlbumA + "," + indiceAlbumB + "," + indiceAlbumC);
+                    
+                    jblNombreAlbum3.setText("sin datos");
+                    setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
             }
             
             
@@ -1068,7 +1081,6 @@ public class FrmBuscador extends javax.swing.JFrame {
                         catch(Exception e){
                             btnRetrocederAlbum.setEnabled(false);
                             System.out.println(e.getMessage());
-                            JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
                             indiceAlbumC = indiceAlbumC + 3;
                             jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
                             setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
@@ -1078,9 +1090,9 @@ public class FrmBuscador extends javax.swing.JFrame {
             }
             
                 catch(Exception e){
+                    System.out.println("Album b");
                     btnRetrocederAlbum.setEnabled(false);
                     System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
                     indiceAlbumB = indiceAlbumB + 3;
                     jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
                     setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
@@ -1092,6 +1104,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         }
         
         catch(Exception e){
+            System.out.println("Album A");
             btnRetrocederAlbum.setEnabled(false);
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
@@ -1169,49 +1182,155 @@ public class FrmBuscador extends javax.swing.JFrame {
 
     private void jblArtista2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtista2MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
-
+        
+        if(jblArtista2.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtista(artistas.get(indiceArtistaB).getId());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, null, null);
+        perfilArtista.setVisible(true);
+        }
     }//GEN-LAST:event_jblArtista2MouseClicked
 
     private void jblArtista3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtista3MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblArtista3.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtista(artistas.get(indiceArtistaC).getId());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, null, null);
+        perfilArtista.setVisible(true);
+        }
 
     }//GEN-LAST:event_jblArtista3MouseClicked
 
     private void jblAlbum1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbum1MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblNombreAlbum1.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtistaPorIdAlbum(albumes.get(indiceAlbumA).getIdAlbum());
+        
+        AlbumDTO album = negocio.buscarAlbumPorId(albumes.get(indiceAlbumA).getIdAlbum());
+        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionA).getIdCancion());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, album.getIdAlbum(), null);
+        perfilArtista.setVisible(true);
+        }                
 
     }//GEN-LAST:event_jblAlbum1MouseClicked
 
     private void jblAlbum2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbum2MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblNombreAlbum2.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtistaPorIdAlbum(albumes.get(indiceAlbumB).getIdAlbum());
+        
+        AlbumDTO album = negocio.buscarAlbumPorId(albumes.get(indiceAlbumB).getIdAlbum());
+        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionA).getIdCancion());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, album.getIdAlbum(), null);
+        perfilArtista.setVisible(true);
+        }
 
     }//GEN-LAST:event_jblAlbum2MouseClicked
 
     private void jblAlbum3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbum3MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblNombreAlbum3.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+            
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtistaPorIdAlbum(albumes.get(indiceAlbumC).getIdAlbum());
+        
+        AlbumDTO album = negocio.buscarAlbumPorId(albumes.get(indiceAlbumC).getIdAlbum());
+        System.out.println("ss" + album.toString());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, album.getIdAlbum(), null);
+        perfilArtista.setVisible(true);
+        }
 
     }//GEN-LAST:event_jblAlbum3MouseClicked
 
     private void jblCancion1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancion1MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblNombreCancion1.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+            
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtistaPorIdCancion(canciones.get(indiceCancionA).getIdCancion());
+        
+        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionA).getIdCancion());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, null, cancion.getIdCancion());
+        perfilArtista.setVisible(true);
+        }
 
     }//GEN-LAST:event_jblCancion1MouseClicked
 
     private void jblCancion2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancion2MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblNombreCancion2.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+            
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtistaPorIdCancion(canciones.get(indiceCancionB).getIdCancion());
+        
+        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionB).getIdCancion());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, null, cancion.getIdCancion());
+        perfilArtista.setVisible(true);
+        }
 
     }//GEN-LAST:event_jblCancion2MouseClicked
 
     private void jblCancion3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancion3MouseClicked
         // TODO add your handling code here:
-                JOptionPane.showMessageDialog(this, "aqui va a haber algo");
+        
+        if(jblNombreCancion3.getText().equalsIgnoreCase("sin datos")){
+            
+        }
+        
+        else{
+            
+        ArtistaDTO artista = new ArtistaDTO();
+        artista = negocio.buscarArtistaPorIdCancion(canciones.get(indiceCancionC).getIdCancion());
+        
+        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionC).getIdCancion());
+        
+        FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, null, cancion.getIdCancion());
+        perfilArtista.setVisible(true);
+        }
 
     }//GEN-LAST:event_jblCancion3MouseClicked
 

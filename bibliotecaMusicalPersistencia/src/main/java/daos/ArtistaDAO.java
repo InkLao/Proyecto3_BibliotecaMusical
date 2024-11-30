@@ -13,12 +13,15 @@ import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import conexionBD.ConexionBD;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -173,4 +176,180 @@ public class ArtistaDAO implements IArtistaDAO {
         }
     }
 
+    
+    
+    @Override
+    public List<Canciones> obtenerTodasCancionesEnArtistaEspecifico(ObjectId id) {
+
+        Document query = new Document("_id", id);
+        
+        List<Artista> listaArtistas = collectionArtista.find(query).into(new ArrayList<>());
+
+        // Lista donde se almacenarán todas las canciones
+        List<Canciones> listaCanciones = new ArrayList<>();
+
+        // Recorrer el AggregateIterable
+        for (Artista artista : listaArtistas) {
+            // Recorrer los álbumes del artista
+            for (Albumes album : artista.getAlbumes()) {
+                // Recorrer las canciones de cada álbum
+                if (album.getCanciones() != null) {
+                    for (Canciones cancion : album.getCanciones()) {
+                        // Crear una nueva Canción con todos los datos (incluyendo el id)
+                        Canciones nuevaCancion = new Canciones();
+                        nuevaCancion.setIdCancion(cancion.getIdCancion());
+                        nuevaCancion.setNombreCancion(cancion.getNombreCancion());
+                        nuevaCancion.setDuracion(cancion.getDuracion());
+
+                        // Agregar la canción a la lista
+                        listaCanciones.add(nuevaCancion);
+                    }
+                }
+            }
+        }
+
+        return listaCanciones;
+
+    }
+    
+    
+    @Override
+    public List<Albumes> obtenerTodosAlbumesEnArtistaEspecifico(ObjectId id) {
+
+        Document query = new Document("_id", id);
+        
+        List<Artista> listaArtistas = collectionArtista.find(query).into(new ArrayList<>());
+
+        // Lista donde se almacenarán todos los álbumes
+        List<Albumes> listaAlbumes = new ArrayList<>();
+
+        // Recorrer el AggregateIterable
+        for (Artista artista : listaArtistas) {
+            // Recorrer los álbumes del artista
+            for (Albumes album : artista.getAlbumes()) {
+                // Crear un nuevo objeto Album con todos los datos (incluyendo el id)
+                Albumes nuevoAlbum = new Albumes();
+                nuevoAlbum.setIdAlbum(album.getIdAlbum());
+                nuevoAlbum.setNombre(album.getNombre());
+                nuevoAlbum.setImagen(album.getImagen());
+                nuevoAlbum.setFechaLanzamiento(album.getFechaLanzamiento());
+                nuevoAlbum.setCanciones(album.getCanciones());
+
+                // Agregar el álbum a la lista
+                listaAlbumes.add(nuevoAlbum);
+            }
+        }
+
+        return listaAlbumes;
+    }
+    
+    
+    @Override
+    public Albumes buscarAlbumPorId(String id) {
+
+ // Consulta para encontrar el artista que contiene el álbum con ese ID
+        Bson filter = Filters.elemMatch("albumes", Filters.eq("idAlbum", id));
+        Artista artista = collectionArtista.find(filter).first();
+
+        if (artista != null) {
+            System.out.println("Artista encontrado: " + artista.getNombreArtista());
+
+            // Buscar el álbum dentro de los álbumes del artista
+            Optional<Albumes> albumEncontrado = artista.getAlbumes().stream()
+                    .filter(album -> album.getIdAlbum().equals(id))
+                    .findFirst();
+
+            if (albumEncontrado.isPresent()) {
+                Albumes album = albumEncontrado.get();
+                System.out.println("Álbum encontrado: " + album.getNombre());
+                System.out.println("Canciones:");
+                album.getCanciones().forEach(cancion ->
+                        System.out.println("- " + cancion.getNombreCancion() + " (" + cancion.getDuracion() + ")")
+                );
+                
+                return album;
+                
+            } else {
+                System.out.println("El álbum no se encontró en los datos del artista.");
+            }
+        } else {
+            System.out.println("No se encontró ningún artista con un álbum de id " + id);
+        }
+        
+        return null;
+    }
+    
+    
+    @Override
+    public Canciones buscarCancionPorId(String id){
+        
+         // Consulta para encontrar el artista que contiene la canción con ese ID
+        Bson filter = Filters.elemMatch("albumes.canciones", Filters.eq("idCancion", id));
+        Artista artista = collectionArtista.find(filter).first();
+
+        if (artista != null) {
+            System.out.println("Artista encontrado: " + artista.getNombreArtista());
+
+            // Buscar la canción dentro de los álbumes del artista
+            Optional<Canciones> cancionEncontrada = artista.getAlbumes().stream()
+                    .flatMap(album -> album.getCanciones().stream())
+                    .filter(cancion -> cancion.getIdCancion().equals(id))
+                    .findFirst();
+
+            if (cancionEncontrada.isPresent()) {
+                Canciones cancion = cancionEncontrada.get();
+                System.out.println("Canción encontrada: " + cancion.getNombreCancion());
+                System.out.println("Duración: " + cancion.getDuracion());
+                
+                return cancion;
+            } else {
+                System.out.println("La canción no se encontró en los datos del artista.");
+            }
+        } else {
+            System.out.println("No se encontró ningún artista con una canción de id " + id);
+        }
+        
+        return null;
+    }
+    
+    
+    @Override
+    public Artista buscarArtistaPorIdAlbum(String id){
+    
+    
+         // Filtro para buscar el artista que tiene un álbum con este idAlbum
+        Bson filter = Filters.elemMatch("albumes", Filters.eq("idAlbum", id));
+        Artista artista = collectionArtista.find(filter).first();
+
+        if (artista != null) {
+            System.out.println("Artista encontrado: " + artista.getNombreArtista());
+            System.out.println("Género: " + artista.getGenero());
+        } else {
+            System.out.println("No se encontró ningún artista con el álbum de id " + id);
+        }
+        
+        return artista;
+    }
+    
+    @Override
+    public Artista buscarArtistaPorIdCancion(String id){
+        
+    // Filtro para buscar el artista que tiene una canción con este idCancion
+        Bson filter = Filters.elemMatch("albumes.canciones", Filters.eq("idCancion", id));
+        Artista artista = collectionArtista.find(filter).first();
+
+        if (artista != null) {
+            System.out.println("Artista encontrado: " + artista.getNombreArtista());
+            System.out.println("Género: " + artista.getGenero());
+        } else {
+            System.out.println("No se encontró ningún artista con la canción de id " + id);
+        }
+    
+        return artista;
+    }
+    
+    
 }
+    
+    
+

@@ -597,11 +597,11 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jblAlbum1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <Component id="jblAlbum2" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Component id="jblAlbum3" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jblAlbum1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                              <Component id="jblAlbum2" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                               <Component id="jblAlbumFavorito3" min="-2" pref="24" max="-2" attributes="0"/>
                                               <Component id="jblAlbumFavorito1" min="-2" pref="24" max="-2" attributes="0"/>
                                           </Group>

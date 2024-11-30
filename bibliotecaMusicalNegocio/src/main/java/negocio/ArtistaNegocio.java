@@ -89,6 +89,78 @@ public class ArtistaNegocio implements IArtistaNegocio {
         return artistaDAO.obtenerImagenPorIdCancion(id);
 
     }
+    
+    
+    
+    @Override
+    public List<CancionDTO> obtenerTodasCancionesEnArtistaEspecifico(ObjectId id) {
+
+        List<Canciones> canciones = artistaDAO.obtenerTodasCancionesEnArtistaEspecifico(id);
+        System.out.println("negocioCan" + canciones.get(0).getIdCancion());
+
+        try {
+            return this.convertirListaCancionDTO(canciones);
+        } catch (Exception ex) {
+            Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public List<AlbumDTO> obtenerTodosAlbumesEnArtistaEspecifico(ObjectId id) {
+
+        List<Albumes> albumes = artistaDAO.obtenerTodosAlbumesEnArtistaEspecifico(id);
+        System.out.println("negocio" + albumes.get(0).getIdAlbum());
+        System.out.println("album" + albumes.get(0).toString());
+
+        try {
+            return this.convertirListaAlbumDTO(albumes);
+        } catch (Exception ex) {
+            Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+    
+    @Override
+    public AlbumDTO buscarAlbumPorId(String id){
+    
+        Albumes albumes = artistaDAO.buscarAlbumPorId(id);
+        
+        return this.convertirAlbumADTO(albumes);
+    }
+    
+    
+    @Override
+    public CancionDTO buscarCancionPorId(String id){
+    
+        Canciones canciones = artistaDAO.buscarCancionPorId(id);
+
+        return this.convertirCancionADTO(canciones);
+    }
+    
+    
+    @Override
+    public ArtistaDTO buscarArtistaPorIdAlbum(String id){
+    
+        return this.convertirArtistaADTO(artistaDAO.buscarArtistaPorIdAlbum(id));
+    }
+    
+    
+    
+    @Override
+    public ArtistaDTO buscarArtistaPorIdCancion(String id){
+        
+        return this.convertirArtistaADTO(artistaDAO.buscarArtistaPorIdCancion(id));
+    }
+    
+    
+    
+    
+    
 
     private List<ArtistaDTO> convertirListaArtistaDTO(List<Artista> artistas) throws Exception {
         if (artistas == null) {
@@ -115,6 +187,7 @@ public class ArtistaNegocio implements IArtistaNegocio {
 
         return new ArtistaDTO(artista.getId(), artista.getIdDos(), artista.getNombreArtista(), artista.getImagen(), artista.getGenero(), artista.getIntegrantes(), artista.getAlbumes());
     }
+    
 
     private List<CancionDTO> convertirListaCancionDTO(List<Canciones> canciones) throws Exception {
         if (canciones == null) {
@@ -151,6 +224,31 @@ public class ArtistaNegocio implements IArtistaNegocio {
         }
         return albumesDTO;
     }
+    
+    
+    private AlbumDTO convertirAlbumADTO(Albumes album) {
+
+        try {
+            return new AlbumDTO(album.getIdAlbum(), album.getNombre(), album.getFechaLanzamiento(), album.getImagen(), this.convertirListaCancionDTO(album.getCanciones()));
+        } catch (Exception ex) {
+            Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
+    
+    private CancionDTO convertirCancionADTO(Canciones cancion) {
+
+        try {
+            return new CancionDTO(cancion.getIdCancion(), cancion.getNombreCancion(), cancion.getDuracion());
+        } catch (Exception ex) {
+            Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
 
     @Override
     public ArtistaDTO agregarArtista(ArtistaDTO artistaDTO) {
