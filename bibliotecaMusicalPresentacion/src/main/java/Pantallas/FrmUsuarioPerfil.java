@@ -5,8 +5,6 @@
 package Pantallas;
 
 import dtos.UsuarioDTO;
-import negocio.IUsuarioNegocio;
-import negocio.UsuarioNegocio;
 
 /**
  *
@@ -17,7 +15,6 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
     
     FrmIniciarSesion iniciarSesion;
     UsuarioDTO usuarioDTO;
-    IUsuarioNegocio usuarioNegocio = new UsuarioNegocio();
     
     /**
      * Creates new form FrmUsuarioPerfil
@@ -56,7 +53,6 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
 
         btnBuscador.setBackground(new java.awt.Color(217, 217, 217));
         btnBuscador.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnBuscador.setForeground(new java.awt.Color(0, 0, 0));
         btnBuscador.setText("Buscador");
         btnBuscador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscador.addActionListener(new java.awt.event.ActionListener() {
@@ -91,33 +87,29 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
 
         btnFavoritos.setBackground(new java.awt.Color(217, 217, 217));
         btnFavoritos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnFavoritos.setForeground(new java.awt.Color(0, 0, 0));
         btnFavoritos.setText("Favoritos");
         btnFavoritos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnFavoritos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnRestricciones.setBackground(new java.awt.Color(217, 217, 217));
         btnRestricciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRestricciones.setForeground(new java.awt.Color(0, 0, 0));
         btnRestricciones.setText("Restricciones");
         btnRestricciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnRestricciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btnEditarPerfil.setBackground(new java.awt.Color(217, 217, 217));
-        btnEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnEditarPerfil.setForeground(new java.awt.Color(0, 0, 0));
-        btnEditarPerfil.setText("Editar Perfil");
-        btnEditarPerfil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        btnEditarPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
+        btnRestricciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarPerfilActionPerformed(evt);
+                btnRestriccionesActionPerformed(evt);
             }
         });
 
+        btnEditarPerfil.setBackground(new java.awt.Color(217, 217, 217));
+        btnEditarPerfil.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnEditarPerfil.setText("Editar Perfil");
+        btnEditarPerfil.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        btnEditarPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         btnRegresar.setBackground(new java.awt.Color(8, 148, 249));
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(0, 0, 0));
         btnRegresar.setText("Cerrar Sesion");
         btnRegresar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -194,15 +186,12 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscadorActionPerformed
 
-    private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
+    private void btnRestriccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestriccionesActionPerformed
         // TODO add your handling code here:
-        
-        usuarioDTO = usuarioNegocio.buscarUsuario(usuarioDTO.getId());
-        FrmEditarPerfil editarPerfil = new FrmEditarPerfil(this, usuarioDTO);
-        editarPerfil.setVisible(true);
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_btnEditarPerfilActionPerformed
+        FrmRestricciones restricciones = new FrmRestricciones(this, usuarioDTO);
+        restricciones.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRestriccionesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
