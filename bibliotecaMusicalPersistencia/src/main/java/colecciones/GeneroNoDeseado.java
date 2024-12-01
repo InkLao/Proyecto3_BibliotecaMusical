@@ -4,6 +4,7 @@
  */
 package colecciones;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -17,11 +18,12 @@ public class GeneroNoDeseado {
     private List<String> nombreGenero;
 
     public GeneroNoDeseado() {
-    }
+        this.nombreGenero = new ArrayList<>();
+    }    
 
     public GeneroNoDeseado(ObjectId idUsuario, List<String> nombreGenero) {
         this.idUsuario = idUsuario;
-        this.nombreGenero = nombreGenero;
+        this.nombreGenero = nombreGenero != null ? nombreGenero : new ArrayList<>();
     }
 
     public GeneroNoDeseado(ObjectId id, ObjectId idUsuario, List<String> nombreGenero) {
