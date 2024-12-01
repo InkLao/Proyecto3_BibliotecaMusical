@@ -31,6 +31,7 @@ public class FrmInicio extends javax.swing.JFrame {
      */
     public FrmInicio() {
         initComponents();
+        //
     }
 
     private List<ArtistaDTO> generarArtistas() {
