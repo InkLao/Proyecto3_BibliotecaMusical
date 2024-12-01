@@ -61,7 +61,7 @@ public class UsuarioNegocio implements IUsuarioNegocio{
     
     private Usuario convertirUsuarioDTOAColeccion(UsuarioDTO usuario){
     
-        return new Usuario(usuario.getNombres(), usuario.getApellidoP(), usuario.getApellidoM(), usuario.getCorreo(), usuario.getContrasena(), usuario.getImagen());
+        return new Usuario(usuario.getId(), usuario.getNombres(), usuario.getApellidoP(), usuario.getApellidoM(), usuario.getCorreo(), usuario.getContrasena(), usuario.getImagen());
     }
     
     private UsuarioDTO convertirUsuarioADTO(Usuario usuario){

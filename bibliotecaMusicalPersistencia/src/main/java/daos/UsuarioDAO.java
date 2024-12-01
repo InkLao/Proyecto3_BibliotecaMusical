@@ -8,8 +8,11 @@ import colecciones.Usuario;
 import conexionBD.ConexionBD;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
 
 
 /**
@@ -42,19 +45,37 @@ public class UsuarioDAO implements IUsuarioDAO{
 
     @Override
     public Usuario editarUsuario(Usuario usuario) {
+        
+        System.out.println("antes de editat" + usuario.toString());
+        
+        Document query = new Document("_id", new ObjectId(usuario.getId().toString()));
+        
+        // Actualizaciones que deseas hacer
+        collectionUsuario.updateOne(
+            Filters.eq("_id", new ObjectId(usuario.getId().toString())), // Filtro por _id
+            Updates.combine(
+                Updates.set("contrasena", usuario.getContrasena()),
+                Updates.set("correo", usuario.getCorreo()),
+                Updates.set("nombres", usuario.getNombres()),
+                Updates.set("apellidoP", usuario.getApellidoP()),
+                Updates.set("apellidoM", usuario.getApellidoM()),
+                Updates.set("imagen", usuario.getImagen())
+            )
+        );
+        
+        
+//        
+//        Document update = new Document();
+//        update.append("$set", new Document("apellidoM", usuario.getApellidoM()));
+//        update.append("$set", new Document("apellidoP", usuario.getApellidoP()));
+//        update.append("$set", new Document("contrasena", usuario.getContrasena()));
+//        update.append("$set", new Document("correo", usuario.getCorreo()));
+//        update.append("$set", new Document("imagen", usuario.getImagen()));
+//        update.append("$set", new Document("nombres", usuario.getNombres()));
+        
+        
 
-        Document query = new Document("_id", usuario.getId());
-        
-        Document update = new Document("Nombres", usuario.getNombres()).append
-                                      ("ApellidoPaterno", usuario.getApellidoP()).append
-                                      ("ApellidoMaterno", usuario.getApellidoM()).append
-                                      ("Correo", usuario.getCorreo()).append
-                                      ("Contrasena", usuario.getImagen()).append
-                                      ("Imagen", usuario.getImagen());
-        
-            collectionUsuario.updateOne(query, update);
-            
-            return usuario;
+        return usuario;
         
     }
     
