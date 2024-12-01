@@ -339,6 +339,26 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
                 // Crear un nombre único para el archivo (usar timestamp)
                 String fileExtension = getFileExtension(selectedFile);
+                if(fileExtension.equalsIgnoreCase("")){
+                    usuarioEditarDTO.setApellidoM(apellidoM);
+                    usuarioEditarDTO.setApellidoP(apellidoP);
+                    usuarioEditarDTO.setContrasena(contra);
+                    usuarioEditarDTO.setCorreo(correo);
+                    usuarioEditarDTO.setImagen("src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    usuarioEditarDTO.setNombres(nombres);
+                    usuarioEditarDTO.setId(usuarioDTO.getId());
+
+                    IUsuarioNegocio negocio = new UsuarioNegocio();
+                    negocio.editarUsuario(usuarioEditarDTO);
+
+                    JOptionPane.showMessageDialog(this,"Usuario actualizado con exito", "Mensaje de resultado ", JOptionPane.INFORMATION_MESSAGE );
+                    System.out.println(usuarioEditarDTO.toString());
+
+                    usuarioPerfil.setVisible(true);
+                    this.dispose();
+                    
+                }
+                else{
                 String uniqueFileName = System.currentTimeMillis() + "." + fileExtension;
 
                 // Ruta donde se guardará la imagen
@@ -349,6 +369,8 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
                 destinationFile.getParentFile().mkdirs();
 
                 // Copiar la imagen seleccionada
+                if(selectedFile.toPath() == null){
+                }
                 Files.copy(selectedFile.toPath(), destinationFile.toPath());
 
                 // Guardar la ruta en una variable
@@ -371,7 +393,7 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
                 usuarioPerfil.setVisible(true);
                 this.dispose();
-
+                }
             }
         }
 
@@ -383,12 +405,21 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
     // Método para obtener la extensión del archivo
     private static String getFileExtension(File file) {
+        
+        try{
         String fileName = file.getName();
         int lastIndex = fileName.lastIndexOf(".");
         if (lastIndex > 0 && lastIndex < fileName.length() - 1) {
             return fileName.substring(lastIndex + 1).toLowerCase();
         }
+        }
+        catch(Exception e){
+              System.out.println(e.getMessage());  
+        }
+        
         return ""; // Sin extensión
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
