@@ -39,7 +39,7 @@ public class FrmInicio extends javax.swing.JFrame {
         // Generar 30 solistas
         for (int i = 1; i <= 30; i++) {
             ArtistaDTO solista = new ArtistaDTO();
-            solista.setIdDos(i);
+       //     solista.setIdDos(i);
             solista.setNombreArtista("Solista " + i);
             solista.setImagen("src/main/java/ImagenesProyecto/Solista" + i + ".jpg");
             solista.setGenero(i % 2 == 0 ? "Pop" : "Rock");
@@ -50,7 +50,7 @@ public class FrmInicio extends javax.swing.JFrame {
         // Generar 30 bandas
         for (int i = 1; i <= 30; i++) {
             ArtistaDTO banda = new ArtistaDTO();
-            banda.setIdDos(30 + i);
+          //  banda.setIdDos(30 + i);
             banda.setNombreArtista("Banda " + i);
             banda.setImagen("src/main/java/ImagenesProyecto/Banda" + i + ".jpg");
             banda.setGenero(i % 2 == 0 ? "Metal" : "Alternative");

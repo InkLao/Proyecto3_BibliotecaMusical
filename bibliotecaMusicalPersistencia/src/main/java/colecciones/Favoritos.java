@@ -4,7 +4,6 @@
  */
 package colecciones;
 
-import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -13,14 +12,23 @@ import org.bson.types.ObjectId;
  * @author eduar
  */
 public class Favoritos {
+    
     private ObjectId id;
-    private ObjectId idUsuario;
+    private String idUsuario;
     private List<Favorito> favorito;
 
     public Favoritos() {
     }
 
-    public Favoritos(ObjectId idUsuario, List<Favorito> favorito) {
+    public Favoritos(ObjectId id, String idUsuario, List<Favorito> favorito) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.favorito = favorito;
+    }
+
+    
+    
+    public Favoritos(String idUsuario, List<Favorito> favorito) {
         this.idUsuario = idUsuario;
         this.favorito = favorito;
     }
@@ -33,11 +41,11 @@ public class Favoritos {
         this.id = id;
     }
 
-    public ObjectId getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(ObjectId idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

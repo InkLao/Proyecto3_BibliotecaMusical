@@ -7,7 +7,12 @@ package Pantallas;
 import dtos.AlbumDTO;
 import dtos.ArtistaDTO;
 import dtos.CancionDTO;
+import dtos.FavoritoDTO;
+import dtos.FavoritosDTO;
+import dtos.UsuarioDTO;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.Icon;
@@ -15,7 +20,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import negocio.ArtistaNegocio;
+import negocio.FavoritosNegocio;
 import negocio.IArtistaNegocio;
+import negocio.IFavoritosNegocio;
 
 /**
  *
@@ -37,18 +44,23 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     
     static List<AlbumDTO> albumes;
     static List<CancionDTO> canciones;
+    static List<FavoritoDTO> favoritos;
     
     String idAlbum;
     String idCancion;
+    UsuarioDTO usuarioDTO;
     
+    IFavoritosNegocio favoritosNegocio = new FavoritosNegocio();
     
     /**
      * Creates new form FrmPerfilArtista
      */
-    public FrmPerfilArtista(ArtistaDTO artista, String idAlbum, String idCancion) {
+    public FrmPerfilArtista(ArtistaDTO artista, String idAlbum, String idCancion, UsuarioDTO usuarioDTO) {
         this.artista = artista;
         this.idAlbum = idAlbum;
         this.idCancion = idCancion;
+        this.usuarioDTO = usuarioDTO;
+        
         
         initComponents();
         
@@ -62,11 +74,20 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         
         albumes = negocio.obtenerTodosAlbumesEnArtistaEspecifico(artista.getId());
         canciones = negocio.obtenerTodasCancionesEnArtistaEspecifico(artista.getId());
+        favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
         
         
         setImagenLabel(jblImagenArtista, artista.getImagen());
         jblNombreArtista.setText(artista.getNombreArtista());
         jblGenero.setText("Genero: " + artista.getGenero());
+        
+       if(buscarFavorito(favoritos, artista.getIdDos())){
+                setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+        
         
         String nombresIntegrantes = "";
         
@@ -81,10 +102,22 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         if(idAlbum == null){
                 jblNombreAlbumA.setText(artista.getAlbumes().get(indiceAlbumA).getNombre());
                 setImagenLabel(jblImagenAlbumA, artista.getAlbumes().get(indiceAlbumA).getImagen());
+                if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumA).getIdAlbum()))){
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 try{
                     jblNombreAlbumB.setText(artista.getAlbumes().get(indiceAlbumB).getNombre());
                     setImagenLabel(jblImagenAlbumB, artista.getAlbumes().get(indiceAlbumB).getImagen());
+                    if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumB).getIdAlbum()))){
+                    setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                    }
+                    else{
+                    setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    }
 
                 }
                 catch(Exception e){
@@ -95,6 +128,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 try{
                     jblNombreAlbumC.setText(artista.getAlbumes().get(indiceAlbumC).getNombre());
                     setImagenLabel(jblImagenAlbumC, artista.getAlbumes().get(indiceAlbumC).getImagen());
+                    if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumC).getIdAlbum()))){
+                        setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                    }
+                    else{
+                        setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                 }
                 catch(Exception e){
                     jblNombreAlbumC.setText("n/a");
@@ -103,12 +142,30 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreCancionA.setText(canciones.get(indiceCancionA).getNombreCancion());
                 setImagenLabel(jblImagenCancionA, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionA).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 jblNombreCancionB.setText(canciones.get(indiceCancionB).getNombreCancion());
                 setImagenLabel(jblImagenCancionB, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionB).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 jblNombreCancionC.setText(canciones.get(indiceCancionC).getNombreCancion());
                 setImagenLabel(jblImagenCancionC, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionC).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                 
             
         }
@@ -127,6 +184,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 try{
                     jblNombreAlbumB.setText(albumes.get(indiceAlbumB).getNombre());
                     setImagenLabel(jblImagenAlbumB, albumes.get(indiceAlbumB).getImagen());
+                    if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumB).getIdAlbum()))){
+                    setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                    }
+                    else{
+                    setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 }
                 catch(Exception e){
@@ -137,6 +200,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 try{
                     jblNombreAlbumC.setText(albumes.get(indiceAlbumC).getNombre());
                     setImagenLabel(jblImagenAlbumC, albumes.get(indiceAlbumC).getImagen());
+                    if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumC).getIdAlbum()))){
+                        setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                    }
+                    else{
+                        setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                 }
                 catch(Exception e){
                     jblNombreAlbumC.setText("n/a");
@@ -150,12 +219,30 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreCancionA.setText(canciones.get(indiceCancionA).getNombreCancion());
                 setImagenLabel(jblImagenCancionA, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionA).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 jblNombreCancionB.setText(canciones.get(indiceCancionB).getNombreCancion());
                 setImagenLabel(jblImagenCancionB, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionB).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 jblNombreCancionC.setText(canciones.get(indiceCancionC).getNombreCancion());
                 setImagenLabel(jblImagenCancionC, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionC).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                   
             }
 
@@ -170,14 +257,33 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreCancionA.setText(canciones.get(indiceCancionA).getNombreCancion());
                 setImagenLabel(jblImagenCancionA, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionA).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 jblNombreCancionB.setText(canciones.get(indiceCancionB).getNombreCancion());
                 setImagenLabel(jblImagenCancionB, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionB).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
 
                 jblNombreCancionC.setText(canciones.get(indiceCancionC).getNombreCancion());
                 setImagenLabel(jblImagenCancionC, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionC).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
              
             } 
+        this.repaint();
     }
     
     
@@ -210,6 +316,33 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     }
     
     
+    public static boolean buscarFavorito(List<FavoritoDTO> favorito, String id) {
+        Iterator<FavoritoDTO> iterator = favoritos.iterator();
+
+        while (iterator.hasNext()) {
+            FavoritoDTO favoritoss = iterator.next();
+            if (favoritoss.getIdFavorito().equalsIgnoreCase(id)) { // Ignora mayúsculas y minúsculas
+                
+                return true; // Indica que si se encontro el favorito el
+            }
+        }
+        
+        return false;
+    } 
+    
+    public static boolean eliminarFavorito(List<FavoritoDTO> favorito, String id) {
+        Iterator<FavoritoDTO> iterator = favoritos.iterator();
+
+        while (iterator.hasNext()) {
+            FavoritoDTO favoritoss = iterator.next();
+            if (favoritoss.getIdFavorito().equalsIgnoreCase(id)) { // Ignora mayúsculas y minúsculas
+                iterator.remove();
+                return true; // Indica que si se encontro el favorito el
+            }
+        }
+        
+        return false;
+    }
     
      /**
      * Metodo que coloca una imagen de el logo de cinepolis en la interfaz
@@ -249,6 +382,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblNombresIntegrantes = new javax.swing.JLabel();
         jblGenero = new javax.swing.JLabel();
         btnMostrarTodosIntegrantes = new javax.swing.JButton();
+        jblArtistaFavorito = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jblImagenAlbumA = new javax.swing.JLabel();
         jblImagenAlbumB = new javax.swing.JLabel();
@@ -258,6 +392,9 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblNombreAlbumA = new javax.swing.JLabel();
         jblNombreAlbumB = new javax.swing.JLabel();
         jblNombreAlbumC = new javax.swing.JLabel();
+        jblAlbumFavoritoA = new javax.swing.JLabel();
+        jblAlbumFavoritoB = new javax.swing.JLabel();
+        jblAlbumFavoritoC = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jblImagenCancionA = new javax.swing.JLabel();
         jblImagenCancionB = new javax.swing.JLabel();
@@ -267,12 +404,16 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblNombreCancionA = new javax.swing.JLabel();
         jblNombreCancionB = new javax.swing.JLabel();
         jblNombreCancionC = new javax.swing.JLabel();
+        jblCancionFavoritoA = new javax.swing.JLabel();
+        jblCancionFavoritoB = new javax.swing.JLabel();
+        jblCancionFavoritoC = new javax.swing.JLabel();
         jblAlbumes = new javax.swing.JLabel();
         jblCanciones = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Perfil Artista");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -310,6 +451,13 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
             }
         });
 
+        jblArtistaFavorito.setText("jLabel2");
+        jblArtistaFavorito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblArtistaFavoritoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -318,16 +466,20 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jblImagenArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jblNombresIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jblNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnMostrarTodosIntegrantes)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblNombresIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMostrarTodosIntegrantes)))
+                        .addGap(78, 78, 78)
+                        .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -340,11 +492,14 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                             .addComponent(jblNombreArtista)
                             .addComponent(jblGenero))
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(btnMostrarTodosIntegrantes))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jblNombresIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(btnMostrarTodosIntegrantes))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jblNombresIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jblImagenArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -390,6 +545,24 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblNombreAlbumC.setForeground(new java.awt.Color(0, 0, 0));
         jblNombreAlbumC.setText("jLabel2");
 
+        jblAlbumFavoritoA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblAlbumFavoritoAMouseClicked(evt);
+            }
+        });
+
+        jblAlbumFavoritoB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblAlbumFavoritoBMouseClicked(evt);
+            }
+        });
+
+        jblAlbumFavoritoC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblAlbumFavoritoCMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -399,41 +572,55 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jblImagenAlbumA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jblImagenAlbumA, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jblNombreAlbumA, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addGap(3, 3, 3)
+                .addComponent(jblAlbumFavoritoA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblNombreAlbumB, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jblImagenAlbumB, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jblAlbumFavoritoB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblImagenAlbumC, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jblNombreAlbumC, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblAlbumFavoritoC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jblImagenAlbumC, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblImagenAlbumB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblImagenAlbumA, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jblNombreAlbumB, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblNombreAlbumC, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblNombreAlbumA, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblImagenAlbumC, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblImagenAlbumB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblImagenAlbumA, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblAlbumFavoritoC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jblNombreAlbumB, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jblNombreAlbumC, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jblNombreAlbumA, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                                    .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAvanzarAlbum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                            .addComponent(btnRetrocederAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblAlbumFavoritoB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblAlbumFavoritoA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
@@ -477,6 +664,24 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblNombreCancionC.setForeground(new java.awt.Color(0, 0, 0));
         jblNombreCancionC.setText("jLabel2");
 
+        jblCancionFavoritoA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCancionFavoritoAMouseClicked(evt);
+            }
+        });
+
+        jblCancionFavoritoB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCancionFavoritoBMouseClicked(evt);
+            }
+        });
+
+        jblCancionFavoritoC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCancionFavoritoCMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -492,35 +697,55 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblNombreCancionB, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jblImagenCancionB, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jblCancionFavoritoB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblImagenCancionC, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jblNombreCancionC, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jblCancionFavoritoC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addContainerGap(147, Short.MAX_VALUE)
+                    .addComponent(jblCancionFavoritoA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(294, Short.MAX_VALUE)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jblImagenCancionC, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblImagenCancionB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jblImagenCancionA, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblNombreCancionA, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblNombreCancionB, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jblNombreCancionC, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jblCancionFavoritoB, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRetrocederCancion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jblImagenCancionC, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblImagenCancionB, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblImagenCancionA, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblCancionFavoritoC, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jblNombreCancionA, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jblNombreCancionB, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jblNombreCancionC, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnRetrocederCancion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAvanzarCancion, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                                .addContainerGap())))))
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jblCancionFavoritoA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(72, Short.MAX_VALUE)))
         );
 
         jblAlbumes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -536,7 +761,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jblCanciones)
                     .addComponent(jblAlbumes)
@@ -634,6 +859,13 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreAlbumA.setText(albumes.get(indiceAlbumA).getNombre());
                 setImagenLabel(jblImagenAlbumA, albumes.get(indiceAlbumA).getImagen());
+                if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumA).getIdAlbum()))){
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+                
             
                 try{
                     System.out.println("indice album a" + indiceCancionA);
@@ -642,6 +874,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                         jblNombreAlbumB.setText(albumes.get(indiceAlbumB).getNombre());
                         setImagenLabel(jblImagenAlbumB, albumes.get(indiceAlbumB).getImagen());
+                        if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumB).getIdAlbum()))){
+                        setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        }
+                        else{
+                        setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
                         
                         try{
                             indiceAlbumC = indiceAlbumC - 3;
@@ -649,6 +887,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                                 jblNombreAlbumC.setText(albumes.get(indiceAlbumC).getNombre());
                                 setImagenLabel(jblImagenAlbumC, albumes.get(indiceAlbumC).getImagen());
+                                if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumC).getIdAlbum()))){
+                                setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                }
+                                else{
+                                setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                             }
                         }
                         
@@ -699,6 +943,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreAlbumA.setText(albumes.get(indiceAlbumA).getNombre());
                 setImagenLabel(jblImagenAlbumA, albumes.get(indiceAlbumA).getImagen());
+                if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumA).getIdAlbum()))){
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
             
                 try{
                     System.out.println("indice album a" + indiceAlbumA);
@@ -707,6 +957,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                         jblNombreAlbumB.setText(albumes.get(indiceAlbumB).getNombre());
                         setImagenLabel(jblImagenAlbumB, albumes.get(indiceAlbumB).getImagen());
+                        if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumB).getIdAlbum()))){
+                        setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        }
+                        else{
+                        setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
                         
                         try{
                             indiceAlbumC = indiceAlbumC + 3;
@@ -714,6 +970,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                                 jblNombreAlbumC.setText(albumes.get(indiceAlbumC).getNombre());
                                 setImagenLabel(jblImagenAlbumC, albumes.get(indiceAlbumC).getImagen());
+                                if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumC).getIdAlbum()))){
+                                setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                }
+                                else{
+                                setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                                }
                             }
                         }
                         
@@ -772,6 +1034,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreCancionA.setText(canciones.get(indiceCancionA).getNombreCancion());
                 setImagenLabel(jblImagenCancionA, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionA).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
             
                 try{
                     System.out.println("indice cacnion a" + indiceCancionA);
@@ -780,6 +1048,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                         jblNombreCancionB.setText(canciones.get(indiceCancionB).getNombreCancion());
                         setImagenLabel(jblImagenCancionB, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                        if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionB).getIdCancion()))){
+                        setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        }
+                        else{
+                        setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                         
                         try{
                             indiceCancionC = indiceCancionC - 3;
@@ -787,6 +1061,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                                 jblNombreCancionC.setText(canciones.get(indiceCancionC).getNombreCancion());
                                 setImagenLabel(jblImagenCancionC, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionC).getIdCancion()))){
+                                    setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                }
+                                else{
+                                    setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                                }
                             }
                         }
                         
@@ -839,6 +1119,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreCancionA.setText(canciones.get(indiceCancionA).getNombreCancion());
                 setImagenLabel(jblImagenCancionA, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionA).getIdCancion()))){
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
             
                 try{
                     System.out.println("indice cacnion a" + indiceCancionA);
@@ -847,6 +1133,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                         jblNombreCancionB.setText(canciones.get(indiceCancionB).getNombreCancion());
                         setImagenLabel(jblImagenCancionB, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                        if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionB).getIdCancion()))){
+                            setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        }
+                        else{
+                            setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
                         
                         try{
                             indiceCancionC = indiceCancionC + 3;
@@ -854,6 +1146,12 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                                 jblNombreCancionC.setText(canciones.get(indiceCancionC).getNombreCancion());
                                 setImagenLabel(jblImagenCancionC, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                                if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionC).getIdCancion()))){
+                                    setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                }
+                                else{
+                                    setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
                             }
                         }
                         
@@ -892,6 +1190,328 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAvanzarCancionActionPerformed
 
+    private void jblAlbumFavoritoAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavoritoAMouseClicked
+        // TODO add your handling code here:
+        try{
+        if(buscarFavorito(favoritos, albumes.get(indiceAlbumA).getIdAlbum())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumA).getNombre()+ "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), albumes.get(indiceAlbumA).getIdAlbum());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, albumes.get(indiceAlbumA).getIdAlbum());
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(albumes.get(indiceAlbumA).getIdAlbum());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblAlbumFavoritoAMouseClicked
+
+    private void jblAlbumFavoritoBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavoritoBMouseClicked
+        // TODO add your handling code here:
+        try{
+        if(buscarFavorito(favoritos, albumes.get(indiceAlbumB).getIdAlbum())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumB).getNombre()+ "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), albumes.get(indiceAlbumB).getIdAlbum());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, albumes.get(indiceAlbumB).getIdAlbum());
+                setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(albumes.get(indiceAlbumB).getIdAlbum());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblAlbumFavoritoBMouseClicked
+
+    private void jblAlbumFavoritoCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavoritoCMouseClicked
+        // TODO add your handling code here:
+        try{
+        if(buscarFavorito(favoritos, albumes.get(indiceAlbumC).getIdAlbum())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumC).getNombre()+ "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), albumes.get(indiceAlbumC).getIdAlbum());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, albumes.get(indiceAlbumC).getIdAlbum());
+                setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(albumes.get(indiceAlbumC).getIdAlbum());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblAlbumFavoritoCMouseClicked
+
+    private void jblCancionFavoritoAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavoritoAMouseClicked
+        // TODO add your handling code here:
+        try{
+        if(buscarFavorito(favoritos, canciones.get(indiceCancionA).getIdCancion())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionA).getNombreCancion()+ "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), canciones.get(indiceCancionA).getIdCancion());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, canciones.get(indiceCancionA).getIdCancion());
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(canciones.get(indiceCancionA).getIdCancion());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblCancionFavoritoAMouseClicked
+
+    private void jblCancionFavoritoBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavoritoBMouseClicked
+        // TODO add your handling code here:
+        try{
+        if(buscarFavorito(favoritos, canciones.get(indiceCancionB).getIdCancion())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionB).getNombreCancion()+ "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), canciones.get(indiceCancionB).getIdCancion());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, canciones.get(indiceCancionB).getIdCancion());
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(canciones.get(indiceCancionB).getIdCancion());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblCancionFavoritoBMouseClicked
+
+    private void jblCancionFavoritoCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavoritoCMouseClicked
+        // TODO add your handling code here:
+                        try{
+        if(buscarFavorito(favoritos, canciones.get(indiceCancionC).getIdCancion())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionC).getNombreCancion()+ "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), canciones.get(indiceCancionC).getIdCancion());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, canciones.get(indiceCancionC).getIdCancion());
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(canciones.get(indiceCancionC).getIdCancion());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblCancionFavoritoCMouseClicked
+
+    private void jblArtistaFavoritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtistaFavoritoMouseClicked
+        // TODO add your handling code here:
+        try{
+        if(buscarFavorito(favoritos, artista.getNombreArtista())){
+           int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + artista.getNombreArtista() + "?",
+            "Confirmación",
+            JOptionPane.YES_NO_OPTION);
+
+            if(opcion == JOptionPane.YES_OPTION){
+                favoritosNegocio.eliminarFavorito(usuarioDTO.getId().toString(), artista.getIdDos());
+                JOptionPane.showMessageDialog(this, "Favorito eliminado");
+                eliminarFavorito(favoritos, artista.getIdDos());
+                setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                System.out.println("favorito eliminado");
+                }
+            }
+
+        else{
+            
+            FavoritosDTO favoritoDTO = new FavoritosDTO();
+            
+            FavoritoDTO favo = new FavoritoDTO();
+            
+            favo.setFechaAgregacion(new Date());
+            favo.setIdFavorito(artista.getIdDos());
+            
+            List<FavoritoDTO> lista = new ArrayList<>();
+            lista.add(favo);
+            
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+            
+            favoritosNegocio.actualizarFavoritos(favoritoDTO);
+            setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+            System.out.println("Favorito agregado");
+            favoritos.add(favo);
+            
+            }
+            
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jblArtistaFavoritoMouseClicked
+
 
     
     
@@ -909,7 +1529,14 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel jblAlbumFavoritoA;
+    private javax.swing.JLabel jblAlbumFavoritoB;
+    private javax.swing.JLabel jblAlbumFavoritoC;
     private javax.swing.JLabel jblAlbumes;
+    private javax.swing.JLabel jblArtistaFavorito;
+    private javax.swing.JLabel jblCancionFavoritoA;
+    private javax.swing.JLabel jblCancionFavoritoB;
+    private javax.swing.JLabel jblCancionFavoritoC;
     private javax.swing.JLabel jblCanciones;
     private javax.swing.JLabel jblGenero;
     private javax.swing.JLabel jblImagenAlbumA;

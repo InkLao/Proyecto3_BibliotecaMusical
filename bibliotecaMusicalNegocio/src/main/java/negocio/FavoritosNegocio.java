@@ -27,16 +27,23 @@ public class FavoritosNegocio implements IFavoritosNegocio {
         Favoritos coleccionInsertada = favoritosDAO.agregarFavoritos(favoritos);
         return this.convertirFavoritosAColeccion(coleccionInsertada);
     }
+    
+    @Override
+    public FavoritosDTO actualizarFavoritos(FavoritosDTO favoritosDTO) {
+        Favoritos favoritos = this.convertirFavoritosDTOAColeccion(favoritosDTO);
+        Favoritos coleccionInsertada = favoritosDAO.actualizarFavoritos(favoritos);
+        return this.convertirFavoritosAColeccion(coleccionInsertada);
+    }
 
     @Override
-    public List<FavoritoDTO> obtenerFavoritosPorUsuario(Object idUsuario) {
-        List<Favorito> favoritos = favoritosDAO.obtenerFavoritosPorUsuario((ObjectId) idUsuario);
+    public List<FavoritoDTO> obtenerFavoritosPorUsuario(String idUsuario) {
+        List<Favorito> favoritos = favoritosDAO.obtenerFavoritosPorUsuario(idUsuario);
         return this.convertirListaFavoritosDTO(favoritos);
     }
 
     @Override
-    public void eliminarFavorito(Object idUsuario, String idFavorito) {
-        favoritosDAO.eliminarFavorito((ObjectId) idUsuario, idFavorito);
+    public void eliminarFavorito(String idUsuario, String idFavorito) {
+        favoritosDAO.eliminarFavorito(idUsuario, idFavorito);
     }
 
     private Favoritos convertirFavoritosDTOAColeccion(FavoritosDTO favoritosDTO) {

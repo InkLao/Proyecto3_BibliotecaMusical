@@ -14,6 +14,11 @@ import java.util.List;
  */
 public interface IFavoritosNegocio {
     FavoritosDTO agregarFavoritos(FavoritosDTO favoritosDTO);
-    List<FavoritoDTO> obtenerFavoritosPorUsuario(Object idUsuario);
-    void eliminarFavorito(Object idUsuario, String idFavorito);
+    
+    List<FavoritoDTO> obtenerFavoritosPorUsuario(String idUsuario);
+    
+    void eliminarFavorito(String idUsuario, String idFavorito);
+    
+    FavoritosDTO actualizarFavoritos(FavoritosDTO favoritosDTO);
+    
 }

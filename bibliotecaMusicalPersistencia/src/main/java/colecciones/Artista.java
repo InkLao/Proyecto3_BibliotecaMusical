@@ -14,7 +14,7 @@ import org.bson.types.ObjectId;
 public class Artista {
     
     private ObjectId id;
-    private int idDos;
+    private String idDos;
     private String nombreArtista;
     private String imagen;
     private String genero;
@@ -26,7 +26,7 @@ public class Artista {
     public Artista() {
     }
 
-    public Artista(ObjectId id, int idDos, String nombreArtista, String imagen, String genero, List<Integrantes> Integrantes, List<Albumes> Albumes) {
+    public Artista(ObjectId id, String idDos, String nombreArtista, String imagen, String genero, List<Integrantes> Integrantes, List<Albumes> Albumes) {
         this.id = id;
         this.idDos = idDos;
         this.nombreArtista = nombreArtista;
@@ -36,7 +36,7 @@ public class Artista {
         this.Albumes = Albumes;
     }
 
-    public Artista(int idDos, String nombreArtista, String imagen, String genero, List<Integrantes> Integrantes, List<Albumes> Albumes) {
+    public Artista(String idDos, String nombreArtista, String imagen, String genero, List<Integrantes> Integrantes, List<Albumes> Albumes) {
         this.idDos = idDos;
         this.nombreArtista = nombreArtista;
         this.imagen = imagen;
@@ -53,11 +53,11 @@ public class Artista {
         this.id = id;
     }
 
-    public int getIdDos() {
+    public String getIdDos() {
         return idDos;
     }
 
-    public void setIdDos(int idDos) {
+    public void setIdDos(String idDos) {
         this.idDos = idDos;
     }
 

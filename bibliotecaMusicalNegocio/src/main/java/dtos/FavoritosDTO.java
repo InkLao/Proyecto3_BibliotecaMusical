@@ -10,13 +10,15 @@ import org.bson.types.ObjectId;
 public class FavoritosDTO {
     
     private ObjectId id;
-    private ObjectId idUsuario;
+    private String idUsuario;
     private List<FavoritoDTO> favorito;
 
     public FavoritosDTO() {
     }
 
-    public FavoritosDTO(ObjectId id, ObjectId idUsuario, List<FavoritoDTO> favorito) {
+    
+    
+    public FavoritosDTO(ObjectId id, String idUsuario, List<FavoritoDTO> favorito) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.favorito = favorito;
@@ -30,11 +32,11 @@ public class FavoritosDTO {
         this.id = id;
     }
 
-    public ObjectId getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(ObjectId idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 

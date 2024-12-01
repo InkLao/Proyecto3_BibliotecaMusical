@@ -180,7 +180,7 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
     private void btnBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscadorActionPerformed
         // TODO add your handling code here:
         
-        FrmBuscador buscador = new FrmBuscador(this);
+        FrmBuscador buscador = new FrmBuscador(this, usuarioDTO);
         buscador.setVisible(true);
         this.setVisible(false);
         

@@ -509,31 +509,19 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblArtistaFavorito1">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblArtistaFavorito1MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblArtistaFavorito2">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblArtistaFavorito2MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblArtistaFavorito3">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblArtistaFavorito3MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -573,20 +561,18 @@
                           <Component id="jblAlbumFavorito2" min="-2" pref="24" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jblAlbum3" min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="jblNombreAlbum3" min="-2" pref="96" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jblAlbumFavorito3" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jblNombreAlbum3" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                   <Component id="btnAvanzarAlbum" min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jblAlbum3" min="-2" pref="96" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jblAlbumFavorito3" min="-2" pref="24" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -602,8 +588,8 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jblAlbum1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                               <Component id="jblAlbum2" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                                              <Component id="jblAlbumFavorito3" min="-2" pref="24" max="-2" attributes="0"/>
                                               <Component id="jblAlbumFavorito1" min="-2" pref="24" max="-2" attributes="0"/>
+                                              <Component id="jblAlbumFavorito3" min="-2" pref="24" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
@@ -731,31 +717,19 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblAlbumFavorito1">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblAlbumFavorito1MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblAlbumFavorito2">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblAlbumFavorito2MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblAlbumFavorito3">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblAlbumFavorito3MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -959,31 +933,19 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblCancionFavorito1">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblCancionFavorito1MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblCancionFavorito2">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblCancionFavorito2MouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jblCancionFavorito3">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jblCancionFavorito3MouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -11,6 +11,7 @@ import java.util.Date;
  * @author eduar
  */
 public class Favorito {
+    
     private String idFavorito;
     private Date fechaAgregacion;
 
