@@ -12,19 +12,24 @@ import org.bson.types.ObjectId;
  */
 public class Persona {
     private ObjectId id;
+    private String idPersona;
     private String nombreCompleto;
 
     public Persona() {
     }
 
-    public Persona(String nombreCompleto) {
+    public Persona(ObjectId id, String idPersona, String nombreCompleto) {
+        this.id = id;
+        this.idPersona = idPersona;
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Persona(ObjectId id, String nombreCompleto) {
-        this.id=id;
+    public Persona(String idPersona, String nombreCompleto) {
+        this.idPersona = idPersona;
         this.nombreCompleto = nombreCompleto;
     }
+
+
 
     public ObjectId getId() {
         return id;
@@ -42,8 +47,21 @@ public class Persona {
         this.nombreCompleto = nombreCompleto;
     }
 
+    public String getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(String idPersona) {
+        this.idPersona = idPersona;
+    }
+
     @Override
     public String toString() {
-        return "Persona{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + '}';
+        return "Persona{" + "id=" + id + ", idPersona=" + idPersona + ", nombreCompleto=" + nombreCompleto + '}';
     }
+
+    
+    
+    
+ 
 }

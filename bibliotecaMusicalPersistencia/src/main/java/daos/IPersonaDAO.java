@@ -16,4 +16,6 @@ public interface IPersonaDAO {
     List<Persona> obtenerTodas();
     Persona buscarPersonaPorId(ObjectId id);
     Persona agregarPersona(Persona persona);
+    Persona buscarPersonaPorId(String id);
+    
 }

@@ -9,15 +9,36 @@ import org.bson.types.ObjectId;
 public class PersonaDTO {
 
     private ObjectId id;
+    private String idPersona;
     private String nombreCompleto;
 
     public PersonaDTO() {
     }
 
-    public PersonaDTO(ObjectId id, String nombreCompleto) {
+    public PersonaDTO(ObjectId id, String idPersona, String nombreCompleto) {
         this.id = id;
+        this.idPersona = idPersona;
         this.nombreCompleto = nombreCompleto;
     }
+
+    public PersonaDTO(String idPersona, String nombreCompleto) {
+        this.idPersona = idPersona;
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    
+    
+    
+    
+    public String getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(String idPersona) {
+        this.idPersona = idPersona;
+    }
+
+
 
     public ObjectId getId() {
         return id;
@@ -37,6 +58,8 @@ public class PersonaDTO {
 
     @Override
     public String toString() {
-        return "PersonaDTO{" + "id=" + id + ", nombreCompleto=" + nombreCompleto + '}';
+        return "PersonaDTO{" + "id=" + id + ", idPersona=" + idPersona + ", nombreCompleto=" + nombreCompleto + '}';
     }
+
+
 }

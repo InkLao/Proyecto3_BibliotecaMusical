@@ -9,6 +9,7 @@ import dtos.ArtistaDTO;
 import dtos.CancionDTO;
 import dtos.FavoritoDTO;
 import dtos.FavoritosDTO;
+import dtos.PersonaDTO;
 import dtos.UsuarioDTO;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ import negocio.ArtistaNegocio;
 import negocio.FavoritosNegocio;
 import negocio.IArtistaNegocio;
 import negocio.IFavoritosNegocio;
+import negocio.IPersonaNegocio;
+import negocio.PersonaNegocio;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -51,6 +55,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     UsuarioDTO usuarioDTO;
     
     IFavoritosNegocio favoritosNegocio = new FavoritosNegocio();
+    IPersonaNegocio personaNegocio = new PersonaNegocio();
     
     /**
      * Creates new form FrmPerfilArtista
@@ -89,14 +94,19 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 }
         
         
-        String nombresIntegrantes = "";
+        List<String> nombresIntegrantes = new ArrayList<>();
         
+        System.out.println("persona " + personaNegocio.buscarPersonaPorId("1").getNombreCompleto());
         for(int i = 0; i < artista.getIntegrantes().size(); i++){
-            nombresIntegrantes = nombresIntegrantes + ", " + artista.getIntegrantes().get(i).getIdPersona();
+            PersonaDTO per = personaNegocio.buscarPersonaPorId(artista.getIntegrantes().get(i).getIdPersona());
+            if(artista.getIntegrantes().get(i).getFechaSalida() == null){
+            nombresIntegrantes.add(per.getNombreCompleto());
+            cbcIntegrantes.addItem(nombresIntegrantes.get(i));
+            }
         
         }
         
-        jblNombresIntegrantes.setText(nombresIntegrantes);
+        
         
         System.out.println("id al" + idAlbum);
         if(idAlbum == null){
@@ -379,10 +389,10 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblImagenArtista = new javax.swing.JLabel();
         jblNombreArtista = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jblNombresIntegrantes = new javax.swing.JLabel();
         jblGenero = new javax.swing.JLabel();
         btnMostrarTodosIntegrantes = new javax.swing.JButton();
         jblArtistaFavorito = new javax.swing.JLabel();
+        cbcIntegrantes = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jblImagenAlbumA = new javax.swing.JLabel();
         jblImagenAlbumB = new javax.swing.JLabel();
@@ -434,9 +444,6 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Integrantes");
 
-        jblNombresIntegrantes.setForeground(new java.awt.Color(0, 0, 0));
-        jblNombresIntegrantes.setText("jLabel2");
-
         jblGenero.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jblGenero.setForeground(new java.awt.Color(0, 0, 0));
         jblGenero.setText("Genero:");
@@ -472,13 +479,13 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblNombresIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnMostrarTodosIntegrantes)))
-                        .addGap(78, 78, 78)
+                                .addComponent(btnMostrarTodosIntegrantes))
+                            .addComponent(cbcIntegrantes, 0, 234, Short.MAX_VALUE))
+                        .addGap(96, 96, 96)
                         .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -497,9 +504,10 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(btnMostrarTodosIntegrantes))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jblNombresIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(49, 49, 49))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbcIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jblImagenArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -847,6 +855,26 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
     private void btnMostrarTodosIntegrantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodosIntegrantesActionPerformed
         // TODO add your handling code here:
+        List<String> nombresIntegrantes = new ArrayList<>();
+        
+        System.out.println("persona " + personaNegocio.buscarPersonaPorId("1").getNombreCompleto());
+        for(int i = 0; i < artista.getIntegrantes().size(); i++){
+            PersonaDTO per = personaNegocio.buscarPersonaPorId(artista.getIntegrantes().get(i).getIdPersona());
+            if(artista.getIntegrantes().get(i).getFechaSalida() == null){
+                nombresIntegrantes.add(per.getNombreCompleto() + " " + "(Activo)");
+            }
+            else{
+                nombresIntegrantes.add(per.getNombreCompleto() + " " + "(Inactivo)");
+            }
+              
+        }
+        
+        
+        
+        DlgIntegrantes integrantes = new DlgIntegrantes(nombresIntegrantes);
+        integrantes.setVisible(true);
+        
+        
     }//GEN-LAST:event_btnMostrarTodosIntegrantesActionPerformed
 
     private void btnRetrocederAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederAlbumActionPerformed
@@ -1469,7 +1497,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     private void jblArtistaFavoritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtistaFavoritoMouseClicked
         // TODO add your handling code here:
         try{
-        if(buscarFavorito(favoritos, artista.getNombreArtista())){
+        if(buscarFavorito(favoritos, artista.getIdDos())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + artista.getNombreArtista() + "?",
             "Confirmación",
             JOptionPane.YES_NO_OPTION);
@@ -1523,6 +1551,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnRetrocederAlbum;
     private javax.swing.JButton btnRetrocederCancion;
+    private javax.swing.JComboBox<String> cbcIntegrantes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1553,6 +1582,5 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     private javax.swing.JLabel jblNombreCancionA;
     private javax.swing.JLabel jblNombreCancionB;
     private javax.swing.JLabel jblNombreCancionC;
-    private javax.swing.JLabel jblNombresIntegrantes;
     // End of variables declaration//GEN-END:variables
 }
