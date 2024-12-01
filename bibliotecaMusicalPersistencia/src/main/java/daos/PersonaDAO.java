@@ -37,6 +37,12 @@ public class PersonaDAO implements IPersonaDAO {
         Document query = new Document("_id", id);
         return collectionPersona.find(query).first();
     }
+    
+    @Override
+    public Persona buscarPersonaPorId(String id) {
+        Document query = new Document("idPersona", id);
+        return collectionPersona.find(query).first();
+    }
 
     @Override
     public Persona agregarPersona(Persona persona) {

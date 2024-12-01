@@ -32,18 +32,25 @@ public class PersonaNegocio implements IPersonaNegocio {
         return this.convertirListaPersonaDTO(personas);
     }
 
+//    @Override
+//    public PersonaDTO buscarPersonaPorId(Object id) {
+//        Persona persona = personaDAO.buscarPersonaPorId((ObjectId) id);
+//        return this.convertirPersonaAColeccion(persona);
+//    }
+    
     @Override
-    public PersonaDTO buscarPersonaPorId(Object id) {
-        Persona persona = personaDAO.buscarPersonaPorId((ObjectId) id);
+    public PersonaDTO buscarPersonaPorId(String id) {
+        Persona persona = personaDAO.buscarPersonaPorId(id);
         return this.convertirPersonaAColeccion(persona);
     }
+    
 
     private Persona convertirPersonaDTOAColeccion(PersonaDTO personaDTO) {
-        return new Persona(personaDTO.getId(), personaDTO.getNombreCompleto());
+        return new Persona(personaDTO.getIdPersona(), personaDTO.getNombreCompleto());
     }
 
     private PersonaDTO convertirPersonaAColeccion(Persona persona) {
-        return new PersonaDTO(persona.getId(), persona.getNombreCompleto());
+        return new PersonaDTO(persona.getId(), persona.getIdPersona(), persona.getNombreCompleto());
     }
 
     private List<PersonaDTO> convertirListaPersonaDTO(List<Persona> personas) {

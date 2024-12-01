@@ -14,5 +14,6 @@ import java.util.List;
 public interface IPersonaNegocio {
     PersonaDTO agregarPersona(PersonaDTO personaDTO);
     List<PersonaDTO> obtenerTodas();
-    PersonaDTO buscarPersonaPorId(Object id);
+    //PersonaDTO buscarPersonaPorId(Object id);
+    PersonaDTO buscarPersonaPorId(String id);
 }
