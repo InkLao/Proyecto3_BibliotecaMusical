@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author 
+ * @author
  */
 public class GeneroNoDeseadoNegocio implements IGeneroNoDeseadoNegocio {
 
@@ -32,6 +32,10 @@ public class GeneroNoDeseadoNegocio implements IGeneroNoDeseadoNegocio {
 
     @Override
     public void eliminarGenero(Object idUsuario, String genero) {
+        List<String> generos = generoNoDeseadoDAO.obtenerGenerosNoDeseados((ObjectId) idUsuario);
+        if (generos == null || !generos.contains(genero)) {
+            throw new IllegalArgumentException("El género no está en la lista de no deseados.");
+        }
         generoNoDeseadoDAO.eliminarGenero((ObjectId) idUsuario, genero);
     }
 
