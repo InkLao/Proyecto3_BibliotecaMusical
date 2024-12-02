@@ -41,4 +41,7 @@ public interface IArtistaDAO {
     Artista buscarArtistaPorIdCancion(String id);
     
     
+    
+    boolean InsercionArtistasArturo();
+    
 }

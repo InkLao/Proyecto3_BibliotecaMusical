@@ -89,23 +89,33 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
        if(buscarFavorito(favoritos, artista.getIdDos())){
                 setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoSi.png");
                 }
-                else{
+        else{
                 setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoNo.png");
                 }
         
         
         List<String> nombresIntegrantes = new ArrayList<>();
-        
-        System.out.println("persona " + personaNegocio.buscarPersonaPorId("1").getNombreCompleto());
+        try{
+       // System.out.println("persona " + personaNegocio.buscarPersonaPorId("1").getNombreCompleto());
+            nombresIntegrantes.clear();
+            System.out.println("tama" + artista.getIntegrantes().size());
         for(int i = 0; i < artista.getIntegrantes().size(); i++){
             PersonaDTO per = personaNegocio.buscarPersonaPorId(artista.getIntegrantes().get(i).getIdPersona());
             if(artista.getIntegrantes().get(i).getFechaSalida() == null){
-            nombresIntegrantes.add(per.getNombreCompleto());
-            cbcIntegrantes.addItem(nombresIntegrantes.get(i));
+                nombresIntegrantes.add(per.getNombreCompleto() + " " + "(" + artista.getIntegrantes().get(i).getRolBanda() + ")");
+
             }
         
         }
         
+        for(int j = 0; j < nombresIntegrantes.size(); j++){
+            cbcIntegrantes.addItem(nombresIntegrantes.get(j));
+            }
+        
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         
         
         System.out.println("id al" + idAlbum);

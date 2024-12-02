@@ -99,9 +99,9 @@ public class FrmBuscador extends javax.swing.JFrame {
     
     public void cargarDatos(){
     
-        jblNombreArtista1.setText(artistas.get(0).getNombreArtista());
-        setImagenLabel(jblArtista1, artistas.get(0).getImagen());
-        if(buscarFavorito(favoritos, artistas.get(0).getIdDos())){
+        jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
+        setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
+        if(buscarFavorito(favoritos, artistas.get(indiceArtistaA).getIdDos())){
             setImagenLabel(jblArtistaFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
         }
         else{
@@ -110,18 +110,18 @@ public class FrmBuscador extends javax.swing.JFrame {
        
         System.out.println(artistas.get(0).toString());
         
-        jblNombreArtista2.setText(artistas.get(1).getNombreArtista());
-        setImagenLabel(jblArtista2, artistas.get(1).getImagen());
-        if(buscarFavorito(favoritos, String.valueOf(artistas.get(1).getIdDos()))){
+        jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
+        setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
+        if(buscarFavorito(favoritos, String.valueOf(artistas.get(indiceArtistaB).getIdDos()))){
             setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
         }
         else{
             setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
         }
         
-        jblNombreArtista3.setText(artistas.get(2).getNombreArtista());
-        setImagenLabel(jblArtista3, artistas.get(2).getImagen());
-        if(buscarFavorito(favoritos, String.valueOf(artistas.get(2).getIdDos()))){
+        jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
+        setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
+        if(buscarFavorito(favoritos, String.valueOf(artistas.get(indiceArtistaC).getIdDos()))){
             setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
         }
         else{
@@ -920,6 +920,8 @@ public class FrmBuscador extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             
+            favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
+            
             btnRetrocederArtista.setEnabled(true);
             indiceArtistaA = indiceArtistaA + 3;
             if(artistas.get(indiceArtistaA) != null){ 
@@ -937,8 +939,8 @@ public class FrmBuscador extends javax.swing.JFrame {
                     indiceArtistaB = indiceArtistaB + 3;
                     if(artistas.get(indiceArtistaB) != null){ 
 
-                        jblNombreArtista1.setText(artistas.get(indiceArtistaB).getNombreArtista());
-                        setImagenLabel(jblArtista1, artistas.get(indiceArtistaB).getImagen());
+                        jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
+                        setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
                         if(buscarFavorito(favoritos, artistas.get(indiceArtistaB).getIdDos())){
                         setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
                         }
@@ -950,8 +952,8 @@ public class FrmBuscador extends javax.swing.JFrame {
                             indiceArtistaC = indiceArtistaC + 3;
                             if(artistas.get(indiceArtistaC) != null){ 
 
-                                jblNombreArtista1.setText(artistas.get(indiceArtistaC).getNombreArtista());
-                                setImagenLabel(jblArtista1, artistas.get(indiceArtistaC).getImagen());
+                                jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
+                                setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
                                 if(buscarFavorito(favoritos, artistas.get(indiceArtistaC).getIdDos())){
                                     setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
                                 }
@@ -1010,6 +1012,8 @@ public class FrmBuscador extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try{
+            
+            favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
             
             btnRetrocederCancion.setEnabled(true);
             indiceCancionA = indiceCancionA + 3;
@@ -1097,6 +1101,8 @@ public class FrmBuscador extends javax.swing.JFrame {
         // TODO add your handling code here:
        try{
             
+           favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
+           
             btnRetrocederAlbum.setEnabled(true);
             indiceAlbumA = indiceAlbumA + 3;
             if(albumes.get(indiceAlbumA) != null){ 
@@ -1189,6 +1195,8 @@ public class FrmBuscador extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             
+            favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
+            
              btnAvanzarCancion.setEnabled(true);
             indiceCancionA = indiceCancionA - 3;
             if(canciones.get(indiceCancionA) != null){ 
@@ -1236,7 +1244,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                             btnRetrocederCancion.setEnabled(false);
                             System.out.println(e.getMessage());
                             JOptionPane.showMessageDialog(this, "No hay mas canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
-                            indiceCancionC = indiceCancionC + 3;
+                            indiceCancionC = 2;
                             jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
                             setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
                         }
@@ -1248,7 +1256,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                     btnRetrocederCancion.setEnabled(false);
                     System.out.println(e.getMessage());
                     JOptionPane.showMessageDialog(this, "No hay mas Canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
-                    indiceCancionB = indiceCancionB + 3;
+                    indiceCancionB = 1;
                     jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
                     setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
                     setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
@@ -1263,7 +1271,7 @@ public class FrmBuscador extends javax.swing.JFrame {
             btnRetrocederCancion.setEnabled(false);
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "No hay mas canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
-            indiceCancionA = indiceCancionA + 3;
+            indiceCancionA = 0;
             jblNombreCancion1.setText(canciones.get(indiceCancionA).getNombreCancion());
             setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
                             if(buscarFavorito(favoritos, canciones.get(indiceCancionA).getIdCancion())){
@@ -1281,6 +1289,8 @@ public class FrmBuscador extends javax.swing.JFrame {
     private void btnRetrocederAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederAlbumActionPerformed
         // TODO add your handling code here:
         try{
+            
+            favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
             
             btnAvanzarAlbum.setEnabled(true);
             indiceAlbumA = indiceAlbumA - 3;
@@ -1327,7 +1337,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                         catch(Exception e){
                             btnRetrocederAlbum.setEnabled(false);
                             System.out.println(e.getMessage());
-                            indiceAlbumC = indiceAlbumC + 3;
+                            indiceAlbumC = 2;
                             jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
                             setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
                             setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
@@ -1340,7 +1350,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                     System.out.println("Album b");
                     btnRetrocederAlbum.setEnabled(false);
                     System.out.println(e.getMessage());
-                    indiceAlbumB = indiceAlbumB + 3;
+                    indiceAlbumB = 1;
                     jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
                     setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
                     setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
@@ -1356,7 +1366,7 @@ public class FrmBuscador extends javax.swing.JFrame {
             btnRetrocederAlbum.setEnabled(false);
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "No hay mas albumes", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
-            indiceAlbumA = indiceAlbumA + 3;
+            indiceAlbumA = 0;
             jblNombreAlbum1.setText(albumes.get(indiceAlbumA).getNombre());
             setImagenLabel(jblAlbum1, albumes.get(indiceAlbumA).getImagen());
             setImagenLabel(jblAlbumFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
@@ -1368,6 +1378,8 @@ public class FrmBuscador extends javax.swing.JFrame {
     private void btnRetrocederArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederArtistaActionPerformed
         // TODO add your handling code here:
         try{
+            
+            favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
             
             btnAvanzarArtista.setEnabled(true);
             indiceArtistaA = indiceArtistaA - 3;
@@ -1414,7 +1426,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                             btnRetrocederArtista.setEnabled(false);
                             System.out.println(e.getMessage());
                             JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
-                            indiceArtistaC =- 3;
+                            indiceArtistaC = 2;
                             jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
                             setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
                             setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
@@ -1427,7 +1439,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                     btnRetrocederArtista.setEnabled(false);
                     System.out.println(e.getMessage());
                     JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
-                    indiceAlbumB = indiceAlbumB - 3;
+                    indiceArtistaB = 1;
                     jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
                     setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
                     if(buscarFavorito(favoritos, artistas.get(indiceArtistaB).getIdDos())){
@@ -1447,7 +1459,7 @@ public class FrmBuscador extends javax.swing.JFrame {
             btnRetrocederArtista.setEnabled(false);
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
-            indiceAlbumA = indiceAlbumA - 3;
+            indiceArtistaA = 0;
             jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
             setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
            if(buscarFavorito(favoritos, artistas.get(indiceArtistaA).getIdDos())){
@@ -1640,6 +1652,8 @@ public class FrmBuscador extends javax.swing.JFrame {
             
             favo.setFechaAgregacion(new Date());
             favo.setIdFavorito(artistas.get(indiceArtistaA).getIdDos());
+            System.out.println(favo.getIdFavorito());
+            System.out.println(usuarioDTO.getId());
             
             List<FavoritoDTO> lista = new ArrayList<>();
             lista.add(favo);

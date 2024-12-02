@@ -24,7 +24,7 @@ public class ConversorDTO {
         for (CancionDTO cancionDTO : albumDTO.getCanciones()) {
             canciones.add(new Canciones(cancionDTO.getIdCancion(), cancionDTO.getNombreCancion(), cancionDTO.getDuracion()));
         }
-        return new Albumes(albumDTO.getIdAlbum(), albumDTO.getNombre(), albumDTO.getFechaLanzamiento(), albumDTO.getImagen(), canciones);
+        return new Albumes(albumDTO.getIdAlbum(), albumDTO.getNombre(), albumDTO.getFechaLanzamiento(), albumDTO.getGenero(), albumDTO.getImagen(), canciones);
     }
 
     public static List<Albumes> convertirListaAlbumDTOAAlbum(List<AlbumDTO> albumesDTO) {

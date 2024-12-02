@@ -218,6 +218,7 @@ public class ArtistaNegocio implements IArtistaNegocio {
             dto.setFechaLanzamiento(album.getFechaLanzamiento());
             dto.setIdAlbum(album.getIdAlbum());
             dto.setImagen(album.getImagen());
+            dto.setGenero(album.getGenero());
             dto.setNombre(album.getNombre());
 
             albumesDTO.add(dto);
@@ -229,7 +230,7 @@ public class ArtistaNegocio implements IArtistaNegocio {
     private AlbumDTO convertirAlbumADTO(Albumes album) {
 
         try {
-            return new AlbumDTO(album.getIdAlbum(), album.getNombre(), album.getFechaLanzamiento(), album.getImagen(), this.convertirListaCancionDTO(album.getCanciones()));
+            return new AlbumDTO(album.getIdAlbum(), album.getNombre(), album.getFechaLanzamiento(), album.getGenero(), album.getImagen(), this.convertirListaCancionDTO(album.getCanciones()));
         } catch (Exception ex) {
             Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -277,6 +278,20 @@ public class ArtistaNegocio implements IArtistaNegocio {
         return null;
     }
 
-    
+    @Override
+    public boolean InsercionArtistasArturo(){
+        
+        try{
+        artistaDAO.InsercionArtistasArturo();
+        
+        return true;
+        }
+        catch(Exception e){
+        
+            System.out.println(e.getMessage());
+        }
+        
+        return false;
+    }
 
 }

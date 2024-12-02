@@ -143,6 +143,7 @@ public class FrmInicio extends javax.swing.JFrame {
         btnDatos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btnDatos.setText("Insertar Datos");
         btnDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDatos.setEnabled(false);
         btnDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDatosActionPerformed(evt);
@@ -207,21 +208,31 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosActionPerformed
         // TODO add your handling code here:
         IArtistaNegocio artistaNegocio = new ArtistaNegocio();
+//
+//        try {
+//            // Generar 60 artistas
+//            List<ArtistaDTO> artistas = generarArtistas();
+//
+//            // Insertar cada artista
+//            for (ArtistaDTO artista : artistas) {
+//                artistaNegocio.agregarArtista(artista);
+//            }
+//
+//            // Mostrar mensaje de éxito
+//            JOptionPane.showMessageDialog(this, "Artistas insertados con éxito");
+//        } catch (Exception ex) {
+//            // Mostrar mensaje de error
+//            JOptionPane.showMessageDialog(this, "Error al insertar artistas: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
 
-        try {
-            // Generar 60 artistas
-            List<ArtistaDTO> artistas = generarArtistas();
 
-            // Insertar cada artista
-            for (ArtistaDTO artista : artistas) {
-                artistaNegocio.agregarArtista(artista);
-            }
-
-            // Mostrar mensaje de éxito
-            JOptionPane.showMessageDialog(this, "Artistas insertados con éxito");
-        } catch (Exception ex) {
-            // Mostrar mensaje de error
-            JOptionPane.showMessageDialog(this, "Error al insertar artistas: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        try{
+        boolean resultado = artistaNegocio.InsercionArtistasArturo();
+            System.out.println("Se inserto masivamanete? " + resultado);
+        }
+        
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnDatosActionPerformed
 

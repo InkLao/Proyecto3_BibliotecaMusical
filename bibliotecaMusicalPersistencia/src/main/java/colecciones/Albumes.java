@@ -16,26 +16,31 @@ public class Albumes {
     private String idAlbum;
     private String nombre;
     private Date fechaLanzamiento;
+    private String genero;
     private String imagen;
     private List<Canciones> canciones;
 
     public Albumes() {
     }
 
-    public Albumes(String idAlbum, String nombre, Date fechaLanzamiento, String imagen, List<Canciones> canciones) {
+    public Albumes(String idAlbum, String nombre, Date fechaLanzamiento, String genero, String imagen, List<Canciones> canciones) {
         this.idAlbum = idAlbum;
         this.nombre = nombre;
         this.fechaLanzamiento = fechaLanzamiento;
+        this.genero = genero;
         this.imagen = imagen;
         this.canciones = canciones;
     }
 
-    public Albumes(String idAlbum, String nombre, Date fechaLanzamiento, String genero, String imagen) {
-        this.idAlbum = idAlbum;
+    public Albumes(String nombre, Date fechaLanzamiento, String genero, String imagen, List<Canciones> canciones) {
         this.nombre = nombre;
         this.fechaLanzamiento = fechaLanzamiento;
+        this.genero = genero;
         this.imagen = imagen;
+        this.canciones = canciones;
     }
+
+
 
 
 
@@ -79,10 +84,22 @@ public class Albumes {
         this.canciones = canciones;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Albumes{" + "idAlbum=" + idAlbum + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", imagen=" + imagen + ", canciones=" + canciones + '}';
+        return "Albumes{" + "idAlbum=" + idAlbum + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", genero=" + genero + ", imagen=" + imagen + ", canciones=" + canciones + '}';
     }
+
+
 
     
     

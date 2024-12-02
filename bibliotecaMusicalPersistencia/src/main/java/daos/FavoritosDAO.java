@@ -37,22 +37,36 @@ public class FavoritosDAO implements IFavoritosDAO{
     public Favoritos actualizarFavoritos(Favoritos favoritos){
         
         try{
+            
+        obtenerFavoritosPorUsuario(favoritos.getIdUsuario()).get(0);
         
-        Document query = new Document("idUsuario", favoritos.getIdUsuario());
+            try{
+        
+                Document query = new Document("idUsuario", favoritos.getIdUsuario());
 
         
-        Document update = new Document("$push", new Document("favorito", new Document("idFavorito", favoritos.getFavorito().get(0).getIdFavorito()).append
+                Document update = new Document("$push", new Document("favorito", new Document("idFavorito", favoritos.getFavorito().get(0).getIdFavorito()).append
                                                             ("fechaAgregacion", favoritos.getFavorito().get(0).getFechaAgregacion())));
         
-        collectionFavoritos.updateOne(query, update);
+                collectionFavoritos.updateOne(query, update);
         
-        return favoritos;
+                return favoritos;
+                }
+        
+            catch(Exception e){
+                System.out.println(e.getMessage());
+                }
+            
         }
         
         catch(Exception e){
-            System.out.println(e.getMessage());
+            agregarFavoritos(favoritos);
+            
         }
+       
+        
         return null;
+        
     }
 
     @Override

@@ -41,4 +41,6 @@ public interface IArtistaNegocio {
     
     ArtistaDTO buscarArtistaPorIdCancion(String id);
     
+    boolean InsercionArtistasArturo();
+    
 }

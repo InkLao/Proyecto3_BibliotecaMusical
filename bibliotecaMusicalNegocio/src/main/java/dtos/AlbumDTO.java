@@ -12,19 +12,31 @@ public class AlbumDTO {
     private String idAlbum;
     private String nombre;
     private Date fechaLanzamiento;
+    private String genero;
     private String imagen;
     private List<CancionDTO> canciones;
 
     public AlbumDTO() {
     }
 
-    public AlbumDTO(String idAlbum, String nombre, Date fechaLanzamiento, String imagen, List<CancionDTO> canciones) {
+    public AlbumDTO(String idAlbum, String nombre, Date fechaLanzamiento, String genero, String imagen, List<CancionDTO> canciones) {
         this.idAlbum = idAlbum;
         this.nombre = nombre;
         this.fechaLanzamiento = fechaLanzamiento;
+        this.genero = genero;
         this.imagen = imagen;
         this.canciones = canciones;
     }
+
+    public AlbumDTO(String nombre, Date fechaLanzamiento, String genero, String imagen, List<CancionDTO> canciones) {
+        this.nombre = nombre;
+        this.fechaLanzamiento = fechaLanzamiento;
+        this.genero = genero;
+        this.imagen = imagen;
+        this.canciones = canciones;
+    }
+
+
 
     public String getIdAlbum() {
         return idAlbum;
@@ -66,10 +78,20 @@ public class AlbumDTO {
         this.canciones = canciones;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     @Override
     public String toString() {
-        return "AlbumDTO{" + "idAlbum=" + idAlbum + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", imagen=" + imagen + ", canciones=" + canciones + '}';
+        return "AlbumDTO{" + "idAlbum=" + idAlbum + ", nombre=" + nombre + ", fechaLanzamiento=" + fechaLanzamiento + ", genero=" + genero + ", imagen=" + imagen + ", canciones=" + canciones + '}';
     }
+
+
 
 
 }
