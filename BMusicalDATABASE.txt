@@ -1,0 +1,78 @@
+db.getCollection("usuarios").insertOne({
+    "nombre": "1",
+    "apellidoP" : "1",
+    "apellidoM" : "1",
+    "correo" : "1",
+    "contrasena" : "1",
+    "imagen" : "home/pruebaImagen.png"
+}
+);
+
+---------------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+db.getCollection("favoritos").insertOne({
+    "idUsuario" : "673f9ed27976e840ab7e265d",
+    "favorito" : [{
+                    "IdFavorito" : "CANCYFMH",
+                    "FechaAgregacion" : new Date()
+                    },
+                    {
+                    "IdFavorito" : "ALBTTS",
+                    "FechaAgregacion" : new Date()
+        
+                    }]
+
+}
+);
+
+
+-----------------------------------------------------------------------------
+
+
+db.getCollection("GeneroNoDeseado").find({})
+
+db.getCollection("GeneroNoDeseado").insertOne({
+    "idUsuario" : "673f9ed27976e840ab7e265d",
+    "NombreGenero" : ["Bachata", "Pop"]
+}
+);
+
+
+------------------------------------------------------------------------------
+
+
+db.getCollection("persona").insertMany([{
+                    "idPersona" : "1",
+                    "nombreCompleto" : "Chester Charles Bennigton"
+    
+                },
+                {
+        
+                     "idPersona" : "2",
+                    "nombreCompleto" : "Mike Shinoda"
+    
+                },
+                {
+                    "idPersona" : "3",
+                    "nombreCompleto" : "Oliver Sykes"
+                    
+                },
+                {
+                    "idPersona" : "4",
+                    "nombreCompleto" : "Jordan Fish"
+                    
+                },
+                                {
+                    "idPersona" : "5",
+                    "nombreCompleto" : "Tyler Joseph"
+                    
+                },
+                                {
+                    "idPersona" : "6",
+                    "nombreCompleto" : "Josh Dun"
+                    
+                }
+]
+);
