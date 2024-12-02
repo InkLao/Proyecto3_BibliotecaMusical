@@ -41,6 +41,40 @@ public class ArtistaNegocio implements IArtistaNegocio {
 
         return null;
     }
+    
+    
+    @Override
+    public List<ArtistaDTO> obtenerTodosArtistasFiltroGeneroNoDeseado(List<String> excluir) {
+
+        List<Artista> artistas = artistaDAO.obtenerTodosArtistaSinGeneroNoDeseado(excluir);
+
+        try {
+            return this.convertirListaArtistaDTO(artistas);
+        } catch (Exception ex) {
+            Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
+    
+    @Override
+    public List<AlbumDTO> obtenerTodosAlbumesEnArtistaFiltroGeneroNoDeseado(List<String> excluir) {
+
+        List<Albumes> albumes = artistaDAO.obtenerTodosAlbumesEnArtistaFiltroGeneroNoDeseado(excluir);
+
+        try {
+            return this.convertirListaAlbumDTO(albumes);
+        } catch (Exception ex) {
+            Logger.getLogger(ArtistaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+    
+    
+    
 
     @Override
     public ArtistaDTO buscarArtista(Object id) {

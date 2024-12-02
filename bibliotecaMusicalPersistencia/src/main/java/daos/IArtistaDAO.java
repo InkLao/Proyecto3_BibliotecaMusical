@@ -40,6 +40,9 @@ public interface IArtistaDAO {
     
     Artista buscarArtistaPorIdCancion(String id);
     
+    List<Artista> obtenerTodosArtistaSinGeneroNoDeseado(List<String> excluir);
+    
+    List<Albumes> obtenerTodosAlbumesEnArtistaFiltroGeneroNoDeseado(List<String> excluir);
     
     
     boolean InsercionArtistasArturo();

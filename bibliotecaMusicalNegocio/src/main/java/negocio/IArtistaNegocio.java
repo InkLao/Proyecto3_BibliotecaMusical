@@ -41,6 +41,11 @@ public interface IArtistaNegocio {
     
     ArtistaDTO buscarArtistaPorIdCancion(String id);
     
+    List<ArtistaDTO> obtenerTodosArtistasFiltroGeneroNoDeseado(List<String> excluir);
+    
+    List<AlbumDTO> obtenerTodosAlbumesEnArtistaFiltroGeneroNoDeseado(List<String> excluir);
+    
+    
     boolean InsercionArtistasArturo();
     
 }
