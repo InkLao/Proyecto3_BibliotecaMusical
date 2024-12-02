@@ -1,0 +1,2103 @@
+
+db.getCollection("artistas").insertMany([
+    {
+    "idDos" : "1",
+    "nombreArtista": "Linkin Park",
+    "imagen" : "src/main/java/ImagenesProyecto/ArtistaLinkinPark.jpg",
+    "genero" : "Rock",
+    "integrantes" : [{
+                    "idPersona" : "1",
+                    "rolBanda" : "Vocalista",
+                    "fechaIngreso" : new Date("1999-01-01"),
+                    "fechaSalida" :  new Date("2017-07-20")
+                    },
+                    {
+                    "idPersona" : "2",
+                    "rolBanda" : "Vocalista, Guitarrista",
+                    "fechaIngreso" : new Date(),
+                    "fechaSalida" : null
+                    }
+                    ],
+                    
+   "albumes" :  [{
+		   "idAlbum" : "ALBHT",
+                   "nombre" :  "Hybrid Theory",
+                   "fechaLanzamiento" : new Date(),
+                   "genero" : "Nu Metal",
+                   "imagen" : "src/main/java/ImagenesProyecto/AlbumHybridTheory.jpg",
+                   "canciones" : [{
+				                   "idCancion" : "CANHTOSP",
+                                   "nombreCancion" : "One Step Closer",
+                                   "duracion" : "2:35"
+                                  },
+                  
+                                  {
+				                   "idCancion" : "CANHTAPFMH",
+                                   "nombreCancion" : "A Place for My Head",
+                                   "duracion" : "3:04"
+                                  },
+                  
+                                  {
+				    "idCancion" : "CANHTITE",
+                                    "nombreCancion" : "In The End",
+                                    "duracion" : "3:36"
+                                  }
+                  
+                                  ]
+                }          
+       
+               ]                
+    },           
+    
+    {
+    "idDos" : "2",
+    "nombreArtista": "Bring Me The Horizon",
+    "imagen" : "src/main/java/ImagenesProyecto/ArtistaBMTH.jpg",
+    "genero" : "Rock",
+    "integrantes" : [{
+                    "idPersona" : "3",
+                    "rolBanda" : "Vocalista",
+                    "fechaIngreso" : new Date(),
+                    "fechaSalida" : null
+                    },
+                    {
+                    "idPersona" : "4",
+                    "rolBanda" : "Vocalista, Teclado",
+                    "fechaIngreso" : new Date(),
+                    "fechaSalida" :  new Date("2023-12-22")
+                    }
+                    ],
+                    
+   "albumes" :  [{
+		   "idAlbum" : "ALBTTS",
+                   "nombre" :  "Thast´s The Spirit",
+                   "fechaLanzamiento" : new Date(),
+                   "genero" : "Post Hardcore",
+                   "imagen" : "src/main/java/ImagenesProyecto/AlbumThatsTheSpirit.png",
+                   "canciones" : [{
+				   "idCancion" : "CANFY",
+                                   "nombreCancion" : "Follow You",
+                                   "duracion" : "3:51"
+                                  },
+                  
+                                  {
+				   "idCancion" : "CANTF",
+                                   "nombreCancion" : "True Friends",
+                                   "duracion" : "3:52"
+                                  },
+                  
+                                  {
+				                    "idCancion" : "CANWYN",
+                                    "nombreCancion" : "What You Need",
+                                    "duracion" : "4:12"
+                                  }
+                  
+                                  ]
+                },
+                                  {
+                   "idAlbum" : "ALSem",
+                   "nombre" :  "Sempiternal",
+                   "fechaLanzamiento" : new Date(),
+                   "genero" : "Metal",
+                   "imagen" : "src/main/java/ImagenesProyecto/AlbumSempiternal.jpg",
+                   "canciones" : [{
+				   "idCancion" : "CANCYFMH",
+                                   "nombreCancion" : "Can You Feel My Heart",
+                                   "duracion" : "3:48"
+                                  },
+                  
+                                  {
+				   "idCancion" : "CANTHOW",
+                                   "nombreCancion" : "The House Of Wolves",
+                                   "duracion" : "3:25"
+                                  },
+                  
+                                  {
+				    "idCancion" : "CANSM",
+                                    "nombreCancion" : "Shadow Moses",
+                                    "duracion" : "4:03"
+                                  }          
+       
+               ]                
+                    
+            }
+            ]
+    },
+
+    {
+    "idDos" : "3",
+    "nombreArtista": "Twenty One Pilots",
+    "imagen" : "src/main/java/ImagenesProyecto/ArtistaTOP.jpg",
+    "genero" : "Alternative",
+    "integrantes" : [{
+                    "idPersona" : "5",
+                    "rolBanda" : "Vocalista",
+                    "fechaIngreso" : new Date(),
+                    "fechaSalida" : null
+                    },
+                    {
+                    "idPersona" : "6",
+                    "rolBanda" : "Baterista",
+                    "fechaIngreso" : new Date(),
+                    "fechaSalida" : null
+                    }
+                    ],
+                    
+   "albumes" :  [{
+		   "idAlbum" : "ALBTrench",
+                   "nombre" :  "Trench",
+                   "fechaLanzamiento" : new Date(),
+                   "genero" : "Alternative",
+                   "imagen" : "src/main/java/ImagenesProyecto/AlbumTrench.jpg",
+                   "canciones" : [{
+				                   "idCancion" : "CANSO",
+                                   "nombreCancion" : "Stressed Out",
+                                   "duracion" : "3:22"
+                                  },
+                  
+                                  {
+				                   "idCancion" : "CANRide",
+                                   "nombreCancion" : "Ride",
+                                   "duracion" : "3:34"
+                                  },
+                  
+                                  {
+				                    "idCancion" : "CANPol",
+                                    "nombreCancion" : "Polarize",
+                                    "duracion" : "3:46"
+                                  }
+                  
+                                  ]
+                }
+                                                
+                    
+            ]    
+    
+    },{
+        "idDos": "4",
+        "nombreArtista": "Coldplay",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaColdplay.jpg",
+        "genero": "Alternative Rock",
+        "integrantes": [
+            {
+                "idPersona": "7",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("1996-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "8",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1996-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "9",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("1996-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBParachutes",
+                "nombre": "Parachutes",
+                "fechaLanzamiento": new Date("2000-07-10"),
+                "genero" : "Alternative Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumParachutes.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANYellow",
+                        "nombreCancion": "Yellow",
+                        "duracion": "4:32"
+                    },
+                    {
+                        "idCancion": "CANShiver",
+                        "nombreCancion": "Shiver",
+                        "duracion": "5:00"
+                    },
+                    {
+                        "idCancion": "CANTrouble",
+                        "nombreCancion": "Trouble",
+                        "duracion": "4:30"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBAHeadFullOfDreams",
+                "nombre": "A Head Full of Dreams",
+                "fechaLanzamiento": new Date("2015-12-04"),
+                "genero" : "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumAHeadFullOfDreams.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANAdventureOfALifetime",
+                        "nombreCancion": "Adventure of a Lifetime",
+                        "duracion": "4:23"
+                    },
+                    {
+                        "idCancion": "CANHymnForTheWeekend",
+                        "nombreCancion": "Hymn for the Weekend",
+                        "duracion": "4:18"
+                    },
+                    {
+                        "idCancion": "CANUpAndUp",
+                        "nombreCancion": "Up&Up",
+                        "duracion": "6:45"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "5",
+        "nombreArtista": "Arctic Monkeys",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaArcticMonkeys.jpg",
+        "genero": "Indie Rock",
+        "integrantes": [
+            {
+                "idPersona": "19",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("2002-06-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "11",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("2002-06-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "12",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("2006-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBAM",
+                "nombre": "AM",
+                "fechaLanzamiento": new Date("2013-09-09"),
+                "genero" : "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumAM.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANDoIWannaKnow",
+                        "nombreCancion": "Do I Wanna Know?",
+                        "duracion": "4:25"
+                    },
+                    {
+                        "idCancion": "CANRUBY",
+                        "nombreCancion": "R U Mine?",
+                        "duracion": "3:21"
+                    },
+                    {
+                        "idCancion": "CANWhyYouOnlyCallMe",
+                        "nombreCancion": "Why'd You Only Call Me When You're High?",
+                        "duracion": "2:41"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBTranquilityBase",
+                "nombre": "Tranquility Base Hotel & Casino",
+                "fechaLanzamiento": new Date("2018-05-11"),
+                "genero" : "Pop Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTranquilityBase.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANStarTreatment",
+                        "nombreCancion": "Star Treatment",
+                        "duracion": "5:54"
+                    },
+                    {
+                        "idCancion": "CANFourOutOfFive",
+                        "nombreCancion": "Four Out of Five",
+                        "duracion": "5:12"
+                    },
+                    {
+                        "idCancion": "CANTheUltracheese",
+                        "nombreCancion": "The Ultracheese",
+                        "duracion": "3:37"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "6",
+        "nombreArtista": "Foo Fighters",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaFooFighters.jpg",
+        "genero": "Rock",
+        "integrantes": [
+            {
+                "idPersona": "13",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("1994-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "14",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1997-01-01"),
+                "fechaSalida": new Date("2022-03-25")
+            },
+            {
+                "idPersona": "15",
+                "rolBanda": "Guitarrista",
+                "fechaIngreso": new Date("1999-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBTheColourAndTheShape",
+                "nombre": "The Colour and the Shape",
+                "fechaLanzamiento": new Date("1997-05-20"),
+                "genero" : "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTheColourAndTheShape.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANMyHero",
+                        "nombreCancion": "My Hero",
+                        "duracion": "4:20"
+                    },
+                    {
+                        "idCancion": "CANEverlong",
+                        "nombreCancion": "Everlong",
+                        "duracion": "4:10"
+                    },
+                    {
+                        "idCancion": "CANMonkeyWrench",
+                        "nombreCancion": "Monkey Wrench",
+                        "duracion": "3:51"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+
+        "idDos": "7",
+        "nombreArtista": "Imagine Dragons",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaImagineDragons.jpg",
+        "genero": "Pop Rock",
+        "integrantes": [
+            {
+                "idPersona": "16",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2008-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "17",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("2008-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBNightVisions",
+                "nombre": "Night Visions",
+                "fechaLanzamiento": new Date("2012-09-04"),
+                "genero": "Pop Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumNightVisions.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANRadioactive",
+                        "nombreCancion": "Radioactive",
+                        "duracion": "3:06"
+                    },
+                    {
+                        "idCancion": "CANDemons",
+                        "nombreCancion": "Demons",
+                        "duracion": "2:57"
+                    },
+                    {
+                        "idCancion": "CANItsTime",
+                        "nombreCancion": "It's Time",
+                        "duracion": "4:00"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBEvolve",
+                "nombre": "Evolve",
+                "fechaLanzamiento": new Date("2017-06-23"),
+                "genero": "Pop Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumEvolve.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANThunder",
+                        "nombreCancion": "Thunder",
+                        "duracion": "3:07"
+                    },
+                    {
+                        "idCancion": "CANBeliever",
+                        "nombreCancion": "Believer",
+                        "duracion": "3:24"
+                    },
+                    {
+                        "idCancion": "CANWhateverItTakes",
+                        "nombreCancion": "Whatever It Takes",
+                        "duracion": "3:21"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "8",
+        "nombreArtista": "The Killers",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaTheKillers.jpg",
+        "genero": "Alternative Rock",
+        "integrantes": [
+            {
+                "idPersona": "18",
+                "rolBanda": "Vocalista, Tecladista",
+                "fechaIngreso": new Date("2001-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "19",
+                "rolBanda": "Guitarrista",
+                "fechaIngreso": new Date("2001-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBHotFuss",
+                "nombre": "Hot Fuss",
+                "fechaLanzamiento": new Date("2004-06-07"),
+                "genero": "Alternative Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumHotFuss.png",
+                "canciones": [
+                    {
+                        "idCancion": "CANMrBrightside",
+                        "nombreCancion": "Mr. Brightside",
+                        "duracion": "3:43"
+                    },
+                    {
+                        "idCancion": "CANSomebodyToldMe",
+                        "nombreCancion": "Somebody Told Me",
+                        "duracion": "3:17"
+                    },
+                    {
+                        "idCancion": "CANAllTheseThings",
+                        "nombreCancion": "All These Things That I've Done",
+                        "duracion": "5:01"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBImplodingTheMirage",
+                "nombre": "Imploding the Mirage",
+                "fechaLanzamiento": new Date("2020-08-21"),
+                "genero": "Alternative Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumImplodingTheMirage.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANCaution",
+                        "nombreCancion": "Caution",
+                        "duracion": "4:05"
+                    },
+                    {
+                        "idCancion": "CANMyOwnSoul",
+                        "nombreCancion": "My Own Soul's Warning",
+                        "duracion": "4:34"
+                    },
+                    {
+                        "idCancion": "CANFireInBone",
+                        "nombreCancion": "Fire in Bone",
+                        "duracion": "3:50"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "9",
+        "nombreArtista": "Muse",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaMuse.jpg",
+        "genero": "Alternative Rock",
+        "integrantes": [
+            {
+                "idPersona": "20",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("1994-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "21",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("1994-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "22",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1994-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBOriginOfSymmetry",
+                "nombre": "Origin of Symmetry",
+                "fechaLanzamiento": new Date("2001-07-17"),
+                "genero": "Alternative Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumOriginOfSymmetry.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANPlugInBaby",
+                        "nombreCancion": "Plug In Baby",
+                        "duracion": "3:39"
+                    },
+                    {
+                        "idCancion": "CANBliss",
+                        "nombreCancion": "Bliss",
+                        "duracion": "4:12"
+                    },
+                    {
+                        "idCancion": "CANNewBorn",
+                        "nombreCancion": "New Born",
+                        "duracion": "6:03"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBDrones",
+                "nombre": "Drones",
+                "fechaLanzamiento": new Date("2015-06-05"),
+                "genero": "Alternative Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumDrones.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANDeadInside",
+                        "nombreCancion": "Dead Inside",
+                        "duracion": "4:22"
+                    },
+                    {
+                        "idCancion": "CANReapers",
+                        "nombreCancion": "Reapers",
+                        "duracion": "5:59"
+                    },
+                    {
+                        "idCancion": "CANTheHandler",
+                        "nombreCancion": "The Handler",
+                        "duracion": "4:33"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "10",
+        "nombreArtista": "Nirvana",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaNirvana.jpg",
+        "genero": "Grunge",
+        "integrantes": [
+            {
+                "idPersona": "23",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("1987-01-01"),
+                "fechaSalida": new Date("1994-04-05")
+            },
+            {
+                "idPersona": "24",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("1987-01-01"),
+                "fechaSalida": new Date("1994-04-05")
+            },
+            {
+                "idPersona": "25",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1987-01-01"),
+                "fechaSalida": new Date("1994-04-05")
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBDontMind",
+                "nombre": "Nevermind",
+                "fechaLanzamiento": new Date("1991-09-24"),
+                "genero": "Grunge",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumNevermind.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANSmellsLike",
+                        "nombreCancion": "Smells Like Teen Spirit",
+                        "duracion": "5:01"
+                    },
+                    {
+                        "idCancion": "CANComeAsYouAre",
+                        "nombreCancion": "Come as You Are",
+                        "duracion": "3:39"
+                    },
+                    {
+                        "idCancion": "CANLithium",
+                        "nombreCancion": "Lithium",
+                        "duracion": "4:17"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBInUtero",
+                "nombre": "In Utero",
+                "fechaLanzamiento": new Date("1993-09-13"),
+                "genero": "Grunge",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumInUtero.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHeartShapedBox",
+                        "nombreCancion": "Heart-Shaped Box",
+                        "duracion": "4:41"
+                    },
+                    {
+                        "idCancion": "CANRapeMe",
+                        "nombreCancion": "Rape Me",
+                        "duracion": "2:50"
+                    },
+                    {
+                        "idCancion": "CANAllApologies",
+                        "nombreCancion": "All Apologies",
+                        "duracion": "3:50"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "11",
+        "nombreArtista": "Ariana Grande",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaArianaGrande.jpg",
+        "genero": "Pop",
+        "integrantes": [
+            {
+                "idPersona": "26",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2010-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBYourTruly",
+                "nombre": "Yours Truly",
+                "fechaLanzamiento": new Date("2013-09-03"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumYoursTruly.png",
+                "canciones": [
+                    {
+                        "idCancion": "CANTHEWAY",
+                        "nombreCancion": "The Way",
+                        "duracion": "3:47"
+                    },
+                    {
+                        "idCancion": "CANPTFO",
+                        "nombreCancion": "Problem",
+                        "duracion": "3:14"
+                    },
+                    {
+                        "idCancion": "CANDangerous",
+                        "nombreCancion": "Dangerous Woman",
+                        "duracion": "3:56"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBSweetener",
+                "nombre": "Sweetener",
+                "fechaLanzamiento": new Date("2018-08-17"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumSweetener.png",
+                "canciones": [
+                    {
+                        "idCancion": "CANNoTears",
+                        "nombreCancion": "No Tears Left to Cry",
+                        "duracion": "3:25"
+                    },
+                    {
+                        "idCancion": "CANBreathin",
+                        "nombreCancion": "Breathin",
+                        "duracion": "3:19"
+                    },
+                    {
+                        "idCancion": "CANGodIsAGirl",
+                        "nombreCancion": "God Is a Woman",
+                        "duracion": "3:17"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "12",
+        "nombreArtista": "Taylor Swift",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaTaylorSwift.jpg",
+        "genero": "Pop",
+        "integrantes": [
+            {
+                "idPersona": "27",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("2004-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALB1989",
+                "nombre": "1989",
+                "fechaLanzamiento": new Date("2014-10-27"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/Album1989.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANShakeItOff",
+                        "nombreCancion": "Shake It Off",
+                        "duracion": "3:39"
+                    },
+                    {
+                        "idCancion": "CANBlankSpace",
+                        "nombreCancion": "Blank Space",
+                        "duracion": "3:51"
+                    },
+                    {
+                        "idCancion": "CANStyle",
+                        "nombreCancion": "Style",
+                        "duracion": "3:51"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBReputation",
+                "nombre": "Reputation",
+                "fechaLanzamiento": new Date("2017-11-10"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumReputation.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANLookWhatYouMadeMeDo",
+                        "nombreCancion": "Look What You Made Me Do",
+                        "duracion": "3:31"
+                    },
+                    {
+                        "idCancion": "CANDelicate",
+                        "nombreCancion": "Delicate",
+                        "duracion": "3:58"
+                    },
+                    {
+                        "idCancion": "CANReadyForIt",
+                        "nombreCancion": "…Ready for It?",
+                        "duracion": "3:28"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "13",
+        "nombreArtista": "Ed Sheeran",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaEdSheeran.jpg",
+        "genero": "Pop",
+        "integrantes": [
+            {
+                "idPersona": "28",
+                "rolBanda": "Vocalista, Guitarrista",
+                "fechaIngreso": new Date("2010-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBPlus",
+                "nombre": "Plus",
+                "fechaLanzamiento": new Date("2011-09-09"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumPlus.png",
+                "canciones": [
+                    {
+                        "idCancion": "CANTHEATEAM",
+                        "nombreCancion": "The A Team",
+                        "duracion": "4:18"
+                    },
+                    {
+                        "idCancion": "CANDrunk",
+                        "nombreCancion": "Drunk",
+                        "duracion": "3:31"
+                    },
+                    {
+                        "idCancion": "CANUndefeated",
+                        "nombreCancion": "Undefeated",
+                        "duracion": "3:47"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBDivide",
+                "nombre": "Divide",
+                "fechaLanzamiento": new Date("2017-03-03"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumDivide.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANShapeOfYou",
+                        "nombreCancion": "Shape of You",
+                        "duracion": "3:53"
+                    },
+                    {
+                        "idCancion": "CANCastleOnTheHill",
+                        "nombreCancion": "Castle on the Hill",
+                        "duracion": "4:21"
+                    },
+                    {
+                        "idCancion": "CANGalwayGirl",
+                        "nombreCancion": "Galway Girl",
+                        "duracion": "2:50"
+                    }
+                ]
+            }
+        ]
+    },
+     {
+        "idDos": "14",
+        "nombreArtista": "Kendrick Lamar",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaKendrickLamar.jpg",
+        "genero": "Rap",
+        "integrantes": [
+            {
+                "idPersona": "29",
+                "rolBanda": "Rapper",
+                "fechaIngreso": new Date("2003-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBGKMC",
+                "nombre": "good kid, m.A.A.d city",
+                "fechaLanzamiento": new Date("2012-10-22"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumGKMC.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANGoodKid",
+                        "nombreCancion": "Good Kid",
+                        "duracion": "5:00"
+                    },
+                    {
+                        "idCancion": "CANBackseat",
+                        "nombreCancion": "Backseat Freestyle",
+                        "duracion": "3:33"
+                    },
+                    {
+                        "idCancion": "CANMoneyTrees",
+                        "nombreCancion": "Money Trees",
+                        "duracion": "5:02"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBTPAB",
+                "nombre": "To Pimp a Butterfly",
+                "fechaLanzamiento": new Date("2015-03-15"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTPAB.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANAlright",
+                        "nombreCancion": "Alright",
+                        "duracion": "3:39"
+                    },
+                    {
+                        "idCancion": "CANKingKunta",
+                        "nombreCancion": "King Kunta",
+                        "duracion": "3:54"
+                    },
+                    {
+                        "idCancion": "CANTheBlacker",
+                        "nombreCancion": "The Blacker the Berry",
+                        "duracion": "4:09"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "15",
+        "nombreArtista": "J. Cole",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaJCole.jpg",
+        "genero": "Rap",
+        "integrantes": [
+            {
+                "idPersona": "30",
+                "rolBanda": "Rapper, Productor",
+                "fechaIngreso": new Date("2007-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBSIDelineStory",
+                "nombre": "Cole World: The Sideline Story",
+                "fechaLanzamiento": new Date("2011-09-27"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumSidelineStory.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANWorkOut",
+                        "nombreCancion": "Work Out",
+                        "duracion": "3:50"
+                    },
+                    {
+                        "idCancion": "CANTherapy",
+                        "nombreCancion": "Therapy",
+                        "duracion": "4:10"
+                    },
+                    {
+                        "idCancion": "CANLostOnes",
+                        "nombreCancion": "Lost Ones",
+                        "duracion": "3:49"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBBornSinner",
+                "nombre": "Born Sinner",
+                "fechaLanzamiento": new Date("2013-06-18"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumBornSinner.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANPowerTrip",
+                        "nombreCancion": "Power Trip",
+                        "duracion": "3:38"
+                    },
+                    {
+                        "idCancion": "CANVilluminati",
+                        "nombreCancion": "Villuminati",
+                        "duracion": "4:29"
+                    },
+                    {
+                        "idCancion": "CANGoodNight",
+                        "nombreCancion": "Good Night",
+                        "duracion": "3:47"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "16",
+        "nombreArtista": "Drake",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaDrake.jpg",
+        "genero": "Rap",
+        "integrantes": [
+            {
+                "idPersona": "31",
+                "rolBanda": "Rapper, Cantante",
+                "fechaIngreso": new Date("2006-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBTakeCare",
+                "nombre": "Take Care",
+                "fechaLanzamiento": new Date("2011-11-15"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTakeCare.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHeadlines",
+                        "nombreCancion": "Headlines",
+                        "duracion": "4:19"
+                    },
+                    {
+                        "idCancion": "CANMarvinsRoom",
+                        "nombreCancion": "Marvins Room",
+                        "duracion": "5:11"
+                    },
+                    {
+                        "idCancion": "CANTakeCare",
+                        "nombreCancion": "Take Care",
+                        "duracion": "4:37"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBNothingWasTheSame",
+                "nombre": "Nothing Was the Same",
+                "fechaLanzamiento": new Date("2013-09-24"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumNothingWasTheSame.png",
+                "canciones": [
+                    {
+                        "idCancion": "CANStartedFrom",
+                        "nombreCancion": "Started from the Bottom",
+                        "duracion": "2:53"
+                    },
+                    {
+                        "idCancion": "CANHoldOn",
+                        "nombreCancion": "Hold On, We're Going Home",
+                        "duracion": "3:47"
+                    },
+                    {
+                        "idCancion": "CANWorstBehavior",
+                        "nombreCancion": "Worst Behavior",
+                        "duracion": "4:28"
+                    }
+                ]
+            }
+        ]
+    },
+        {
+        "idDos": "17",
+        "nombreArtista": "Kanye West",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaKanyeWest.jpg",
+        "genero": "Rap",
+        "integrantes": [
+            {
+                "idPersona": "32",
+                "rolBanda": "Rapper, Productor",
+                "fechaIngreso": new Date("2000-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBCollegeDropout",
+                "nombre": "The College Dropout",
+                "fechaLanzamiento": new Date("2004-02-10"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumCollegeDropout.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANDropout",
+                        "nombreCancion": "Through the Wire",
+                        "duracion": "3:41"
+                    },
+                    {
+                        "idCancion": "CANAllFallsDown",
+                        "nombreCancion": "All Falls Down",
+                        "duracion": "4:00"
+                    },
+                    {
+                        "idCancion": "CANTouchTheSky",
+                        "nombreCancion": "Touch the Sky",
+                        "duracion": "4:06"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBLateRegistration",
+                "nombre": "Late Registration",
+                "fechaLanzamiento": new Date("2005-08-30"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumLateRegistration.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANYeah",
+                        "nombreCancion": "Gold Digger",
+                        "duracion": "3:30"
+                    },
+                    {
+                        "idCancion": "CANHeardEmSay",
+                        "nombreCancion": "Heard 'Em Say",
+                        "duracion": "3:34"
+                    },
+                    {
+                        "idCancion": "CANTouchTheSky",
+                        "nombreCancion": "Touch the Sky",
+                        "duracion": "4:06"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "18",
+        "nombreArtista": "Travis Scott",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaTravisScott.jpg",
+        "genero": "Rap",
+        "integrantes": [
+            {
+                "idPersona": "33",
+                "rolBanda": "Rapper, Productor",
+                "fechaIngreso": new Date("2008-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBAstroworld",
+                "nombre": "Astroworld",
+                "fechaLanzamiento": new Date("2018-08-03"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumAstroworld.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANSICKO",
+                        "nombreCancion": "SICKO MODE",
+                        "duracion": "5:12"
+                    },
+                    {
+                        "idCancion": "CANSTOPTrying",
+                        "nombreCancion": "STOP TRYING TO BE GOD",
+                        "duracion": "4:24"
+                    },
+                    {
+                        "idCancion": "CANAstroworld",
+                        "nombreCancion": "ASTROWORLD",
+                        "duracion": "3:29"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBRodeo",
+                "nombre": "Rodeo",
+                "fechaLanzamiento": new Date("2015-09-04"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumRodeo.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CAN3500",
+                        "nombreCancion": "3500",
+                        "duracion": "5:08"
+                    },
+                    {
+                        "idCancion": "CANToldYa",
+                        "nombreCancion": "Told Ya",
+                        "duracion": "3:44"
+                    },
+                    {
+                        "idCancion": "CANNight",
+                        "nombreCancion": "Nightcrawler",
+                        "duracion": "4:10"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "19",
+        "nombreArtista": "Lil Wayne",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaLilWayne.jpg",
+        "genero": "Rap",
+        "integrantes": [
+            {
+                "idPersona": "34",
+                "rolBanda": "Rapper, Productor",
+                "fechaIngreso": new Date("1999-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBThaCarterIII",
+                "nombre": "Tha Carter III",
+                "fechaLanzamiento": new Date("2008-06-10"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumThaCarterIII.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANA Milli",
+                        "nombreCancion": "A Milli",
+                        "duracion": "3:41"
+                    },
+                    {
+                        "idCancion": "CANLollipop",
+                        "nombreCancion": "Lollipop",
+                        "duracion": "4:10"
+                    },
+                    {
+                        "idCancion": "CANGotMoney",
+                        "nombreCancion": "Got Money",
+                        "duracion": "3:32"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBThaCarterIV",
+                "nombre": "Tha Carter IV",
+                "fechaLanzamiento": new Date("2011-08-29"),
+                "genero": "Rap",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumThaCarterIV.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CAN6Foot7Foot",
+                        "nombreCancion": "6 Foot 7 Foot",
+                        "duracion": "4:10"
+                    },
+                    {
+                        "idCancion": "CANHowToLove",
+                        "nombreCancion": "How to Love",
+                        "duracion": "3:50"
+                    },
+                    {
+                        "idCancion": "CANSheWill",
+                        "nombreCancion": "She Will",
+                        "duracion": "4:03"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "20",
+        "nombreArtista": "Vicente Fernández",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaVicenteFernandez.jpg",
+        "genero": "Regional Mexicano",
+        "integrantes": [
+            {
+                "idPersona": "35",
+                "rolBanda": "Cantante",
+                "fechaIngreso": new Date("1965-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBElViejito",
+                "nombre": "El Viejito",
+                "fechaLanzamiento": new Date("2000-05-10"),
+                "genero": "Regional Mexicano",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumElViejito.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANElRey",
+                        "nombreCancion": "El Rey",
+                        "duracion": "3:13"
+                    },
+                    {
+                        "idCancion": "CANLaVaca",
+                        "nombreCancion": "La Vaca",
+                        "duracion": "2:55"
+                    },
+                    {
+                        "idCancion": "CANLaLeyenda",
+                        "nombreCancion": "La Leyenda del Solitario",
+                        "duracion": "4:00"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBParaSiempre",
+                "nombre": "Para Siempre",
+                "fechaLanzamiento": new Date("2012-10-23"),
+                "genero": "Regional Mexicano",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumParaSiempre.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANParaSiempre",
+                        "nombreCancion": "Para Siempre",
+                        "duracion": "3:44"
+                    },
+                    {
+                        "idCancion": "CANAmanecer",
+                        "nombreCancion": "Amor de mis Amores",
+                        "duracion": "4:13"
+                    },
+                    {
+                        "idCancion": "CANQueBonitoEsLoBonito",
+                        "nombreCancion": "Qué Bonito Es Lo Bonito",
+                        "duracion": "3:56"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "21",
+        "nombreArtista": "Julión Álvarez",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaJulionAlvarez.jpg",
+        "genero": "Regional Mexicano",
+        "integrantes": [
+            {
+                "idPersona": "36",
+                "rolBanda": "Cantante",
+                "fechaIngreso": new Date("2003-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBTeVeoElDomingo",
+                "nombre": "Te Veo El Domingo",
+                "fechaLanzamiento": new Date("2014-08-19"),
+                "genero": "Regional Mexicano",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTeVeoElDomingo.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANTeVeoElDomingo",
+                        "nombreCancion": "Te Veo El Domingo",
+                        "duracion": "4:07"
+                    },
+                    {
+                        "idCancion": "CANMeVasAExtrañar",
+                        "nombreCancion": "Me Vas A Extrañar",
+                        "duracion": "3:42"
+                    },
+                    {
+                        "idCancion": "CANDeVezEnCuando",
+                        "nombreCancion": "De Vez En Cuando",
+                        "duracion": "3:25"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBElAmorDeSuVida",
+                "nombre": "El Amor De Su Vida",
+                "fechaLanzamiento": new Date("2016-07-05"),
+                "genero": "Regional Mexicano",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumElAmorDeSuVida.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANElAmorDeSuVida",
+                        "nombreCancion": "El Amor De Su Vida",
+                        "duracion": "4:09"
+                    },
+                    {
+                        "idCancion": "CANEsteAmor",
+                        "nombreCancion": "Este Amor",
+                        "duracion": "3:49"
+                    },
+                    {
+                        "idCancion": "CANTeDejoElSol",
+                        "nombreCancion": "Te Dejo El Sol",
+                        "duracion": "3:30"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "22",
+        "nombreArtista": "Los Tigres del Norte",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaLosTigresDelNorte.jpg",
+        "genero": "Regional Mexicano",
+        "integrantes": [
+            {
+                "idPersona": "37",
+                "rolBanda": "Vocalista, Acordeonista",
+                "fechaIngreso": new Date("1968-01-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "38",
+                "rolBanda": "Bajista, Vocalista",
+                "fechaIngreso": new Date("1968-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBLaBandaDelCarroRojo",
+                "nombre": "La Banda del Carro Rojo",
+                "fechaLanzamiento": new Date("2009-06-15"),
+                "genero": "Regional Mexicano",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumLaBandaDelCarroRojo.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANTaVezTeVas",
+                        "nombreCancion": "A Vez Te Vas",
+                        "duracion": "3:34"
+                    },
+                    {
+                        "idCancion": "CANMiUltimaCarta",
+                        "nombreCancion": "Mi Última Carta",
+                        "duracion": "3:20"
+                    },
+                    {
+                        "idCancion": "CANEnCadaVuelta",
+                        "nombreCancion": "En Cada Vuelta",
+                        "duracion": "4:12"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALB50AnosDeExito",
+                "nombre": "50 Años de Éxito",
+                "fechaLanzamiento": new Date("2018-11-16"),
+                "genero": "Regional Mexicano",
+                "imagen": "src/main/java/ImagenesProyecto/Album50AnosDeExito.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANNiUnaSolaVez",
+                        "nombreCancion": "Ni Una Sola Vez",
+                        "duracion": "3:45"
+                    },
+                    {
+                        "idCancion": "CANAventurasDeUnSinaloense",
+                        "nombreCancion": "Aventuras De Un Sinaloense",
+                        "duracion": "4:20"
+                    },
+                    {
+                        "idCancion": "CANTodoSeOlvida",
+                        "nombreCancion": "Todo Se Olvida",
+                        "duracion": "3:55"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "23",
+        "nombreArtista": "BTS",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaBTS.jpg",
+        "genero": "K-pop",
+        "integrantes": [
+            {
+                "idPersona": "39",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "40",
+                "rolBanda": "Rapper, Vocalista",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "41",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "42",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "43",
+                "rolBanda": "Vocalista, Rapper",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "44",
+                "rolBanda": "Rapper",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "45",
+                "rolBanda": "Rapper, Vocalista",
+                "fechaIngreso": new Date("2013-06-13"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBMapOfTheSoul",
+                "nombre": "Map of the Soul: 7",
+                "fechaLanzamiento": new Date("2020-02-21"),
+                "genero": "K-pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumMapOfTheSoul7.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANOn",
+                        "nombreCancion": "On",
+                        "duracion": "4:08"
+                    },
+                    {
+                        "idCancion": "CANBlackSwan",
+                        "nombreCancion": "Black Swan",
+                        "duracion": "3:18"
+                    },
+                    {
+                        "idCancion": "CANMyTime",
+                        "nombreCancion": "My Time",
+                        "duracion": "3:56"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBBTSWorld",
+                "nombre": "BTS World OST",
+                "fechaLanzamiento": new Date("2019-06-28"),
+                "genero": "K-pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumBTSWorld.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHeartbeat",
+                        "nombreCancion": "Heartbeat",
+                        "duracion": "3:28"
+                    },
+                    {
+                        "idCancion": "CANYoongi",
+                        "nombreCancion": "Yoongi",
+                        "duracion": "3:24"
+                    },
+                    {
+                        "idCancion": "CANDreamGlow",
+                        "nombreCancion": "Dream Glow",
+                        "duracion": "4:02"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "24",
+        "nombreArtista": "Blackpink",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaBlackpink.png",
+        "genero": "K-pop",
+        "integrantes": [
+            {
+                "idPersona": "46",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2016-08-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "47",
+                "rolBanda": "Rapper, Vocalista",
+                "fechaIngreso": new Date("2016-08-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "48",
+                "rolBanda": "Vocalista, Rapper",
+                "fechaIngreso": new Date("2016-08-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "49",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2016-08-08"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBTheAlbum",
+                "nombre": "The Album",
+                "fechaLanzamiento": new Date("2020-10-02"),
+                "genero": "K-pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTheAlbum.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHowYouLikeThat",
+                        "nombreCancion": "How You Like That",
+                        "duracion": "3:00"
+                    },
+                    {
+                        "idCancion": "CANLovesickGirls",
+                        "nombreCancion": "Lovesick Girls",
+                        "duracion": "3:11"
+                    },
+                    {
+                        "idCancion": "CANPrettySavage",
+                        "nombreCancion": "Pretty Savage",
+                        "duracion": "3:16"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBKillThisLove",
+                "nombre": "Kill This Love",
+                "fechaLanzamiento": new Date("2019-04-05"),
+                "genero": "K-pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumKillThisLove.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANKillThisLove",
+                        "nombreCancion": "Kill This Love",
+                        "duracion": "3:14"
+                    },
+                    {
+                        "idCancion": "CANDontKnowWhatToDo",
+                        "nombreCancion": "Don’t Know What To Do",
+                        "duracion": "3:25"
+                    },
+                    {
+                        "idCancion": "CANTouch",
+                        "nombreCancion": "Touch",
+                        "duracion": "3:28"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "25",
+        "nombreArtista": "EXO",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaEXO.jpg",
+        "genero": "K-pop",
+        "integrantes": [
+            {
+                "idPersona": "50",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2012-04-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "51",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2012-04-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "52",
+                "rolBanda": "Rapper, Vocalista",
+                "fechaIngreso": new Date("2012-04-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "53",
+                "rolBanda": "Rapper, Vocalista",
+                "fechaIngreso": new Date("2012-04-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "54",
+                "rolBanda": "Rapper",
+                "fechaIngreso": new Date("2012-04-08"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "55",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2012-04-08"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBExodus",
+                "nombre": "Exodus",
+                "fechaLanzamiento": new Date("2015-03-30"),
+                "genero": "K-pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumExodus.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANCallMeBaby",
+                        "nombreCancion": "Call Me Baby",
+                        "duracion": "3:36"
+                    },
+                    {
+                        "idCancion": "CANLoveMeRight",
+                        "nombreCancion": "Love Me Right",
+                        "duracion": "3:24"
+                    },
+                    {
+                        "idCancion": "CANSuho",
+                        "nombreCancion": "Suho",
+                        "duracion": "3:14"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBTheWar",
+                "nombre": "The War",
+                "fechaLanzamiento": new Date("2017-07-18"),
+                "genero": "K-pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTheWar.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANKoKoBop",
+                        "nombreCancion": "Ko Ko Bop",
+                        "duracion": "3:08"
+                    },
+                    {
+                        "idCancion": "CANPower",
+                        "nombreCancion": "Power",
+                        "duracion": "3:25"
+                    },
+                    {
+                        "idCancion": "CANForever",
+                        "nombreCancion": "Forever",
+                        "duracion": "3:32"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "26",
+        "nombreArtista": "AC/DC",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaACDC.jpg",
+        "genero": "Rock",
+        "integrantes": [
+            {
+                "idPersona": "56",
+                "rolBanda": "Guitarrista",
+                "fechaIngreso": new Date("1973-11-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "57",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("1980-04-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "58",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("1975-12-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "59",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1974-05-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBBackInBlack",
+                "nombre": "Back in Black",
+                "fechaLanzamiento": new Date("1980-07-25"),
+                "genero": "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumBackInBlack.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHellsBell",
+                        "nombreCancion": "Hells Bells",
+                        "duracion": "5:12"
+                    },
+                    {
+                        "idCancion": "CANTNT",
+                        "nombreCancion": "You Shook Me All Night Long",
+                        "duracion": "3:30"
+                    },
+                    {
+                        "idCancion": "CANBackInBlack",
+                        "nombreCancion": "Back in Black",
+                        "duracion": "4:15"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBHighwayToHell",
+                "nombre": "Highway to Hell",
+                "fechaLanzamiento": new Date("1979-07-27"),
+                "genero": "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumHighwayToHell.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHighwayToHell",
+                        "nombreCancion": "Highway to Hell",
+                        "duracion": "3:28"
+                    },
+                    {
+                        "idCancion": "CANTNTL",
+                        "nombreCancion": "Touch Too Much",
+                        "duracion": "4:27"
+                    },
+                    {
+                        "idCancion": "CANGirlsGotRhythm",
+                        "nombreCancion": "Girls Got Rhythm",
+                        "duracion": "3:24"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "27",
+        "nombreArtista": "Queen",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaQueen.jpg",
+        "genero": "Rock",
+        "integrantes": [
+            {
+                "idPersona": "60",
+                "rolBanda": "Vocalista, Pianista",
+                "fechaIngreso": new Date("1970-07-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "61",
+                "rolBanda": "Guitarrista",
+                "fechaIngreso": new Date("1970-07-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "62",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("1970-07-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "63",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1970-07-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBTheGame",
+                "nombre": "The Game",
+                "fechaLanzamiento": new Date("1980-06-30"),
+                "genero": "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumTheGame.png",
+                "canciones": [
+                    {
+                        "idCancion": "CANAnotherOneBitesTheDust",
+                        "nombreCancion": "Another One Bites the Dust",
+                        "duracion": "3:35"
+                    },
+                    {
+                        "idCancion": "CANPlayTheGame",
+                        "nombreCancion": "Play the Game",
+                        "duracion": "3:30"
+                    },
+                    {
+                        "idCancion": "CANDragonAttack",
+                        "nombreCancion": "Dragon Attack",
+                        "duracion": "4:19"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBNewsOfTheWorld",
+                "nombre": "News of the World",
+                "fechaLanzamiento": new Date("1977-10-28"),
+                "genero": "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumNewsOfTheWorld.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANWeAreTheChampions",
+                        "nombreCancion": "We Are the Champions",
+                        "duracion": "2:59"
+                    },
+                    {
+                        "idCancion": "CANWeWillRockYou",
+                        "nombreCancion": "We Will Rock You",
+                        "duracion": "2:02"
+                    },
+                    {
+                        "idCancion": "CANSpreadYourWings",
+                        "nombreCancion": "Spread Your Wings",
+                        "duracion": "4:34"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "28",
+        "nombreArtista": "Guns N' Roses",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaGunsNRoses.jpg",
+        "genero": "Rock",
+        "integrantes": [
+            {
+                "idPersona": "64",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("1985-06-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "65",
+                "rolBanda": "Guitarrista",
+                "fechaIngreso": new Date("1985-06-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "66",
+                "rolBanda": "Guitarrista",
+                "fechaIngreso": new Date("1985-06-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "67",
+                "rolBanda": "Bajista",
+                "fechaIngreso": new Date("1985-06-01"),
+                "fechaSalida": null
+            },
+            {
+                "idPersona": "68",
+                "rolBanda": "Baterista",
+                "fechaIngreso": new Date("1985-06-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBAppetiteForDestruction",
+                "nombre": "Appetite for Destruction",
+                "fechaLanzamiento": new Date("1987-07-21"),
+                "genero": "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumAppetiteForDestruction.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANWelcomeToTheJungle",
+                        "nombreCancion": "Welcome to the Jungle",
+                        "duracion": "4:31"
+                    },
+                    {
+                        "idCancion": "CANSweetChildOMine",
+                        "nombreCancion": "Sweet Child O' Mine",
+                        "duracion": "5:56"
+                    },
+                    {
+                        "idCancion": "CANTNT",
+                        "nombreCancion": "Nightrain",
+                        "duracion": "4:30"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBUseYourIllusionI",
+                "nombre": "Use Your Illusion I",
+                "fechaLanzamiento": new Date("1991-09-17"),
+                "genero": "Rock",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumUseYourIllusionI.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANNovemberRain",
+                        "nombreCancion": "November Rain",
+                        "duracion": "8:57"
+                    },
+                    {
+                        "idCancion": "CANDontCry",
+                        "nombreCancion": "Don't Cry",
+                        "duracion": "4:43"
+                    },
+                    {
+                        "idCancion": "CANLiveAndLetDie",
+                        "nombreCancion": "Live and Let Die",
+                        "duracion": "3:04"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "29",
+        "nombreArtista": "Shakira",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaShakira.jpg",
+        "genero": "Pop",
+        "integrantes": [
+            {
+                "idPersona": "69",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("1990-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBOralFixationVol2",
+                "nombre": "Oral Fixation Vol. 2",
+                "fechaLanzamiento": new Date("2005-11-29"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumOralFixationVol2.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANHipsDontLie",
+                        "nombreCancion": "Hips Don't Lie",
+                        "duracion": "3:38"
+                    },
+                    {
+                        "idCancion": "CANLaLaLa",
+                        "nombreCancion": "La La La",
+                        "duracion": "3:42"
+                    },
+                    {
+                        "idCancion": "CANIllegal",
+                        "nombreCancion": "Illegal",
+                        "duracion": "3:52"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBSaleElSol",
+                "nombre": "Sale el Sol",
+                "fechaLanzamiento": new Date("2010-10-19"),
+                "genero": "Pop",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumSaleElSol.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANLoca",
+                        "nombreCancion": "Loca",
+                        "duracion": "3:14"
+                    },
+                    {
+                        "idCancion": "CANDiaDe Enero",
+                        "nombreCancion": "Día de Enero",
+                        "duracion": "4:11"
+                    },
+                    {
+                        "idCancion": "CANRabiosa",
+                        "nombreCancion": "Rabiosa",
+                        "duracion": "3:14"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "idDos": "30",
+        "nombreArtista": "The Weeknd",
+        "imagen": "src/main/java/ImagenesProyecto/ArtistaTheWeeknd.jpg",
+        "genero": "R&B",
+        "integrantes": [
+            {
+                "idPersona": "70",
+                "rolBanda": "Vocalista",
+                "fechaIngreso": new Date("2010-01-01"),
+                "fechaSalida": null
+            }
+        ],
+        "albumes": [
+            {
+                "idAlbum": "ALBStarboy",
+                "nombre": "Starboy",
+                "fechaLanzamiento": new Date("2016-11-25"),
+                "genero": "R&B",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumStarboy.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANStarboy",
+                        "nombreCancion": "Starboy",
+                        "duracion": "3:50"
+                    },
+                    {
+                        "idCancion": "CANIFeelItComing",
+                        "nombreCancion": "I Feel It Coming",
+                        "duracion": "4:29"
+                    },
+                    {
+                        "idCancion": "CANPartyMonster",
+                        "nombreCancion": "Party Monster",
+                        "duracion": "3:14"
+                    }
+                ]
+            },
+            {
+                "idAlbum": "ALBAfterHours",
+                "nombre": "After Hours",
+                "fechaLanzamiento": new Date("2020-03-20"),
+                "genero": "R&B",
+                "imagen": "src/main/java/ImagenesProyecto/AlbumAfterHours.jpg",
+                "canciones": [
+                    {
+                        "idCancion": "CANBlindingLights",
+                        "nombreCancion": "Blinding Lights",
+                        "duracion": "3:20"
+                    },
+                    {
+                        "idCancion": "CANSaveYourTears",
+                        "nombreCancion": "Save Your Tears",
+                        "duracion": "3:35"
+                    },
+                    {
+                        "idCancion": "CANInYourEyes",
+                        "nombreCancion": "In Your Eyes",
+                        "duracion": "3:58"
+                    }
+                ]
+            }
+        ]
+    }
+]);
