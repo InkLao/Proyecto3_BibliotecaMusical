@@ -11,10 +11,15 @@ import dtos.FavoritoDTO;
 import dtos.FavoritosDTO;
 import dtos.UsuarioDTO;
 import java.awt.Image;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -25,7 +30,6 @@ import negocio.GeneroNoDeseadoNegocio;
 import negocio.IArtistaNegocio;
 import negocio.IFavoritosNegocio;
 import negocio.IGeneroNoDeseadoNegocio;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -58,6 +62,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     IArtistaNegocio negocio = new ArtistaNegocio();
     IFavoritosNegocio favoritosNegocio = new FavoritosNegocio();
     IGeneroNoDeseadoNegocio generoNoDeseadoNegocio = new GeneroNoDeseadoNegocio();
+    DlgFiltrosBuscador filtrosBuscador = new DlgFiltrosBuscador(this, true, this);
     
     
     /**
@@ -421,7 +426,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
     
-    public static boolean buscarFavorito(List<FavoritoDTO> favorito, String id) {
+    public boolean buscarFavorito(List<FavoritoDTO> favorito, String id) {
         Iterator<FavoritoDTO> iterator = favoritos.iterator();
 
         while (iterator.hasNext()) {
@@ -435,7 +440,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         return false;
     } 
     
-    public static boolean eliminarFavorito(List<FavoritoDTO> favorito, String id) {
+    public boolean eliminarFavorito(List<FavoritoDTO> favorito, String id) {
         Iterator<FavoritoDTO> iterator = favoritos.iterator();
 
         while (iterator.hasNext()) {
@@ -450,7 +455,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
     
-    public static boolean eliminarAlbum(List<AlbumDTO> album) {
+    public boolean eliminarAlbum(List<AlbumDTO> album) {
         Iterator<AlbumDTO> iterator = albumes.iterator();
 
         while (iterator.hasNext()) {
@@ -465,7 +470,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
     
-    public static boolean eliminarArtista(List<ArtistaDTO> artista) {
+    public boolean eliminarArtista(List<ArtistaDTO> artista) {
         Iterator<ArtistaDTO> iterator = artistas.iterator();
 
         while (iterator.hasNext()) {
@@ -482,7 +487,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     
     
     
-    public static boolean eliminarCancionPorBusqueda(String texto) {
+    public boolean eliminarCancionPorBusqueda(String texto) {
         Iterator<CancionDTO> iterator = canciones.iterator();
 
         while (iterator.hasNext()) {
@@ -497,7 +502,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
  
-    public static boolean eliminarAlbumPorBusqueda(String texto) {
+    public boolean eliminarAlbumPorBusqueda(String texto) {
         Iterator<AlbumDTO> iterator = albumes.iterator();
 
         while (iterator.hasNext()) {
@@ -512,7 +517,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
     
-    public static boolean eliminarArtistaPorBusqueda(String texto) {
+    public boolean eliminarArtistaPorBusqueda(String texto) {
         Iterator<ArtistaDTO> iterator = artistas.iterator();
 
         while (iterator.hasNext()) {
@@ -529,7 +534,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     
     
     
-    public static boolean existeCancion(String texto) {
+    public boolean existeCancion(String texto) {
         Iterator<CancionDTO> iterator = canciones.iterator();
 
         while (iterator.hasNext()) {
@@ -543,7 +548,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
  
-    public static boolean existeAlbum(String texto) {
+    public boolean existeAlbum(String texto) {
         Iterator<AlbumDTO> iterator = albumes.iterator();
 
         while (iterator.hasNext()) {
@@ -557,19 +562,47 @@ public class FrmBuscador extends javax.swing.JFrame {
     }
     
     
-    public static boolean existeArtista(String texto) {
+    public boolean existeArtista(String texto) {
         Iterator<ArtistaDTO> iterator = artistas.iterator();
 
         while (iterator.hasNext()) {
             ArtistaDTO arti = iterator.next();
             if (!arti.getNombreArtista().equalsIgnoreCase(texto)) { 
-                iterator.remove();
                 return true; // 
             }
         }
         
         return false;
-    }    
+    }  
+    
+    
+    
+    public boolean existeGeneroAlbum(String texto) {
+        Iterator<AlbumDTO> iterator = albumes.iterator();
+
+        while (iterator.hasNext()) {
+            AlbumDTO albu = iterator.next();
+            if (!albu.getGenero().equalsIgnoreCase(texto)) { 
+                return true; //
+            }
+        }
+        
+        return false;
+    }
+    
+    
+    public boolean existeGeneroArtista(String texto) {
+        Iterator<ArtistaDTO> iterator = artistas.iterator();
+
+        while (iterator.hasNext()) {
+            ArtistaDTO arti = iterator.next();
+            if (!arti.getGenero().equalsIgnoreCase(texto)) { 
+                return true; // 
+            }
+        }
+        
+        return false;
+    }
     
      /**
      * Metodo que coloca una imagen un jbl
@@ -611,6 +644,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         jblBuscar = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnFiltros = new javax.swing.JButton();
+        jblFormatoFecha = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jblArtistas = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -709,6 +743,8 @@ public class FrmBuscador extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         txtBuscar.setBackground(new java.awt.Color(204, 204, 204));
+        txtBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtBuscar.setForeground(new java.awt.Color(0, 0, 0));
         txtBuscar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jblBuscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -723,6 +759,14 @@ public class FrmBuscador extends javax.swing.JFrame {
         });
 
         btnFiltros.setText("Filtros");
+        btnFiltros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrosActionPerformed(evt);
+            }
+        });
+
+        jblFormatoFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jblFormatoFecha.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -733,6 +777,8 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jblBuscar)
+                        .addGap(42, 42, 42)
+                        .addComponent(jblFormatoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFiltros))
                     .addComponent(txtBuscar))
@@ -746,7 +792,8 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jblBuscar)
-                    .addComponent(btnFiltros))
+                    .addComponent(btnFiltros)
+                    .addComponent(jblFormatoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1214,9 +1261,7 @@ public class FrmBuscador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jblArtistas)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jblCantidadArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)))
+                    .addComponent(jblCantidadArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1362,7 +1407,6 @@ public class FrmBuscador extends javax.swing.JFrame {
                             btnRetrocederArtista.setEnabled(true);
                             btnAvanzarArtista.setEnabled(false);
                             System.out.println(e.getMessage());
-                            JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                             indiceArtistaC = indiceArtistaC - 3;
                             jblNombreArtista3.setText("sin datos");
                             setImagenLabel(jblArtista3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
@@ -1376,11 +1420,13 @@ public class FrmBuscador extends javax.swing.JFrame {
                     btnRetrocederArtista.setEnabled(true);
                     btnAvanzarArtista.setEnabled(false);
                     System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                     indiceArtistaB = indiceArtistaB - 3;
                     jblNombreArtista2.setText("sin datos");
                     setImagenLabel(jblArtista2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
                     setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreArtista3.setText("sin datos");
+                    setImagenLabel(jblArtista3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
             }
             
             
@@ -1638,7 +1684,6 @@ public class FrmBuscador extends javax.swing.JFrame {
                         catch(Exception e){
                             btnRetrocederCancion.setEnabled(false);
                             System.out.println(e.getMessage());
-                            JOptionPane.showMessageDialog(this, "No hay mas canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
                             indiceCancionC = 2;
                             jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
                             setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
@@ -1650,7 +1695,6 @@ public class FrmBuscador extends javax.swing.JFrame {
                 catch(Exception e){
                     btnRetrocederCancion.setEnabled(false);
                     System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(this, "No hay mas Canciones", "Inicio de la lista", JOptionPane.ERROR_MESSAGE);
                     indiceCancionB = 1;
                     jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
                     setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
@@ -1820,7 +1864,6 @@ public class FrmBuscador extends javax.swing.JFrame {
                         catch(Exception e){
                             btnRetrocederArtista.setEnabled(false);
                             System.out.println(e.getMessage());
-                            JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                             indiceArtistaC = 2;
                             jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
                             setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
@@ -1833,7 +1876,6 @@ public class FrmBuscador extends javax.swing.JFrame {
                 catch(Exception e){
                     btnRetrocederArtista.setEnabled(false);
                     System.out.println(e.getMessage());
-                    JOptionPane.showMessageDialog(this, "No hay mas artistas", "Fin de la lista", JOptionPane.ERROR_MESSAGE);
                     indiceArtistaB = 1;
                     jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
                     setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
@@ -1912,7 +1954,6 @@ public class FrmBuscador extends javax.swing.JFrame {
         artista = negocio.buscarArtistaPorIdAlbum(albumes.get(indiceAlbumA).getIdAlbum());
         
         AlbumDTO album = negocio.buscarAlbumPorId(albumes.get(indiceAlbumA).getIdAlbum());
-        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionA).getIdCancion());
         
         FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, album.getIdAlbum(), null, usuarioDTO);
         perfilArtista.setVisible(true);
@@ -1932,7 +1973,6 @@ public class FrmBuscador extends javax.swing.JFrame {
         artista = negocio.buscarArtistaPorIdAlbum(albumes.get(indiceAlbumB).getIdAlbum());
         
         AlbumDTO album = negocio.buscarAlbumPorId(albumes.get(indiceAlbumB).getIdAlbum());
-        CancionDTO cancion = negocio.buscarCancionPorId(canciones.get(indiceCancionA).getIdCancion());
         
         FrmPerfilArtista perfilArtista = new FrmPerfilArtista(artista, album.getIdAlbum(), null, usuarioDTO);
         perfilArtista.setVisible(true);
@@ -2444,6 +2484,17 @@ public class FrmBuscador extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
          
+        indiceAlbumA = 0;
+        indiceAlbumB = 1;
+        indiceAlbumC = 2;
+        indiceArtistaA = 0;
+        indiceArtistaB = 1;
+        indiceArtistaC = 2;
+        indiceCancionA = 0;
+        indiceCancionB = 1;
+        indiceCancionC = 2;
+        
+        
         obtenerDatos();
         
         String texto = txtBuscar.getText();
@@ -2455,18 +2506,95 @@ public class FrmBuscador extends javax.swing.JFrame {
         }
         
         else{
-            artistas.removeIf(ArtistaDTO -> !ArtistaDTO.getNombreArtista().equalsIgnoreCase(texto));
-            albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getNombre().equalsIgnoreCase(texto));
+        if(!filtrosBuscador.cbFecha.isSelected() && !filtrosBuscador.cbGeneroAlbum.isSelected() && !filtrosBuscador.cbNombreAlbum.isSelected()){
+            if(existeArtista(texto) || existeAlbum(texto) || existeCancion(texto) || existeGeneroArtista(texto) || existeGeneroAlbum(texto)){
+            artistas.removeIf(ArtistaDTO -> !ArtistaDTO.getNombreArtista().equalsIgnoreCase(texto) && !ArtistaDTO.getGenero().equalsIgnoreCase(texto));
+            albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getNombre().equalsIgnoreCase(texto) && !AlbumesDTO.getGenero().equalsIgnoreCase(texto));
             canciones.removeIf(CancionDTO -> !CancionDTO.getNombreCancion().equalsIgnoreCase(texto));
             
             cargarDatos();
 
   
             }
+        }
 
+        if(filtrosBuscador.cbNombreAlbum.isSelected()){
+            albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getNombre().equalsIgnoreCase(texto));
+            canciones.clear();
+            artistas.clear();
+            
+            cargarDatos();
+        }
+
+        if(filtrosBuscador.cbGeneroAlbum.isSelected()){
+            albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getGenero().equalsIgnoreCase(texto));
+            canciones.clear();
+            artistas.clear();
+            
+            cargarDatos();
+        }
+        
+        }
+        
+        
+        if(filtrosBuscador.cbFecha.isSelected()){
+
+            if(validarFormatoFecha(texto)){
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            
+            // Fecha proporcionada como String 2000-07-10
+            String fechaString = "31/12/1999";
+
+            try {
+                // Convertir String a Date (sin hora)
+                
+                Date fechaComparacion = sdf.parse(fechaString);
+
+    
+                System.out.println(fechaString);
+                System.out.println(sdf.format(albumes.get(0).getFechaLanzamiento()).toString());
+                System.out.println(fechaString.equalsIgnoreCase(sdf.format(albumes.get(0).getFechaLanzamiento()).toString()));
+                albumes.removeIf(AlbumDTO ->  !texto.equalsIgnoreCase(sdf.format(AlbumDTO.getFechaLanzamiento()).toString()));
+                canciones.clear();
+                artistas.clear();
+
+
+                
+              }    
+               
+             catch (ParseException ex) {
+                Logger.getLogger(FrmBuscador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+    
+            cargarDatos();
+            }
+            
+            else{
+            JOptionPane.showMessageDialog(this, "Formato de fecha invalido", "Fecha Invalida", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrosActionPerformed
+        // TODO add your handling code here:
+        filtrosBuscador.setVisible(true);
+        
+    }//GEN-LAST:event_btnFiltrosActionPerformed
 
+
+    public boolean validarFormatoFecha(String fecha) {
+        
+        String regex = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+        
+        return Pattern.matches(regex, fecha);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvanzarAlbum;
@@ -2512,6 +2640,7 @@ public class FrmBuscador extends javax.swing.JFrame {
     private javax.swing.JLabel jblCantidadAlbumes;
     private javax.swing.JLabel jblCantidadArtistas;
     private javax.swing.JLabel jblCantidadCanciones;
+    public javax.swing.JLabel jblFormatoFecha;
     private javax.swing.JLabel jblNombreAlbum1;
     private javax.swing.JLabel jblNombreAlbum2;
     private javax.swing.JLabel jblNombreAlbum3;
