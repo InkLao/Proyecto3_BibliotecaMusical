@@ -160,6 +160,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                     setImagenLabel(jblImagenAlbumC, "src/main/java/ImagenesProyecto/NoImagen.jpg");
                 }
 
+                
                 jblNombreCancionA.setText(canciones.get(indiceCancionA).getNombreCancion());
                 setImagenLabel(jblImagenCancionA, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
                 if(buscarFavorito(favoritos, String.valueOf(canciones.get(indiceCancionA).getIdCancion()))){
@@ -200,6 +201,14 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
                 jblNombreAlbumA.setText(albumes.get(indiceAlbumA).getNombre());
                 setImagenLabel(jblImagenAlbumA, albumes.get(indiceAlbumA).getImagen());
+                if(buscarFavorito(favoritos, String.valueOf(albumes.get(indiceAlbumA).getIdAlbum()))){
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                }
+                else{
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+                
+                jblGeneroItemSeleccionado.setText("Genero del Album Seleccionado: " + albumes.get(0).getGenero());
 
                 try{
                     jblNombreAlbumB.setText(albumes.get(indiceAlbumB).getNombre());
@@ -429,6 +438,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblCancionFavoritoC = new javax.swing.JLabel();
         jblAlbumes = new javax.swing.JLabel();
         jblCanciones = new javax.swing.JLabel();
+        jblGeneroItemSeleccionado = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -774,18 +784,22 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jblCanciones.setForeground(new java.awt.Color(0, 0, 0));
         jblCanciones.setText("Canciones");
 
+        jblGeneroItemSeleccionado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jblGeneroItemSeleccionado.setForeground(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jblCanciones)
                     .addComponent(jblAlbumes)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jblGeneroItemSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -801,7 +815,9 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 .addComponent(jblCanciones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jblGeneroItemSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1578,6 +1594,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
     private javax.swing.JLabel jblCancionFavoritoC;
     private javax.swing.JLabel jblCanciones;
     private javax.swing.JLabel jblGenero;
+    private javax.swing.JLabel jblGeneroItemSeleccionado;
     private javax.swing.JLabel jblImagenAlbumA;
     private javax.swing.JLabel jblImagenAlbumB;
     private javax.swing.JLabel jblImagenAlbumC;

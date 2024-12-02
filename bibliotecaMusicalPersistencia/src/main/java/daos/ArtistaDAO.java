@@ -62,6 +62,54 @@ public class ArtistaDAO implements IArtistaDAO {
         return artista;
 
     }
+    
+    @Override
+    public List<Artista> obtenerTodosArtistaSinGeneroNoDeseado(List<String> excluir){
+    
+        List<Artista> artistas = new ArrayList<>();
+        
+        Document query = new Document("genero", new Document("$nin", excluir));
+        
+        // Ejecutar la consulta y agregar los resultados a la lista
+            try (MongoCursor<Artista> cursor = collectionArtista.find(query).iterator()) {
+                while (cursor.hasNext()) {
+                    artistas.add(cursor.next());
+                }
+            }
+            
+            return artistas;
+        
+    }
+    
+    
+    @Override
+    public List<Albumes> obtenerTodosAlbumesEnArtistaFiltroGeneroNoDeseado(List<String> excluir) {
+
+        // Obtener todos los artistas de la colección
+        List<Artista> listaArtistas = collectionArtista.find().into(new ArrayList<>());
+
+        // Lista donde se almacenarán los álbumes filtrados
+        List<Albumes> listaAlbumes = new ArrayList<>();
+
+        // Procesamos cada artista
+        for (Artista artista : listaArtistas) {
+            // Extraemos los álbumes del artista
+            List<Albumes> albumes = artista.getAlbumes();
+
+            // Filtramos los álbumes por género
+            for (Albumes album : albumes) {
+                String generoAlbum = album.getGenero();
+
+                // Si el género no está en la lista de exclusión, lo añadimos a la lista final
+                if (!excluir.contains(generoAlbum)) {
+                    listaAlbumes.add(album);
+                }
+            }
+        }
+
+        return listaAlbumes;
+    }    
+    
 
     @Override
     public List<Albumes> obtenerTodosAlbumesEnArtista() {
