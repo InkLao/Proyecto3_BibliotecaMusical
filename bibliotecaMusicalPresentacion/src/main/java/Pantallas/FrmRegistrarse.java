@@ -261,6 +261,10 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
         negocio.agregarUsuario(usuarioDTO);
         JOptionPane.showMessageDialog(this, "Usuario registrado con éxito.");
+        FrmIniciarSesion iniciarSesion = new FrmIniciarSesion(inicio);
+        iniciarSesion.setVisible(true);
+        this.dispose();
+        
     } catch (IllegalArgumentException ex) {
         JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
