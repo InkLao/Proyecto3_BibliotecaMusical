@@ -22,7 +22,7 @@ db.getCollection("artistas").insertMany([
    "albumes" :  [{
 		   "idAlbum" : "ALBHT",
                    "nombre" :  "Hybrid Theory",
-                   "fechaLanzamiento" : new Date(),
+                   "fechaLanzamiento" : new Date("2000-10-24"),
                    "genero" : "Nu Metal",
                    "imagen" : "src/main/java/ImagenesProyecto/AlbumHybridTheory.jpg",
                    "canciones" : [{
@@ -70,8 +70,8 @@ db.getCollection("artistas").insertMany([
                     
    "albumes" :  [{
 		   "idAlbum" : "ALBTTS",
-                   "nombre" :  "Thast´s The Spirit",
-                   "fechaLanzamiento" : new Date(),
+                   "nombre" :  "That's The Spirit",
+                   "fechaLanzamiento" : new Date("2015-09-11"),
                    "genero" : "Post Hardcore",
                    "imagen" : "src/main/java/ImagenesProyecto/AlbumThatsTheSpirit.png",
                    "canciones" : [{
@@ -97,7 +97,7 @@ db.getCollection("artistas").insertMany([
                                   {
                    "idAlbum" : "ALSem",
                    "nombre" :  "Sempiternal",
-                   "fechaLanzamiento" : new Date(),
+                   "fechaLanzamiento" : new Date("2013-04-01"),
                    "genero" : "Metal",
                    "imagen" : "src/main/java/ImagenesProyecto/AlbumSempiternal.jpg",
                    "canciones" : [{
@@ -146,7 +146,7 @@ db.getCollection("artistas").insertMany([
    "albumes" :  [{
 		   "idAlbum" : "ALBTrench",
                    "nombre" :  "Trench",
-                   "fechaLanzamiento" : new Date(),
+                   "fechaLanzamiento" : new Date("2018-10-05"),
                    "genero" : "Alternative",
                    "imagen" : "src/main/java/ImagenesProyecto/AlbumTrench.jpg",
                    "canciones" : [{
