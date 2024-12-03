@@ -29,6 +29,8 @@ public class FavoritosDAO implements IFavoritosDAO{
 
     @Override
     public Favoritos agregarFavoritos(Favoritos favoritos) {
+        
+        
         collectionFavoritos.insertOne(favoritos);
         return favoritos;
     }
@@ -36,9 +38,6 @@ public class FavoritosDAO implements IFavoritosDAO{
     @Override
     public Favoritos actualizarFavoritos(Favoritos favoritos){
         
-        try{
-            
-        obtenerFavoritosPorUsuario(favoritos.getIdUsuario()).get(0);
         
             try{
         
@@ -57,13 +56,8 @@ public class FavoritosDAO implements IFavoritosDAO{
                 System.out.println(e.getMessage());
                 }
             
-        }
         
-        catch(Exception e){
-            agregarFavoritos(favoritos);
-            
-        }
-       
+        
         
         return null;
         

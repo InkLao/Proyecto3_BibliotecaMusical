@@ -11,14 +11,8 @@ import dtos.IntegrantesDTO;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import javax.swing.JOptionPane;
 import negocio.ArtistaNegocio;
 import negocio.IArtistaNegocio;
-import org.bson.types.ObjectId;
-import util.ConversorDTO;
-import static util.ConversorDTO.convertirListaAlbumDTOAAlbum;
-import static util.ConversorDTO.convertirListaIntegrantesDTOAIntegrantes;
 
 /**
  *
@@ -34,71 +28,71 @@ public class FrmInicio extends javax.swing.JFrame {
         //
     }
 
-    private List<ArtistaDTO> generarArtistas() {
-        List<ArtistaDTO> artistas = new ArrayList<>();
-
-        // Generar 30 solistas
-        for (int i = 1; i <= 30; i++) {
-            ArtistaDTO solista = new ArtistaDTO();
-       //     solista.setIdDos(i);
-            solista.setNombreArtista("Solista " + i);
-            solista.setImagen("src/main/java/ImagenesProyecto/Solista" + i + ".jpg");
-            solista.setGenero(i % 2 == 0 ? "Pop" : "Rock");
-            solista.setAlbumes(convertirListaAlbumDTOAAlbum(generarAlbumes(i, false)));
-            artistas.add(solista);
-        }
-
-        // Generar 30 bandas
-        for (int i = 1; i <= 30; i++) {
-            ArtistaDTO banda = new ArtistaDTO();
-          //  banda.setIdDos(30 + i);
-            banda.setNombreArtista("Banda " + i);
-            banda.setImagen("src/main/java/ImagenesProyecto/Banda" + i + ".jpg");
-            banda.setGenero(i % 2 == 0 ? "Metal" : "Alternative");
-            banda.setIntegrantes(convertirListaIntegrantesDTOAIntegrantes(generarIntegrantes(i)));
-            banda.setAlbumes(convertirListaAlbumDTOAAlbum(generarAlbumes(i, true)));
-            artistas.add(banda);
-        }
-
-        return artistas;
-    }
-
-    private List<AlbumDTO> generarAlbumes(int idBase, boolean esBanda) {
-        List<AlbumDTO> albumes = new ArrayList<>();
-
-        for (int j = 1; j <= 2; j++) {
-            AlbumDTO album = new AlbumDTO();
-            album.setIdAlbum("ALB" + idBase + "_" + j);
-            album.setNombre((esBanda ? "Álbum Banda " : "Álbum Solista ") + idBase + " - " + j);
-            album.setFechaLanzamiento(new Date());
-            album.setImagen("src/main/java/ImagenesProyecto/Album" + idBase + "_" + j + ".jpg");
-            album.setCanciones(generarCanciones(idBase, j));
-            albumes.add(album);
-        }
-
-        return albumes;
-    }
-
-    private List<CancionDTO> generarCanciones(int idBase, int albumId) {
-        List<CancionDTO> canciones = new ArrayList<>();
-
-        for (int k = 1; k <= 3; k++) {
-            CancionDTO cancion = new CancionDTO();
-            cancion.setIdCancion("CAN" + idBase + "_" + albumId + "_" + k);
-            cancion.setNombreCancion("Canción " + k + " - Álbum " + albumId);
-            cancion.setDuracion("3:" + (10 + k * 5));
-            canciones.add(cancion);
-        }
-
-        return canciones;
-    }
-
-    private List<IntegrantesDTO> generarIntegrantes(int idBase) {
-        List<IntegrantesDTO> integrantes = new ArrayList<>();
-        integrantes.add(new IntegrantesDTO("INT" + idBase + "_1", "Vocalista", new Date(), null));
-        integrantes.add(new IntegrantesDTO("INT" + idBase + "_2", "Guitarrista", new Date(), null));
-        return integrantes;
-    }
+//    private List<ArtistaDTO> generarArtistas() {
+//        List<ArtistaDTO> artistas = new ArrayList<>();
+//
+//        // Generar 30 solistas
+//        for (int i = 1; i <= 30; i++) {
+//            ArtistaDTO solista = new ArtistaDTO();
+//       //     solista.setIdDos(i);
+//            solista.setNombreArtista("Solista " + i);
+//            solista.setImagen("src/main/java/ImagenesProyecto/Solista" + i + ".jpg");
+//            solista.setGenero(i % 2 == 0 ? "Pop" : "Rock");
+//            solista.setAlbumes(convertirListaAlbumDTOAAlbum(generarAlbumes(i, false)));
+//            artistas.add(solista);
+//        }
+//
+//        // Generar 30 bandas
+//        for (int i = 1; i <= 30; i++) {
+//            ArtistaDTO banda = new ArtistaDTO();
+//          //  banda.setIdDos(30 + i);
+//            banda.setNombreArtista("Banda " + i);
+//            banda.setImagen("src/main/java/ImagenesProyecto/Banda" + i + ".jpg");
+//            banda.setGenero(i % 2 == 0 ? "Metal" : "Alternative");
+//            banda.setIntegrantes(convertirListaIntegrantesDTOAIntegrantes(generarIntegrantes(i)));
+//            banda.setAlbumes(convertirListaAlbumDTOAAlbum(generarAlbumes(i, true)));
+//            artistas.add(banda);
+//        }
+//
+//        return artistas;
+//    }
+//
+//    private List<AlbumDTO> generarAlbumes(int idBase, boolean esBanda) {
+//        List<AlbumDTO> albumes = new ArrayList<>();
+//
+//        for (int j = 1; j <= 2; j++) {
+//            AlbumDTO album = new AlbumDTO();
+//            album.setIdAlbum("ALB" + idBase + "_" + j);
+//            album.setNombre((esBanda ? "Álbum Banda " : "Álbum Solista ") + idBase + " - " + j);
+//            album.setFechaLanzamiento(new Date());
+//            album.setImagen("src/main/java/ImagenesProyecto/Album" + idBase + "_" + j + ".jpg");
+//            album.setCanciones(generarCanciones(idBase, j));
+//            albumes.add(album);
+//        }
+//
+//        return albumes;
+//    }
+//
+//    private List<CancionDTO> generarCanciones(int idBase, int albumId) {
+//        List<CancionDTO> canciones = new ArrayList<>();
+//
+//        for (int k = 1; k <= 3; k++) {
+//            CancionDTO cancion = new CancionDTO();
+//            cancion.setIdCancion("CAN" + idBase + "_" + albumId + "_" + k);
+//            cancion.setNombreCancion("Canción " + k + " - Álbum " + albumId);
+//            cancion.setDuracion("3:" + (10 + k * 5));
+//            canciones.add(cancion);
+//        }
+//
+//        return canciones;
+//    }
+//
+//    private List<IntegrantesDTO> generarIntegrantes(int idBase) {
+//        List<IntegrantesDTO> integrantes = new ArrayList<>();
+//        integrantes.add(new IntegrantesDTO("INT" + idBase + "_1", "Vocalista", new Date(), null));
+//        integrantes.add(new IntegrantesDTO("INT" + idBase + "_2", "Guitarrista", new Date(), null));
+//        return integrantes;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
