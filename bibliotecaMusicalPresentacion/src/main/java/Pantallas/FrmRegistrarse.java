@@ -15,6 +15,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import negocio.IUsuarioNegocio;
 import negocio.UsuarioNegocio;
+import org.mindrot.jbcrypt.BCrypt;
+
 
 /**
  *
@@ -55,11 +57,11 @@ public class FrmRegistrarse extends javax.swing.JFrame {
         jblCorreo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jblContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         jblImagen = new javax.swing.JLabel();
         btnCargar = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
         btnRegistrarse1 = new javax.swing.JButton();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrarse");
@@ -67,44 +69,27 @@ public class FrmRegistrarse extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jblNombres.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblNombres.setForeground(new java.awt.Color(0, 0, 0));
         jblNombres.setText("Nombres");
 
         jblApellidoP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblApellidoP.setForeground(new java.awt.Color(0, 0, 0));
         jblApellidoP.setText("Apellido Paterno");
 
         jblApellidoM.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblApellidoM.setForeground(new java.awt.Color(0, 0, 0));
         jblApellidoM.setText("Apellido Materno");
 
-        txtNombres.setBackground(new java.awt.Color(255, 255, 255));
-        txtNombres.setForeground(new java.awt.Color(0, 0, 0));
         txtNombres.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        txtApellidoP.setBackground(new java.awt.Color(255, 255, 255));
-        txtApellidoP.setForeground(new java.awt.Color(0, 0, 0));
         txtApellidoP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        txtApellidoM.setBackground(new java.awt.Color(255, 255, 255));
-        txtApellidoM.setForeground(new java.awt.Color(0, 0, 0));
         txtApellidoM.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblCorreo.setForeground(new java.awt.Color(0, 0, 0));
         jblCorreo.setText("Correo");
 
-        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
-        txtCorreo.setForeground(new java.awt.Color(0, 0, 0));
         txtCorreo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblContrasena.setForeground(new java.awt.Color(0, 0, 0));
         jblContrasena.setText("Contraseña");
-
-        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
-        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
-        txtContrasena.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblImagen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
@@ -117,7 +102,6 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
         btnRegistrarse.setBackground(new java.awt.Color(14, 153, 217));
         btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegistrarse.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrarse.setText("Regresar");
         btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,13 +111,14 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
         btnRegistrarse1.setBackground(new java.awt.Color(30, 243, 11));
         btnRegistrarse1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegistrarse1.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrarse1.setText("Registrarse");
         btnRegistrarse1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarse1ActionPerformed(evt);
             }
         });
+
+        txtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,7 +135,6 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContrasena)
                             .addComponent(txtCorreo)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +144,10 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jblApellidoP)
                                     .addComponent(txtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jblContrasena))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jblContrasena)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtContrasena))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,7 +162,7 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                                             .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(77, 77, 77)
+                                        .addGap(75, 75, 75)
                                         .addComponent(btnCargar)))
                                 .addGap(50, 50, 50))))))
         );
@@ -193,20 +180,21 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                     .addComponent(txtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jblCorreo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jblContrasena))
-                            .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCargar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jblCorreo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnCargar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jblContrasena)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrarse1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,6 +228,8 @@ public class FrmRegistrarse extends javax.swing.JFrame {
         return ""; // Sin extensión
     }
     
+
+    
     
     
     
@@ -253,86 +243,27 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
     private void btnRegistrarse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse1ActionPerformed
         // TODO add your handling code here:
-        
-        try{
-        
-            String nombres = txtNombres.getText();
-            String apellidoP = txtApellidoP.getText();
-            String apellidoM = txtApellidoM.getText();
-            String correo = txtCorreo.getText();
-            String contra = txtContrasena.getText();
-            
-            
-            UsuarioDTO usuarioDTO = new UsuarioDTO();
-        
-            
-            if(selectedFile == null){
-    
-                usuarioDTO.setApellidoM(apellidoM);
-                usuarioDTO.setApellidoP(apellidoP);
-                usuarioDTO.setContrasena(contra);
-                usuarioDTO.setCorreo(correo);
-                usuarioDTO.setImagen("src/main/java/ImagenesProyecto/NoImagen.jpg");
-                usuarioDTO.setNombres(nombres);
+        try {
+        String nombres = txtNombres.getText().trim();
+        String apellidoP = txtApellidoP.getText().trim();
+        String apellidoM = txtApellidoM.getText().trim();
+        String correo = txtCorreo.getText().trim();
+        String contra = new String(txtContrasena.getPassword()).trim();
 
-
-                IUsuarioNegocio negocio = new UsuarioNegocio();
-                negocio.agregarUsuario(usuarioDTO);
-
-
-                JOptionPane.showMessageDialog(this, "usuario registrado con exito");
-                System.out.println(usuarioDTO.toString());
-                
-            }
-            
-            else{
-                
-                    // Crear un nombre único para el archivo (usar timestamp)
-                    String fileExtension = getFileExtension(selectedFile);
-                    String uniqueFileName = System.currentTimeMillis() + "." + fileExtension;
-                    
-                    // Ruta donde se guardará la imagen
-                    String destinationPath = "src/main/java/ImagenesUsuario/" + uniqueFileName;
-                    File destinationFile = new File(destinationPath);
-
-                    // Crear directorio si no existe
-                    destinationFile.getParentFile().mkdirs();
-
-                    // Copiar la imagen seleccionada
-                    Files.copy(selectedFile.toPath(), destinationFile.toPath());
-                    
-                // Guardar la ruta en una variable
-                    String savedImagePath = destinationFile.getAbsolutePath();
-                    System.out.println("Imagen guardada en: " + savedImagePath);
-                   
-            
-                    usuarioDTO.setApellidoM(apellidoM);
-                    usuarioDTO.setApellidoP(apellidoP);
-                    usuarioDTO.setContrasena(contra);
-                    usuarioDTO.setCorreo(correo);
-                    usuarioDTO.setImagen(destinationPath);
-                    usuarioDTO.setNombres(nombres);
-
-
-                    IUsuarioNegocio negocio = new UsuarioNegocio();
-                    negocio.agregarUsuario(usuarioDTO);
-
-
-                    JOptionPane.showMessageDialog(this, "usuario registrado con exito");
-                    System.out.println(usuarioDTO.toString());   
-                    
-                    FrmIniciarSesion iniciarSesion = new FrmIniciarSesion(inicio);
-                    iniciarSesion.setVisible(true);
-                    
-                    this.dispose();
-                    
-            }
-        }   
-        
-        catch(IOException ex){
-                JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage());
-
+        if (nombres.isEmpty() || correo.isEmpty() || contra.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        // Validación y registro
+        IUsuarioNegocio negocio = new UsuarioNegocio();
+        UsuarioDTO usuarioDTO = new UsuarioDTO(nombres, apellidoP, apellidoM, correo, contra, "default.jpg");
+
+        negocio.agregarUsuario(usuarioDTO);
+        JOptionPane.showMessageDialog(this, "Usuario registrado con éxito.");
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnRegistrarse1ActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
@@ -380,7 +311,7 @@ public class FrmRegistrarse extends javax.swing.JFrame {
     private javax.swing.JLabel jblNombres;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables

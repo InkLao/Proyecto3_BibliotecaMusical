@@ -8,6 +8,7 @@ import dtos.UsuarioDTO;
 import javax.swing.JOptionPane;
 import negocio.IUsuarioNegocio;
 import negocio.UsuarioNegocio;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -16,13 +17,13 @@ import negocio.UsuarioNegocio;
 public class FrmIniciarSesion extends javax.swing.JFrame {
 
     FrmInicio inicio;
-    
+
     /**
      * Creates new form FrmIniciarSesion
      */
     public FrmIniciarSesion(FrmInicio inicio) {
         this.inicio = inicio;
-        
+
         initComponents();
     }
 
@@ -39,38 +40,27 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         txtCorreo = new javax.swing.JTextField();
         jblCorreo = new javax.swing.JLabel();
         jblContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesion");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
         txtCorreo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtCorreo.setForeground(new java.awt.Color(0, 0, 0));
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCorreo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jblCorreo.setForeground(new java.awt.Color(0, 0, 0));
         jblCorreo.setText("Correo");
 
         jblContrasena.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jblContrasena.setForeground(new java.awt.Color(0, 0, 0));
         jblContrasena.setText("Contraseña");
-
-        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
-        txtContrasena.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
-        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContrasena.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         btnIngresar.setBackground(new java.awt.Color(30, 243, 11));
         btnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnIngresar.setForeground(new java.awt.Color(0, 0, 0));
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +70,6 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
 
         btnRegistrarse.setBackground(new java.awt.Color(14, 153, 217));
         btnRegistrarse.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegistrarse.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrarse.setText("Regresar");
         btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,15 +77,25 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
             }
         });
 
+        txtContrasena.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtContrasena)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(jblContrasena)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtContrasena, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))))
                 .addGap(145, 145, 145))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,10 +107,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                         .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(256, 256, 256)
-                        .addComponent(jblContrasena)))
+                        .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,13 +119,13 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jblContrasena)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(24, 24, 24)
                 .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(34, 34, 34)
                 .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,43 +147,30 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
         // TODO add your handling code here:
         inicio.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        
-        String correo = txtCorreo.getText();
-        String contra = txtContrasena.getText();
-        
-        try{
-        
-            IUsuarioNegocio negocio = new UsuarioNegocio();
-            UsuarioDTO usuarioDTO = negocio.buscarUsuarioIniciarSesion(correo, contra);
-            
-            if(usuarioDTO != null){
-                FrmUsuarioPerfil perfil = new FrmUsuarioPerfil(this, usuarioDTO);
-                perfil.setVisible(true);
-                
-                this.setVisible(false);
-                
-            }
-        
-            else{
-                JOptionPane.showMessageDialog(this, "correo o contraseña incorrectos.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        
-        
-        
-        catch(Exception ex){
-            System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(this, "correo o contraseña incorrectos.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+        String correo = txtCorreo.getText().trim();
+    String contra = new String(txtContrasena.getPassword()).trim();
 
-        
-        }
-        
-        
+    if (correo.isEmpty() || contra.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Correo y contraseña son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        IUsuarioNegocio negocio = new UsuarioNegocio();
+        UsuarioDTO usuarioDTO = negocio.buscarUsuarioIniciarSesion(correo, contra);
+
+        JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
+        FrmUsuarioPerfil perfil = new FrmUsuarioPerfil(this, usuarioDTO);
+        perfil.setVisible(true);
+        this.dispose();
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
 
@@ -197,7 +180,7 @@ public class FrmIniciarSesion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jblContrasena;
     private javax.swing.JLabel jblCorreo;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
