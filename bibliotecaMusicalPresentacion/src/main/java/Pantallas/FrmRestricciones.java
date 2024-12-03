@@ -43,7 +43,7 @@ public class FrmRestricciones extends javax.swing.JFrame {
             List<String> generos = negocio.obtenerGenerosNoDeseados(usuarioDTO.getId());
             lstGenerosNoDeseados.setListData(generos.toArray(new String[0]));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al cargar los géneros: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
         }
     }
 

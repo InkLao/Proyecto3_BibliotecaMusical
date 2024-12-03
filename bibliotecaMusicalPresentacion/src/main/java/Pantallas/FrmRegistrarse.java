@@ -281,8 +281,10 @@ public class FrmRegistrarse extends javax.swing.JFrame {
 
 
                 JOptionPane.showMessageDialog(this, "usuario registrado con exito");
+                FrmIniciarSesion iniciarSesion = new FrmIniciarSesion(inicio);
+                iniciarSesion.setVisible(true);
                 System.out.println(usuarioDTO.toString());
-                
+                this.dispose();
             }
             
             else{
