@@ -93,6 +93,11 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
         btnFavoritos.setText("Favoritos");
         btnFavoritos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         btnFavoritos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFavoritos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFavoritosActionPerformed(evt);
+            }
+        });
 
         btnRestricciones.setBackground(new java.awt.Color(217, 217, 217));
         btnRestricciones.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -210,6 +215,14 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
                 
         
     }//GEN-LAST:event_btnEditarPerfilActionPerformed
+
+    private void btnFavoritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritosActionPerformed
+        // TODO add your handling code here:
+        FrmUsuarioFavoritos uFav = new FrmUsuarioFavoritos(this, usuarioDTO);
+        uFav.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnFavoritosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
