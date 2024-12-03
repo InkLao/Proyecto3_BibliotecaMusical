@@ -1,0 +1,285 @@
+db.getCollection("persona").insertMany([
+    {
+        "idPersona": "1",
+        "nombreCompleto": "Chester Charles Bennigton"
+    },
+    {
+        "idPersona": "2",
+        "nombreCompleto": "Mike Shinoda"
+    },
+    {
+        "idPersona": "3",
+        "nombreCompleto": "Oliver Sykes"
+    },
+    {
+        "idPersona": "4",
+        "nombreCompleto": "Jordan Fish"
+    },
+    {
+        "idPersona": "5",
+        "nombreCompleto": "Tyler Joseph"
+    },
+    {
+        "idPersona": "6",
+        "nombreCompleto": "Josh Dun"
+    },
+    {
+        "idPersona": "7",
+        "nombreCompleto": "Hayley Williams"
+    },
+    {
+        "idPersona": "8",
+        "nombreCompleto": "Brendon Urie"
+    },
+    {
+        "idPersona": "9",
+        "nombreCompleto": "Billie Joe Armstrong"
+    },
+    {
+        "idPersona": "10",
+        "nombreCompleto": "Tré Cool"
+    },
+    {
+        "idPersona": "11",
+        "nombreCompleto": "Mark Hoppus"
+    },
+    {
+        "idPersona": "12",
+        "nombreCompleto": "Travis Barker"
+    },
+    {
+        "idPersona": "13",
+        "nombreCompleto": "Dave Grohl"
+    },
+    {
+        "idPersona": "14",
+        "nombreCompleto": "Frank Iero"
+    },
+    {
+        "idPersona": "15",
+        "nombreCompleto": "Ray Toro"
+    },
+    {
+        "idPersona": "16",
+        "nombreCompleto": "Patrick Stump"
+    },
+    {
+        "idPersona": "17",
+        "nombreCompleto": "Pete Wentz"
+    },
+    {
+        "idPersona": "18",
+        "nombreCompleto": "Andy Hurley"
+    },
+    {
+        "idPersona": "19",
+        "nombreCompleto": "Joe Trohman"
+    },
+    {
+        "idPersona": "20",
+        "nombreCompleto": "Alex Turner"
+    },
+    {
+        "idPersona": "21",
+        "nombreCompleto": "Matt Helders"
+    },
+    {
+        "idPersona": "22",
+        "nombreCompleto": "Jamie Cook"
+    },
+    {
+        "idPersona": "23",
+        "nombreCompleto": "Kurt Cobain"
+    },
+    {
+        "idPersona": "24",
+        "nombreCompleto": "Matty Healy"
+    },
+    {
+        "idPersona": "25",
+        "nombreCompleto": "George Daniel"
+    },
+    {
+        "idPersona": "26",
+        "nombreCompleto": "Ariana Grande"
+    },
+    {
+        "idPersona": "27",
+        "nombreCompleto": "Taylor Swift"
+    },
+    {
+        "idPersona": "28",
+        "nombreCompleto": "Ed Sheeran"
+    },
+    {
+        "idPersona": "29",
+        "nombreCompleto": "Kendrick Lamar"
+    },
+    {
+        "idPersona": "30",
+        "nombreCompleto": "J. Cole"
+    },
+    {
+        "idPersona": "31",
+        "nombreCompleto": "Drake"
+    },
+    {
+        "idPersona": "32",
+        "nombreCompleto": "Kanye West"
+    },
+    {
+        "idPersona": "33",
+        "nombreCompleto": "Travis Scott"
+    },
+    {
+        "idPersona": "34",
+        "nombreCompleto": "Lil Wayne"
+    },
+    {
+        "idPersona": "35",
+        "nombreCompleto": "Vicente Fernandez"
+    },
+    {
+        "idPersona": "36",
+        "nombreCompleto": "Julion Alvarez"
+    },
+    {
+        "idPersona": "37",
+        "nombreCompleto": "James Valentine"
+    },
+    {
+        "idPersona": "38",
+        "nombreCompleto": "Mickey Madden"
+    },
+    {
+        "idPersona": "39",
+        "nombreCompleto": "Jesse Carmichael"
+    },
+    {
+        "idPersona": "40",
+        "nombreCompleto": "Brandon Flowers"
+    },
+    {
+        "idPersona": "41",
+        "nombreCompleto": "Dave Keuning"
+    },
+    {
+        "idPersona": "42",
+        "nombreCompleto": "Mark Stoermer"
+    },
+    {
+        "idPersona": "43",
+        "nombreCompleto": "Ronnie Vannucci Jr."
+    },
+    {
+        "idPersona": "44",
+        "nombreCompleto": "Ezra Koenig"
+    },
+    {
+        "idPersona": "45",
+        "nombreCompleto": "Rostam Batmanglij"
+    },
+    {
+        "idPersona": "46",
+        "nombreCompleto": "Chris Baio"
+    },
+    {
+        "idPersona": "47",
+        "nombreCompleto": "Chris Tomson"
+    },
+    {
+        "idPersona": "48",
+        "nombreCompleto": "Jack White"
+    },
+    {
+        "idPersona": "49",
+        "nombreCompleto": "Meg White"
+    },
+    {
+        "idPersona": "50",
+        "nombreCompleto": "Dan Auerbach"
+    },
+    {
+        "idPersona": "51",
+        "nombreCompleto": "Patrick Carney"
+    },
+    {
+        "idPersona": "52",
+        "nombreCompleto": "Brittany Howard"
+    },
+    {
+        "idPersona": "53",
+        "nombreCompleto": "Zac Cockrell"
+    },
+    {
+        "idPersona": "54",
+        "nombreCompleto": "Steve Johnson"
+    },
+    {
+        "idPersona": "55",
+        "nombreCompleto": "Ben Tanner"
+    },
+    {
+        "idPersona": "56",
+        "nombreCompleto": "Thom Yorke"
+    },
+    {
+        "idPersona": "57",
+        "nombreCompleto": "Jonny Greenwood"
+    },
+    {
+        "idPersona": "58",
+        "nombreCompleto": "Colin Greenwood"
+    },
+    {
+        "idPersona": "59",
+        "nombreCompleto": "Ed O'Brien"
+    },
+    {
+        "idPersona": "60",
+        "nombreCompleto": "Fredie Mercury"
+    },
+    {
+        "idPersona": "61",
+        "nombreCompleto": "Anthony Kiedis"
+    },
+    {
+        "idPersona": "62",
+        "nombreCompleto": "Flea Balzary"
+    },
+    {
+        "idPersona": "63",
+        "nombreCompleto": "John Frusciante"
+    },
+    {
+        "idPersona": "64",
+        "nombreCompleto": "Axel Rose"
+    },
+    {
+        "idPersona": "65",
+        "nombreCompleto": "Corey Taylor"
+    },
+    {
+        "idPersona": "66",
+        "nombreCompleto": "Jim Root"
+    },
+    {
+        "idPersona": "67",
+        "nombreCompleto": "Shawn Crahan"
+    },
+    {
+        "idPersona": "68",
+        "nombreCompleto": "Sid Wilson"
+    },
+    {
+        "idPersona": "69",
+        "nombreCompleto": "Shakira"
+    },
+    {
+        "idPersona": "70",
+        "nombreCompleto": "Abel Makkonen Tesfaye"
+    },{
+        "idPersona": "71",
+        "nombreCompleto": "Emily Armstrong" 
+    }
+]);

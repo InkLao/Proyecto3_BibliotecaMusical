@@ -16,7 +16,12 @@ db.getCollection("artistas").insertMany([
                     "rolBanda" : "Vocalista, Guitarrista",
                     "fechaIngreso" : new Date(),
                     "fechaSalida" : null
-                    }
+                    },{
+                    "idPersona" : "71",
+                    "rolBanda" : "Vocalista",
+                    "fechaIngreso" : new Date("2024-08-05"),
+                    "fechaSalida" : null
+		    }
                     ],
                     
    "albumes" :  [{
