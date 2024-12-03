@@ -45,6 +45,10 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
     static List<CancionDTO> canciones;
     static List<FavoritoDTO> favoritos;
     static List<String> generoNoDeseado;
+    static List<ArtistaDTO> todosArtistas;
+    static List<AlbumDTO> todosAlbumes;
+    static List<CancionDTO> todasCanciones;
+            
 
     static int indiceArtistaA = 0;
     static int indiceArtistaB = 1;
@@ -84,13 +88,13 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
         favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(String.valueOf(usuarioDTO.getId()));
         System.out.println("Favoritos obtenidos: " + favoritos);
 
-        List<ArtistaDTO> todosArtistas = negocio.obtenerTodos();
+        todosArtistas = negocio.obtenerTodos();
         System.out.println("Artistas obtenidos: " + todosArtistas);
 
-        List<AlbumDTO> todosAlbumes = negocio.obtenerTodosAlbumesEnArtista();
+        todosAlbumes = negocio.obtenerTodosAlbumesEnArtista();
         System.out.println("Álbumes obtenidos: " + todosAlbumes);
 
-        List<CancionDTO> todasCanciones = negocio.obtenerTodasCancionesEnArtista();
+        todasCanciones = negocio.obtenerTodasCancionesEnArtista();
         System.out.println("Canciones obtenidas: " + todasCanciones);
 
         System.out.println("Favoritos obtenidos de la base de datos: " + favoritos);
@@ -407,11 +411,286 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
 
     }
 
+    
+    
+   
+    public void cargarDatos2() {
+
+//        if (artistas.isEmpty() || albumes.isEmpty() || canciones.isEmpty()) {
+//            System.out.println("Una de las listas está vacía.");
+//            return;
+//        }
+
+        jblCantidadArtistas.setText("Artistas: " + artistas.size());
+        jblCantidadAlbumes.setText("Albumes: " + albumes.size());
+        jblCantidadCanciones.setText("Canciones: " + canciones.size());
+
+        try {
+
+            if (artistas.get(indiceArtistaA) != null) {
+
+                jblNombreArtista1.setText(artistas.get(indiceArtistaA).getNombreArtista());
+                setImagenLabel(jblArtista1, artistas.get(indiceArtistaA).getImagen());
+                if (buscarFavorito(favoritos, artistas.get(indiceArtistaA).getIdDos())) {
+                    setImagenLabel(jblArtistaFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                } else {
+                    setImagenLabel(jblArtistaFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+
+                try {
+
+                    if (artistas.get(indiceArtistaB) != null) {
+
+                        jblNombreArtista2.setText(artistas.get(indiceArtistaB).getNombreArtista());
+                        setImagenLabel(jblArtista2, artistas.get(indiceArtistaB).getImagen());
+                        if (buscarFavorito(favoritos, artistas.get(indiceArtistaB).getIdDos())) {
+                            setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        } else {
+                            setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
+
+                        try {
+
+                            if (artistas.get(indiceArtistaC) != null) {
+
+                                jblNombreArtista3.setText(artistas.get(indiceArtistaC).getNombreArtista());
+                                setImagenLabel(jblArtista3, artistas.get(indiceArtistaC).getImagen());
+                                if (buscarFavorito(favoritos, artistas.get(indiceArtistaC).getIdDos())) {
+                                    setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                } else {
+                                    setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                                }
+                            }
+                        } catch (Exception e) {
+
+                            System.out.println(e.getMessage());
+                            jblNombreArtista3.setText("sin datos");
+                            setImagenLabel(jblArtista3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                            setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                            jblNombreAlbum3.setText("sin datos");
+                            setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                            setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                            jblNombreCancion3.setText("sin datos");
+                            setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                            setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
+
+                    }
+                } catch (Exception e) {
+
+                    System.out.println(e.getMessage());
+                    jblNombreArtista2.setText("sin datos");
+                    setImagenLabel(jblArtista2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreArtista3.setText("sin datos");
+                    setImagenLabel(jblArtista3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreAlbum1.setText("sin datos");
+                    setImagenLabel(jblAlbum1, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblAlbumFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreAlbum2.setText("sin datos");
+                    setImagenLabel(jblAlbum2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreAlbum3.setText("sin datos");
+                    setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreCancion1.setText("sin datos");
+                    setImagenLabel(jblCancion1, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblCancionFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreCancion2.setText("sin datos");
+                    setImagenLabel(jblCancion2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreCancion3.setText("sin datos");
+                    setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            jblNombreArtista1.setText("sin datos");
+            setImagenLabel(jblArtista1, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblArtistaFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreArtista2.setText("sin datos");
+            setImagenLabel(jblArtista2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreArtista3.setText("sin datos");
+            setImagenLabel(jblArtista3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreAlbum2.setText("sin datos");
+            setImagenLabel(jblAlbum2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreAlbum3.setText("sin datos");
+            setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreCancion2.setText("sin datos");
+            setImagenLabel(jblCancion2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreCancion3.setText("sin datos");
+            setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+
+        }
+
+        // cargar albumes
+        try {
+
+            if (albumes.get(indiceAlbumA) != null) {
+
+                jblNombreAlbum1.setText(albumes.get(indiceAlbumA).getNombre());
+                setImagenLabel(jblAlbum1, albumes.get(indiceAlbumA).getImagen());
+                if (buscarFavorito(favoritos, albumes.get(indiceAlbumA).getIdAlbum())) {
+                    setImagenLabel(jblAlbumFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                } else {
+                    setImagenLabel(jblAlbumFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+
+                try {
+
+                    if (albumes.get(indiceAlbumB) != null) {
+
+                        jblNombreAlbum2.setText(albumes.get(indiceAlbumB).getNombre());
+                        setImagenLabel(jblAlbum2, albumes.get(indiceAlbumB).getImagen());
+                        if (buscarFavorito(favoritos, albumes.get(indiceAlbumB).getIdAlbum())) {
+                            setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        } else {
+                            setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
+
+                        try {
+
+                            if (albumes.get(indiceAlbumC) != null) {
+
+                                jblNombreAlbum3.setText(albumes.get(indiceAlbumC).getNombre());
+                                setImagenLabel(jblAlbum3, albumes.get(indiceAlbumC).getImagen());
+                                if (buscarFavorito(favoritos, albumes.get(indiceAlbumC).getIdAlbum())) {
+                                    setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                } else {
+                                    setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("albumC " + e.getMessage());
+                            jblNombreAlbum3.setText("sin datos");
+                            setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                            setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("albumB " + e.getMessage());
+                    jblNombreAlbum2.setText("sin datos");
+                    setImagenLabel(jblAlbum2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreAlbum3.setText("sin datos");
+                    setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            jblNombreAlbum1.setText("sin datos");
+            setImagenLabel(jblAlbum1, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblAlbumFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreAlbum2.setText("sin datos");
+            setImagenLabel(jblAlbum2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreAlbum3.setText("sin datos");
+            setImagenLabel(jblAlbum3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+
+        }
+
+        //cargar canciones
+        try {
+
+            if (canciones.get(indiceCancionA) != null) {
+
+                jblNombreCancion1.setText(canciones.get(indiceCancionA).getNombreCancion());
+                setImagenLabel(jblCancion1, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionA).getIdCancion()));
+                if (buscarFavorito(favoritos, canciones.get(indiceCancionA).getIdCancion())) {
+                    setImagenLabel(jblCancionFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                } else {
+                    setImagenLabel(jblCancionFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+
+                try {
+
+                    if (canciones.get(indiceCancionB) != null) {
+
+                        jblNombreCancion2.setText(canciones.get(indiceCancionB).getNombreCancion());
+                        setImagenLabel(jblCancion2, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionB).getIdCancion()));
+                        if (buscarFavorito(favoritos, canciones.get(indiceCancionB).getIdCancion())) {
+                            setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                        } else {
+                            setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
+
+                        try {
+                            if (canciones.get(indiceCancionC) != null) {
+
+                                jblNombreCancion3.setText(canciones.get(indiceCancionC).getNombreCancion());
+                                setImagenLabel(jblCancion3, negocio.obtenerImagenPorIdCancion(canciones.get(indiceCancionC).getIdCancion()));
+                                if (buscarFavorito(favoritos, canciones.get(indiceCancionC).getIdCancion())) {
+                                    setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                                } else {
+                                    setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                                }
+
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            jblNombreCancion3.setText("sin datos");
+                            setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                            setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                        }
+
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    jblNombreCancion2.setText("sin datos");
+                    setImagenLabel(jblCancion2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                    jblNombreCancion3.setText("sin datos");
+                    setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+                    setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            jblNombreCancion1.setText("sin datos");
+            setImagenLabel(jblCancion1, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblCancionFavorito1, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreCancion2.setText("sin datos");
+            setImagenLabel(jblCancion2, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+            jblNombreCancion3.setText("sin datos");
+            setImagenLabel(jblCancion3, "src/main/java/ImagenesProyecto/NoImagen.jpg");
+            setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoNo.png");
+
+        }
+
+    }    
+    
+    
+    
+    
     private boolean buscarFavorito(List<FavoritoDTO> favoritos, String id) {
+        try{
+        
         for (FavoritoDTO favorito : favoritos) {
             if (favorito.getIdFavorito().equalsIgnoreCase(id)) {
                 return true;
             }
+        }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
         return false;
     }
@@ -2548,7 +2827,7 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
             cargarDatos();
 
         } else {
-            if (!filtrosBuscador.cbFecha.isSelected() && !filtrosBuscador.cbGeneroAlbum.isSelected() && !filtrosBuscador.cbNombreAlbum.isSelected()) {
+            if (!filtrosBuscador.cbFecha.isSelected() && !filtrosBuscador.cbGenero.isSelected() && !filtrosBuscador.cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Ninguno")) {
                 if (existeArtista(texto) || existeAlbum(texto) || existeCancion(texto) || existeGeneroArtista(texto) || existeGeneroAlbum(texto)) {
                     artistas.removeIf(ArtistaDTO -> !ArtistaDTO.getNombreArtista().equalsIgnoreCase(texto) && !ArtistaDTO.getGenero().equalsIgnoreCase(texto));
                     albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getNombre().equalsIgnoreCase(texto) && !AlbumesDTO.getGenero().equalsIgnoreCase(texto));
@@ -2559,18 +2838,34 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
                 }
             }
 
-            if (filtrosBuscador.cbNombreAlbum.isSelected()) {
-                albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getNombre().equalsIgnoreCase(texto));
+            if (filtrosBuscador.cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Artista")) {
+                artistas.removeIf(ArtistaDTO -> !ArtistaDTO.getNombreArtista().equalsIgnoreCase(texto));
+                canciones.clear();
+                albumes.clear();
+
+                cargarDatos();
+            }
+            
+            if (filtrosBuscador.cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Cancion")) {
+                canciones.removeIf(CancionDTO -> !CancionDTO.getNombreCancion().equalsIgnoreCase(texto));
+                artistas.clear();
+                albumes.clear();
+
+                cargarDatos();
+            }
+
+            if (filtrosBuscador.cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Album")) {
+                albumes.removeIf(AlbumDTO -> !AlbumDTO.getNombre().equalsIgnoreCase(texto));
                 canciones.clear();
                 artistas.clear();
 
                 cargarDatos();
             }
-
-            if (filtrosBuscador.cbGeneroAlbum.isSelected()) {
+            
+            if (filtrosBuscador.cbGenero.isSelected()) {
+                artistas.removeIf(ArtistaDTO -> !ArtistaDTO.getGenero().equalsIgnoreCase(texto));
                 albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getGenero().equalsIgnoreCase(texto));
                 canciones.clear();
-                artistas.clear();
 
                 cargarDatos();
             }
@@ -2586,24 +2881,46 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
                 // Fecha proporcionada como String 2000-07-10
                 String fechaString = "31/12/1999";
 
+                 System.out.println("hay antes favo: " + favoritos.size());
+                
                 try {
                     // Convertir String a Date (sin hora)
 
                     Date fechaComparacion = sdf.parse(fechaString);
 
                     System.out.println(fechaString);
-                    System.out.println(sdf.format(albumes.get(0).getFechaLanzamiento()).toString());
-                    System.out.println(fechaString.equalsIgnoreCase(sdf.format(albumes.get(0).getFechaLanzamiento()).toString()));
-                    albumes.removeIf(AlbumDTO -> !texto.equalsIgnoreCase(sdf.format(AlbumDTO.getFechaLanzamiento()).toString()));
-                    canciones.clear();
-                    artistas.clear();
+                    System.out.println(sdf.format(favoritos.get(0).getFechaAgregacion()).toString());
+                    System.out.println(texto.equalsIgnoreCase(sdf.format(favoritos.get(0).getFechaAgregacion()).toString()));
+                    favoritos.removeIf(FavoritoDTO -> !texto.equalsIgnoreCase(sdf.format(FavoritoDTO.getFechaAgregacion()).toString()));
+                    
+                    List<String> listaFa = new ArrayList<>();
+                    for(int i = 0; i < favoritos.size(); i++){
+                        listaFa.add(favoritos.get(i).getIdFavorito());
+                    }
+                    
+                    
+                  
+                        canciones.removeIf(CancionDTO -> !listaFa.contains(CancionDTO.getIdCancion()));
+                        albumes.removeIf(AlbumDTO -> !listaFa.contains(AlbumDTO.getIdAlbum()));
+                        artistas.removeIf(ArtistaDTO -> !listaFa.contains(ArtistaDTO.getIdDos()));
+                   
+
+                    System.out.println("hay despues favo: " + favoritos.size());
+                    
+                    filtrarFavoritosAlbumes(albumes, favoritos);
+                    filtrarFavoritosArtistas(artistas, favoritos);
+                    filtrarFavoritosCanciones(canciones, favoritos);
+                    
 
                 } catch (ParseException ex) {
                     Logger.getLogger(FrmUsuarioFavoritos.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                cargarDatos();
-            } else {
+                cargarDatos2();
+                
+            } 
+            
+            else {
                 JOptionPane.showMessageDialog(this, "Formato de fecha invalido", "Fecha Invalida", JOptionPane.ERROR_MESSAGE);
             }
         }

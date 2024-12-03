@@ -36,10 +36,13 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jblFlitrosAlbumes = new javax.swing.JLabel();
-        cbNombreAlbum = new javax.swing.JCheckBox();
-        cbGeneroAlbum = new javax.swing.JCheckBox();
+        cbGenero = new javax.swing.JCheckBox();
         cbFecha = new javax.swing.JCheckBox();
         btnVolver = new javax.swing.JButton();
+        jblFlitroTipo = new javax.swing.JLabel();
+        cbcTipo = new javax.swing.JComboBox<>();
+        jblFlitroTipo1 = new javax.swing.JLabel();
+        jblFlitroTipo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtros Buscador");
@@ -47,37 +50,23 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jblFlitrosAlbumes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jblFlitrosAlbumes.setForeground(new java.awt.Color(0, 0, 0));
         jblFlitrosAlbumes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jblFlitrosAlbumes.setText("Filtros Albumes");
+        jblFlitrosAlbumes.setText("Filtros Favoritos");
 
-        cbNombreAlbum.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cbNombreAlbum.setText("Nombre Album");
-        cbNombreAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
+        cbGenero.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbGenero.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbNombreAlbumMouseClicked(evt);
+                cbGeneroMouseClicked(evt);
             }
         });
-        cbNombreAlbum.addActionListener(new java.awt.event.ActionListener() {
+        cbGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbNombreAlbumActionPerformed(evt);
-            }
-        });
-
-        cbGeneroAlbum.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cbGeneroAlbum.setText("Genero Album");
-        cbGeneroAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbGeneroAlbumMouseClicked(evt);
-            }
-        });
-        cbGeneroAlbum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGeneroAlbumActionPerformed(evt);
+                cbGeneroActionPerformed(evt);
             }
         });
 
         cbFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cbFecha.setText("Fecha Lanzamiento");
         cbFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbFechaMouseClicked(evt);
@@ -89,12 +78,36 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
             }
         });
 
+        btnVolver.setBackground(new java.awt.Color(8, 148, 249));
+        btnVolver.setForeground(new java.awt.Color(0, 0, 0));
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
             }
         });
+
+        jblFlitroTipo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jblFlitroTipo.setForeground(new java.awt.Color(0, 0, 0));
+        jblFlitroTipo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jblFlitroTipo.setText("Tipo");
+
+        cbcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Artista", "Album", "Cancion" }));
+        cbcTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbcTipoActionPerformed(evt);
+            }
+        });
+
+        jblFlitroTipo1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jblFlitroTipo1.setForeground(new java.awt.Color(0, 0, 0));
+        jblFlitroTipo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jblFlitroTipo1.setText("Genero");
+
+        jblFlitroTipo2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jblFlitroTipo2.setForeground(new java.awt.Color(0, 0, 0));
+        jblFlitroTipo2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jblFlitroTipo2.setText("Fecha Agregacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,11 +116,18 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbGeneroAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbNombreAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver)
-                    .addComponent(jblFlitrosAlbumes, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jblFlitrosAlbumes, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jblFlitroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblFlitroTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jblFlitroTipo2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbcTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,13 +135,19 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jblFlitrosAlbumes)
-                .addGap(27, 27, 27)
-                .addComponent(cbNombreAlbum)
                 .addGap(18, 18, 18)
-                .addComponent(cbGeneroAlbum)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jblFlitroTipo)
+                    .addComponent(cbcTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(cbFecha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbGenero)
+                    .addComponent(jblFlitroTipo1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbFecha)
+                    .addComponent(jblFlitroTipo2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(btnVolver)
                 .addGap(18, 18, 18))
         );
@@ -143,8 +169,8 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
 
     private void cbFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFechaActionPerformed
         // TODO add your handling code here:
-        cbGeneroAlbum.setSelected(false);
-        cbNombreAlbum.setSelected(false);
+        cbGenero.setSelected(false);
+        cbcTipo.setSelectedIndex(0);
         if(cbFecha.isSelected()){
         uFav.jblFormatoFecha.setText("Formato fecha: 'dd/MM/yyyy'");
         }
@@ -153,15 +179,10 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_cbFechaActionPerformed
 
-    private void cbNombreAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbNombreAlbumMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbNombreAlbumMouseClicked
-
-    private void cbGeneroAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbGeneroAlbumMouseClicked
+    private void cbGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbGeneroMouseClicked
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_cbGeneroAlbumMouseClicked
+    }//GEN-LAST:event_cbGeneroMouseClicked
 
     private void cbFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbFechaMouseClicked
         // TODO add your handling code here:
@@ -172,29 +193,39 @@ public class DlgFiltrosUsuarioFavoritos extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void cbGeneroAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroAlbumActionPerformed
+    private void cbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGeneroActionPerformed
         // TODO add your handling code here:
         cbFecha.setSelected(false);
-        cbNombreAlbum.setSelected(false);
         uFav.jblFormatoFecha.setText("");
-    }//GEN-LAST:event_cbGeneroAlbumActionPerformed
+        cbcTipo.setSelectedIndex(0);
+    }//GEN-LAST:event_cbGeneroActionPerformed
 
-    private void cbNombreAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNombreAlbumActionPerformed
+    private void cbcTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbcTipoActionPerformed
         // TODO add your handling code here:
-        cbFecha.setSelected(false);
-        cbGeneroAlbum.setSelected(false);
-        uFav.jblFormatoFecha.setText("");
+        if(!cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Ninguno")){
+            cbFecha.setEnabled(false);
+            cbGenero.setEnabled(false);
+        }
+        else{
+            cbFecha.setEnabled(true);
+            cbGenero.setEnabled(true);
+        }
+            
         
-    }//GEN-LAST:event_cbNombreAlbumActionPerformed
+        
+    }//GEN-LAST:event_cbcTipoActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
     public javax.swing.JCheckBox cbFecha;
-    public javax.swing.JCheckBox cbGeneroAlbum;
-    public javax.swing.JCheckBox cbNombreAlbum;
+    public javax.swing.JCheckBox cbGenero;
+    protected javax.swing.JComboBox<String> cbcTipo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jblFlitroTipo;
+    private javax.swing.JLabel jblFlitroTipo1;
+    private javax.swing.JLabel jblFlitroTipo2;
     private javax.swing.JLabel jblFlitrosAlbumes;
     // End of variables declaration//GEN-END:variables
 }
