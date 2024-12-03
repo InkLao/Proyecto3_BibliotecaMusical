@@ -1,0 +1,11 @@
+db.getCollection("favoritos").insertOne({
+    "idUsuario" : "674d1c2a8ad9c67710571841",
+    "favorito" : [{
+                    "idFavorito" : "1",
+                    "fechaAgregacion" : new Date()
+                    },
+                    {
+                    "idFavorito" : "2",
+                    "fechaAgregacion" : new Date("2024-12-02")
+        
+                    }]
