@@ -2063,6 +2063,29 @@ public class FrmBuscador extends javax.swing.JFrame {
 
     private void jblArtistaFavorito1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtistaFavorito1MouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(artistas.get(indiceArtistaA).getIdDos());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblArtistaFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
         
         try{
         if(buscarFavorito(favoritos, artistas.get(indiceArtistaA).getIdDos())){
@@ -2108,11 +2131,35 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblArtistaFavorito1MouseClicked
 
     private void jblArtistaFavorito2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtistaFavorito2MouseClicked
         // TODO add your handling code here:
         
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(artistas.get(indiceArtistaB).getIdDos());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblArtistaFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
     try{
         if(buscarFavorito(favoritos, artistas.get(indiceArtistaB).getIdDos())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + artistas.get(indiceArtistaB).getNombreArtista()+ "?",
@@ -2155,11 +2202,36 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     
     }//GEN-LAST:event_jblArtistaFavorito2MouseClicked
 
     private void jblArtistaFavorito3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtistaFavorito3MouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(artistas.get(indiceArtistaC).getIdDos());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblArtistaFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
+        
     try{
         if(buscarFavorito(favoritos, artistas.get(indiceArtistaC).getIdDos())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + artistas.get(indiceArtistaC).getNombreArtista()+ "?",
@@ -2202,11 +2274,37 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
         
     }//GEN-LAST:event_jblArtistaFavorito3MouseClicked
 
     private void jblAlbumFavorito1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavorito1MouseClicked
         // TODO add your handling code here:
+                if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(albumes.get(indiceAlbumA).getIdAlbum());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblAlbumFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        
+                else{
+        
     try{
         if(buscarFavorito(favoritos, albumes.get(indiceAlbumA).getIdAlbum())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumA).getNombre()+ "?",
@@ -2249,10 +2347,35 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+                }
     }//GEN-LAST:event_jblAlbumFavorito1MouseClicked
 
     private void jblAlbumFavorito2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavorito2MouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(albumes.get(indiceAlbumB).getIdAlbum());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblAlbumFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        
+        else{
         try{
         if(buscarFavorito(favoritos, albumes.get(indiceAlbumB).getIdAlbum())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumB).getNombre()+ "?",
@@ -2295,10 +2418,34 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblAlbumFavorito2MouseClicked
 
     private void jblAlbumFavorito3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavorito3MouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(albumes.get(indiceAlbumC).getIdAlbum());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblAlbumFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        
     try{
         if(buscarFavorito(favoritos, albumes.get(indiceAlbumC).getIdAlbum())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumC).getNombre()+ "?",
@@ -2345,6 +2492,30 @@ public class FrmBuscador extends javax.swing.JFrame {
 
     private void jblCancionFavorito1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavorito1MouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(canciones.get(indiceCancionA).getIdCancion());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblCancionFavorito1, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        
+        else{    
     try{
         if(buscarFavorito(favoritos, canciones.get(indiceCancionA).getIdCancion())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionA).getNombreCancion()+ "?",
@@ -2387,10 +2558,35 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblCancionFavorito1MouseClicked
 
     private void jblCancionFavorito2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavorito2MouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(canciones.get(indiceCancionB).getIdCancion());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblCancionFavorito2, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }    
+        else{
+        
     try{
         if(buscarFavorito(favoritos, canciones.get(indiceCancionB).getIdCancion())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionB).getNombreCancion()+ "?",
@@ -2433,10 +2629,34 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblCancionFavorito2MouseClicked
 
     private void jblCancionFavorito3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavorito3MouseClicked
         // TODO add your handling code here:
+    if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(canciones.get(indiceCancionC).getIdCancion());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblCancionFavorito3, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+    else{
     try{
         if(buscarFavorito(favoritos, canciones.get(indiceCancionC).getIdCancion())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionC).getNombreCancion()+ "?",
@@ -2479,6 +2699,7 @@ public class FrmBuscador extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+    }
     }//GEN-LAST:event_jblCancionFavorito3MouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
