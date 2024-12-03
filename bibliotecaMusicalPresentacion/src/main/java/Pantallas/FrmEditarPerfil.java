@@ -24,57 +24,54 @@ import negocio.UsuarioNegocio;
  */
 public class FrmEditarPerfil extends javax.swing.JFrame {
 
-    
     FrmUsuarioPerfil usuarioPerfil;
     UsuarioDTO usuarioDTO;
-    
+    private String contrasenaOriginal;
+
     /**
      * Creates new form FrmEditarPerfil
      */
-    public FrmEditarPerfil(FrmUsuarioPerfil usuarioPerfil, UsuarioDTO usuarioDTO) {
+    public FrmEditarPerfil(FrmUsuarioPerfil usuarioPerfil, UsuarioDTO usuarioDTO, String contrasenaOriginal) {
         this.usuarioDTO = usuarioDTO;
         this.usuarioPerfil = usuarioPerfil;
-        
+        this.contrasenaOriginal = contrasenaOriginal;
+
         initComponents();
-        
+
         cargarDatos();
     }
 
-    
-    public void cargarDatos(){
-    
+    public void cargarDatos() {
+
         setImagenLabel(jblImagen, usuarioDTO.getImagen());
-        
+
         txtNombres.setText(usuarioDTO.getNombres());
         txtApellidoP.setText(usuarioDTO.getApellidoP());
         txtApellidoM.setText(usuarioDTO.getApellidoM());
         txtCorreo.setText(usuarioDTO.getCorreo());
-        txtContrasena.setText(usuarioDTO.getContrasena());
-                
-                
-                
+        txtContrasena.setText("");
+
     }
-    
-     /**
+
+    /**
      * Metodo que coloca una imagen en la interfaz
+     *
      * @param nombreJlb el jlabel que sera reemplazado por una imagen
      * @param ruta la direccion donde se encuentra la imagen
      */
-    private void setImagenLabel(JLabel nombreJlb, String ruta){
-    
+    private void setImagenLabel(JLabel nombreJlb, String ruta) {
+
         ImageIcon image = new ImageIcon(ruta);
-        
+
         Icon icon = new ImageIcon(
-        image.getImage().getScaledInstance(nombreJlb.getWidth(), nombreJlb.getHeight(), Image.SCALE_DEFAULT));
-        
+                image.getImage().getScaledInstance(nombreJlb.getWidth(), nombreJlb.getHeight(), Image.SCALE_DEFAULT));
+
         nombreJlb.setIcon(icon);
-        
+
         this.repaint();
-   
+
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,57 +91,39 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
         jblCorreo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jblContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         jblImagen = new javax.swing.JLabel();
         btnCargar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar Perfil");
-        setPreferredSize(new java.awt.Dimension(650, 550));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jblNombres.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblNombres.setForeground(new java.awt.Color(0, 0, 0));
         jblNombres.setText("Nombres");
 
         jblApellidoP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblApellidoP.setForeground(new java.awt.Color(0, 0, 0));
         jblApellidoP.setText("Apellido Paterno");
 
         jblApellidoM.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblApellidoM.setForeground(new java.awt.Color(0, 0, 0));
         jblApellidoM.setText("Apellido Materno");
 
-        txtNombres.setBackground(new java.awt.Color(255, 255, 255));
-        txtNombres.setForeground(new java.awt.Color(0, 0, 0));
         txtNombres.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        txtApellidoP.setBackground(new java.awt.Color(255, 255, 255));
-        txtApellidoP.setForeground(new java.awt.Color(0, 0, 0));
         txtApellidoP.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
-        txtApellidoM.setBackground(new java.awt.Color(255, 255, 255));
-        txtApellidoM.setForeground(new java.awt.Color(0, 0, 0));
         txtApellidoM.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblCorreo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblCorreo.setForeground(new java.awt.Color(0, 0, 0));
         jblCorreo.setText("Correo");
 
-        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
-        txtCorreo.setForeground(new java.awt.Color(0, 0, 0));
         txtCorreo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblContrasena.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jblContrasena.setForeground(new java.awt.Color(0, 0, 0));
         jblContrasena.setText("Contraseña");
-
-        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
-        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
-        txtContrasena.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jblImagen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
@@ -157,7 +136,6 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
         btnRegresar.setBackground(new java.awt.Color(14, 153, 217));
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(0, 0, 0));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,13 +145,14 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
         btnGuardar.setBackground(new java.awt.Color(30, 243, 11));
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
+
+        txtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -190,7 +169,6 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtContrasena)
                             .addComponent(txtCorreo)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +178,10 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jblApellidoP)
                                     .addComponent(txtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jblContrasena))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jblContrasena)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtContrasena))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,7 +196,7 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
                                             .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(77, 77, 77)
+                                        .addGap(76, 76, 76)
                                         .addComponent(btnCargar)))
                                 .addGap(50, 50, 50))))))
         );
@@ -233,20 +214,21 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
                     .addComponent(txtApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jblCorreo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jblContrasena))
-                            .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCargar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jblCorreo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnCargar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jblContrasena)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -270,7 +252,7 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         // TODO add your handling code here:
-        try{
+        try {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Selecciona una imagen");
             fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imágenes", "jpg", "png", "jpeg", "gif"));
@@ -282,15 +264,13 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
                 // Mostrar la imagen
                 ImageIcon image = new ImageIcon(selectedFile.getPath());
                 Icon icon = new ImageIcon(
-                    image.getImage().getScaledInstance(jblImagen.getWidth(), jblImagen.getHeight(), Image.SCALE_DEFAULT));
+                        image.getImage().getScaledInstance(jblImagen.getWidth(), jblImagen.getHeight(), Image.SCALE_DEFAULT));
 
                 jblImagen.setIcon(icon);
                 jblImagen.setText("");
 
             }
-        }
-
-        catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage());
 
         }
@@ -306,120 +286,82 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-
-        try{
-
+        try {
             String nombres = txtNombres.getText();
             String apellidoP = txtApellidoP.getText();
             String apellidoM = txtApellidoM.getText();
-            String correo = txtCorreo.getText();
-            String contra = txtContrasena.getText();
+            String nuevoCorreo = txtCorreo.getText();
+            String nuevaContrasena = new String(txtContrasena.getPassword());
 
             UsuarioDTO usuarioEditarDTO = new UsuarioDTO();
+            usuarioEditarDTO.setId(usuarioDTO.getId());
+            usuarioEditarDTO.setNombres(nombres);
+            usuarioEditarDTO.setApellidoP(apellidoP);
+            usuarioEditarDTO.setApellidoM(apellidoM);
+            usuarioEditarDTO.setCorreo(nuevoCorreo);
 
-            if(selectedFile == null && usuarioDTO.getImagen().equalsIgnoreCase("src/main/java/ImagenesProyecto/NoImagen.jpg")){
-
-                usuarioEditarDTO.setApellidoM(apellidoM);
-                usuarioEditarDTO.setApellidoP(apellidoP);
-                usuarioEditarDTO.setContrasena(contra);
-                usuarioEditarDTO.setCorreo(correo);
-                usuarioEditarDTO.setImagen("src/main/java/ImagenesProyecto/NoImagen.jpg");
-                usuarioEditarDTO.setNombres(nombres);
-                usuarioEditarDTO.setId(usuarioDTO.getId());
-
-                IUsuarioNegocio negocio = new UsuarioNegocio();
-                negocio.editarUsuario(usuarioEditarDTO);
-
-                JOptionPane.showMessageDialog(this,"Usuario actualizado con exito", "Mensaje de resultado ", JOptionPane.INFORMATION_MESSAGE );
-                System.out.println(usuarioEditarDTO.toString());
-
+            // Validar y encriptar contraseña si se edita
+            if (!nuevaContrasena.isEmpty()) {
+                if (nuevaContrasena.length() < 8) {
+                    JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                String contrasenaEncriptada = org.mindrot.jbcrypt.BCrypt.hashpw(nuevaContrasena, org.mindrot.jbcrypt.BCrypt.gensalt());
+                usuarioEditarDTO.setContrasena(contrasenaEncriptada);
+            } else {
+                // Mantener la contraseña anterior si no se editó
+                usuarioEditarDTO.setContrasena(usuarioDTO.getContrasena());
             }
 
-            else{
-
-                // Crear un nombre único para el archivo (usar timestamp)
+            // Manejo de imagen (igual que antes)
+            if (selectedFile == null && usuarioDTO.getImagen().equalsIgnoreCase("src/main/java/ImagenesProyecto/NoImagen.jpg")) {
+                usuarioEditarDTO.setImagen("src/main/java/ImagenesProyecto/NoImagen.jpg");
+            } else if (selectedFile != null) {
                 String fileExtension = getFileExtension(selectedFile);
-                if(fileExtension.equalsIgnoreCase("")){
-                    usuarioEditarDTO.setApellidoM(apellidoM);
-                    usuarioEditarDTO.setApellidoP(apellidoP);
-                    usuarioEditarDTO.setContrasena(contra);
-                    usuarioEditarDTO.setCorreo(correo);
-                    usuarioEditarDTO.setImagen("src/main/java/ImagenesProyecto/NoImagen.jpg");
-                    usuarioEditarDTO.setNombres(nombres);
-                    usuarioEditarDTO.setId(usuarioDTO.getId());
-
-                    IUsuarioNegocio negocio = new UsuarioNegocio();
-                    negocio.editarUsuario(usuarioEditarDTO);
-
-                    JOptionPane.showMessageDialog(this,"Usuario actualizado con exito", "Mensaje de resultado ", JOptionPane.INFORMATION_MESSAGE );
-                    System.out.println(usuarioEditarDTO.toString());
-
-                    usuarioPerfil.setVisible(true);
-                    this.dispose();
-                    
-                }
-                else{
                 String uniqueFileName = System.currentTimeMillis() + "." + fileExtension;
-
-                // Ruta donde se guardará la imagen
                 String destinationPath = "src/main/java/ImagenesUsuario/" + uniqueFileName;
                 File destinationFile = new File(destinationPath);
 
-                // Crear directorio si no existe
                 destinationFile.getParentFile().mkdirs();
-
-                // Copiar la imagen seleccionada
-                if(selectedFile.toPath() == null){
-                }
                 Files.copy(selectedFile.toPath(), destinationFile.toPath());
-
-                // Guardar la ruta en una variable
-                String savedImagePath = destinationFile.getAbsolutePath();
-                System.out.println("Imagen guardada en: " + savedImagePath);
-
-                usuarioEditarDTO.setApellidoM(apellidoM);
-                usuarioEditarDTO.setApellidoP(apellidoP);
-                usuarioEditarDTO.setContrasena(contra);
-                usuarioEditarDTO.setCorreo(correo);
                 usuarioEditarDTO.setImagen(destinationPath);
-                usuarioEditarDTO.setNombres(nombres);
-                usuarioEditarDTO.setId(usuarioDTO.getId());
-
-                IUsuarioNegocio negocio = new UsuarioNegocio();
-                negocio.editarUsuario(usuarioEditarDTO);
-
-                JOptionPane.showMessageDialog(this,"Usuario actualizado con exito", "Mensaje de resultado ", JOptionPane.INFORMATION_MESSAGE );
-                System.out.println(usuarioEditarDTO.toString());
-
-                usuarioPerfil.setVisible(true);
-                this.dispose();
-                }
+            } else {
+                usuarioEditarDTO.setImagen(usuarioDTO.getImagen());
             }
-        }
 
-        catch(IOException ex){
-            JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage());
+            // Guardar cambios en la base de datos
+            IUsuarioNegocio negocio = new UsuarioNegocio();
+            negocio.editarUsuario(usuarioEditarDTO);
 
+            JOptionPane.showMessageDialog(this, "Usuario actualizado con éxito.", "Mensaje de resultado", JOptionPane.INFORMATION_MESSAGE);
+
+            // Actualiza el objeto usuarioDTO con los nuevos datos
+            usuarioDTO = usuarioEditarDTO;
+
+            // Volver al perfil de usuario
+            usuarioPerfil.setVisible(true);
+            this.dispose();
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     // Método para obtener la extensión del archivo
     private static String getFileExtension(File file) {
-        
-        try{
-        String fileName = file.getName();
-        int lastIndex = fileName.lastIndexOf(".");
-        if (lastIndex > 0 && lastIndex < fileName.length() - 1) {
-            return fileName.substring(lastIndex + 1).toLowerCase();
+
+        try {
+            String fileName = file.getName();
+            int lastIndex = fileName.lastIndexOf(".");
+            if (lastIndex > 0 && lastIndex < fileName.length() - 1) {
+                return fileName.substring(lastIndex + 1).toLowerCase();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        }
-        catch(Exception e){
-              System.out.println(e.getMessage());  
-        }
-        
+
         return ""; // Sin extensión
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -435,7 +377,7 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel jblNombres;
     private javax.swing.JTextField txtApellidoM;
     private javax.swing.JTextField txtApellidoP;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombres;
     // End of variables declaration//GEN-END:variables

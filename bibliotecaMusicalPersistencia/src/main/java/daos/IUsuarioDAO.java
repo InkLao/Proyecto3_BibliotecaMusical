@@ -21,4 +21,7 @@ public interface IUsuarioDAO {
     
     Usuario buscarUsuarioIniciarSesion(String correo, String contra);
     
+    boolean existeCorreo(String correo);
+    
+    Usuario buscarUsuarioPorCorreo(String correo);
 }

@@ -19,5 +19,10 @@ public interface IUsuarioNegocio {
     
     UsuarioDTO buscarUsuario(Object id);
     
+    UsuarioDTO buscarUsuarioPorCorreo(String correo);
+    
     UsuarioDTO buscarUsuarioIniciarSesion(String correo, String contra);
+    
+    boolean correoExiste(String correo);
+
 }
