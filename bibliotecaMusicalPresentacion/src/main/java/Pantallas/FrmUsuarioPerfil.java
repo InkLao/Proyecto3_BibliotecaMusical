@@ -209,7 +209,8 @@ public class FrmUsuarioPerfil extends javax.swing.JFrame {
     private void btnEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarPerfilActionPerformed
         // TODO add your handling code here:
         usuarioDTO = usuarioNegocio.buscarUsuario(usuarioDTO.getId());
-        FrmEditarPerfil editarPerfil = new FrmEditarPerfil(this, usuarioDTO);
+        String contrasenaSinEncriptar = "CONTRASEÑA_ORIGINAL";
+        FrmEditarPerfil editarPerfil = new FrmEditarPerfil(this, usuarioDTO, contrasenaSinEncriptar);
         editarPerfil.setVisible(true);
         this.setVisible(false);
                 
