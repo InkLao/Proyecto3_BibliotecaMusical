@@ -49,7 +49,7 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
         txtApellidoP.setText(usuarioDTO.getApellidoP());
         txtApellidoM.setText(usuarioDTO.getApellidoM());
         txtCorreo.setText(usuarioDTO.getCorreo());
-        txtContrasena.setText(usuarioDTO.getContrasena());
+        txtContrasena.setText("");
 
     }
 
@@ -290,7 +290,7 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
             String nombres = txtNombres.getText();
             String apellidoP = txtApellidoP.getText();
             String apellidoM = txtApellidoM.getText();
-            String nuevoCorreo = txtCorreo.getText(); // Captura el nuevo correo
+            String nuevoCorreo = txtCorreo.getText();
             String nuevaContrasena = new String(txtContrasena.getPassword());
 
             UsuarioDTO usuarioEditarDTO = new UsuarioDTO();
@@ -298,13 +298,18 @@ public class FrmEditarPerfil extends javax.swing.JFrame {
             usuarioEditarDTO.setNombres(nombres);
             usuarioEditarDTO.setApellidoP(apellidoP);
             usuarioEditarDTO.setApellidoM(apellidoM);
-            usuarioEditarDTO.setCorreo(nuevoCorreo); // Actualiza el correo
+            usuarioEditarDTO.setCorreo(nuevoCorreo);
 
-            // Verificar si la contraseña ha cambiado
-            if (!nuevaContrasena.equals(contrasenaOriginal)) {
+            // Validar y encriptar contraseña si se edita
+            if (!nuevaContrasena.isEmpty()) {
+                if (nuevaContrasena.length() < 8) {
+                    JOptionPane.showMessageDialog(this, "La contraseña debe tener al menos 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 String contrasenaEncriptada = org.mindrot.jbcrypt.BCrypt.hashpw(nuevaContrasena, org.mindrot.jbcrypt.BCrypt.gensalt());
                 usuarioEditarDTO.setContrasena(contrasenaEncriptada);
             } else {
+                // Mantener la contraseña anterior si no se editó
                 usuarioEditarDTO.setContrasena(usuarioDTO.getContrasena());
             }
 
