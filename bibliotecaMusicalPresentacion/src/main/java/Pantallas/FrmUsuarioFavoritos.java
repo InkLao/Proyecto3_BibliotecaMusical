@@ -45,6 +45,10 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
     static List<CancionDTO> canciones;
     static List<FavoritoDTO> favoritos;
     static List<String> generoNoDeseado;
+    static List<ArtistaDTO> todosArtistas;
+    static List<AlbumDTO> todosAlbumes;
+    static List<CancionDTO> todasCanciones;
+            
 
     static int indiceArtistaA = 0;
     static int indiceArtistaB = 1;
@@ -84,13 +88,13 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
         favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(String.valueOf(usuarioDTO.getId()));
         System.out.println("Favoritos obtenidos: " + favoritos);
 
-        List<ArtistaDTO> todosArtistas = negocio.obtenerTodos();
+        todosArtistas = negocio.obtenerTodos();
         System.out.println("Artistas obtenidos: " + todosArtistas);
 
-        List<AlbumDTO> todosAlbumes = negocio.obtenerTodosAlbumesEnArtista();
+        todosAlbumes = negocio.obtenerTodosAlbumesEnArtista();
         System.out.println("Álbumes obtenidos: " + todosAlbumes);
 
-        List<CancionDTO> todasCanciones = negocio.obtenerTodasCancionesEnArtista();
+        todasCanciones = negocio.obtenerTodasCancionesEnArtista();
         System.out.println("Canciones obtenidas: " + todasCanciones);
 
         System.out.println("Favoritos obtenidos de la base de datos: " + favoritos);
@@ -2888,6 +2892,18 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
                     System.out.println(sdf.format(favoritos.get(0).getFechaAgregacion()).toString());
                     System.out.println(texto.equalsIgnoreCase(sdf.format(favoritos.get(0).getFechaAgregacion()).toString()));
                     favoritos.removeIf(FavoritoDTO -> !texto.equalsIgnoreCase(sdf.format(FavoritoDTO.getFechaAgregacion()).toString()));
+                    
+                    List<String> listaFa = new ArrayList<>();
+                    for(int i = 0; i < favoritos.size(); i++){
+                        listaFa.add(favoritos.get(i).getIdFavorito());
+                    }
+                    
+                    
+                  
+                        canciones.removeIf(CancionDTO -> !listaFa.contains(CancionDTO.getIdCancion()));
+                        albumes.removeIf(AlbumDTO -> !listaFa.contains(AlbumDTO.getIdAlbum()));
+                        artistas.removeIf(ArtistaDTO -> !listaFa.contains(ArtistaDTO.getIdDos()));
+                   
 
                     System.out.println("hay despues favo: " + favoritos.size());
                     
@@ -2895,13 +2911,12 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
                     filtrarFavoritosArtistas(artistas, favoritos);
                     filtrarFavoritosCanciones(canciones, favoritos);
                     
-                    cargarDatos2();
 
                 } catch (ParseException ex) {
                     Logger.getLogger(FrmUsuarioFavoritos.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                cargarDatos();
+                cargarDatos2();
                 
             } 
             
