@@ -140,11 +140,6 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
 
     public void cargarDatos() {
 
-        if (artistas.isEmpty() || albumes.isEmpty() || canciones.isEmpty()) {
-            System.out.println("Una de las listas está vacía.");
-            return;
-        }
-
         jblCantidadArtistas.setText("Artistas: " + artistas.size());
         jblCantidadAlbumes.setText("Albumes: " + albumes.size());
         jblCantidadCanciones.setText("Canciones: " + canciones.size());
@@ -2462,4 +2457,29 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
     private javax.swing.JLabel jblNombreCancion3;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
+
+    public void imprimirFavoritos() {
+    if (!artistas.isEmpty()) {
+        System.out.println("Artistas favoritos:");
+        artistas.forEach(artista -> System.out.println(" - " + artista.getNombreArtista()));
+    } else {
+        System.out.println("No hay artistas favoritos.");
+    }
+
+    if (!albumes.isEmpty()) {
+        System.out.println("Álbumes favoritos:");
+        albumes.forEach(album -> System.out.println(" - " + album.getNombre()));
+    } else {
+        System.out.println("No hay álbumes favoritos.");
+    }
+
+    if (!canciones.isEmpty()) {
+        System.out.println("Canciones favoritas:");
+        canciones.forEach(cancion -> System.out.println(" - " + cancion.getNombreCancion()));
+    } else {
+        System.out.println("No hay canciones favoritas.");
+    }
+}
+
+
 }
