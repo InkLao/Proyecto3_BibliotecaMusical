@@ -335,6 +335,10 @@ public class FrmRegistrarse extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error al guardar la imagen: " + ex.getMessage());
 
         }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(this, "la contra debe tener 8 caracteres como minimo ", "Error mensaje" , JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarse1ActionPerformed
 
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
