@@ -2827,7 +2827,7 @@ public class FrmUsuarioFavoritos extends javax.swing.JFrame {
             cargarDatos();
 
         } else {
-            if (!filtrosBuscador.cbFecha.isSelected() && !filtrosBuscador.cbGenero.isSelected() && !filtrosBuscador.cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Ninguno")) {
+            if (!filtrosBuscador.cbFecha.isSelected() && !filtrosBuscador.cbGenero.isSelected() && filtrosBuscador.cbcTipo.getSelectedItem().toString().equalsIgnoreCase("Ninguno")) {
                 if (existeArtista(texto) || existeAlbum(texto) || existeCancion(texto) || existeGeneroArtista(texto) || existeGeneroAlbum(texto)) {
                     artistas.removeIf(ArtistaDTO -> !ArtistaDTO.getNombreArtista().equalsIgnoreCase(texto) && !ArtistaDTO.getGenero().equalsIgnoreCase(texto));
                     albumes.removeIf(AlbumesDTO -> !AlbumesDTO.getNombre().equalsIgnoreCase(texto) && !AlbumesDTO.getGenero().equalsIgnoreCase(texto));
