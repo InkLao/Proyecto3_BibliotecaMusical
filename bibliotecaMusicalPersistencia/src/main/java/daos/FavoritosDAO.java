@@ -38,6 +38,8 @@ public class FavoritosDAO implements IFavoritosDAO {
      */
     @Override
     public Favoritos agregarFavoritos(Favoritos favoritos) {
+        
+        
         collectionFavoritos.insertOne(favoritos);
         return favoritos;
     }
@@ -49,8 +51,10 @@ public class FavoritosDAO implements IFavoritosDAO {
      * @return El objeto Favoritos actualizado o null si ocurre un error.
      */
     @Override
+
     public Favoritos actualizarFavoritos(Favoritos favoritos) {
             try {
+
                 Document query = new Document("idUsuario", favoritos.getIdUsuario());
                 Document update = new Document("$push", new Document("favorito", 
                         new Document("idFavorito", favoritos.getFavorito().get(0).getIdFavorito())
@@ -61,7 +65,6 @@ public class FavoritosDAO implements IFavoritosDAO {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
         
 
         return null;

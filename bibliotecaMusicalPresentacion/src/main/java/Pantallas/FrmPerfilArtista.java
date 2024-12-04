@@ -81,9 +81,17 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         canciones = negocio.obtenerTodasCancionesEnArtistaEspecifico(artista.getId());
         favoritos = favoritosNegocio.obtenerFavoritosPorUsuario(usuarioDTO.getId().toString());
         
+        String tipoArtista = "";
+        if(artista.getIntegrantes().size() > 1){
+            tipoArtista = "Banda";
+        }
+        else{
+            tipoArtista = "Solista";
+        }
+        
         
         setImagenLabel(jblImagenArtista, artista.getImagen());
-        jblNombreArtista.setText(artista.getNombreArtista());
+        jblNombreArtista.setText(tipoArtista + ": " +artista.getNombreArtista());
         jblGenero.setText("Genero: " + artista.getGenero());
         
        if(buscarFavorito(favoritos, artista.getIdDos())){
@@ -493,43 +501,41 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jblImagenArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jblNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnMostrarTodosIntegrantes))
-                            .addComponent(cbcIntegrantes, 0, 234, Short.MAX_VALUE))
-                        .addGap(96, 96, 96)
-                        .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnMostrarTodosIntegrantes))
+                                .addComponent(cbcIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(96, 96, 96)
+                            .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jblGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jblNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jblImagenArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jblNombreArtista)
-                            .addComponent(jblGenero))
-                        .addGap(23, 23, 23)
+                        .addComponent(jblNombreArtista)
+                        .addGap(16, 16, 16)
+                        .addComponent(jblGenero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(btnMostrarTodosIntegrantes))
-                                .addGap(49, 49, 49))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jblArtistaFavorito, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cbcIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jblImagenArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                                .addGap(2, 2, 2)
+                                .addComponent(cbcIntegrantes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -807,7 +813,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(148, Short.MAX_VALUE)
+                .addContainerGap(186, Short.MAX_VALUE)
                 .addComponent(jblAlbumes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -821,7 +827,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 302, Short.MAX_VALUE)))
+                    .addGap(0, 319, Short.MAX_VALUE)))
         );
 
         btnRegresar.setBackground(new java.awt.Color(8, 148, 249));
@@ -1246,6 +1252,29 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
 
     private void jblAlbumFavoritoAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavoritoAMouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(albumes.get(indiceAlbumA).getIdAlbum());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblAlbumFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
         try{
         if(buscarFavorito(favoritos, albumes.get(indiceAlbumA).getIdAlbum())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumA).getNombre()+ "?",
@@ -1288,10 +1317,34 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblAlbumFavoritoAMouseClicked
 
     private void jblAlbumFavoritoBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavoritoBMouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(albumes.get(indiceAlbumB).getIdAlbum());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblAlbumFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{ 
         try{
         if(buscarFavorito(favoritos, albumes.get(indiceAlbumB).getIdAlbum())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumB).getNombre()+ "?",
@@ -1334,10 +1387,35 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblAlbumFavoritoBMouseClicked
 
     private void jblAlbumFavoritoCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblAlbumFavoritoCMouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(albumes.get(indiceAlbumC).getIdAlbum());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblAlbumFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        
+        else{
         try{
         if(buscarFavorito(favoritos, albumes.get(indiceAlbumC).getIdAlbum())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + albumes.get(indiceAlbumC).getNombre()+ "?",
@@ -1380,10 +1458,35 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblAlbumFavoritoCMouseClicked
 
     private void jblCancionFavoritoAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavoritoAMouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(canciones.get(indiceCancionA).getIdCancion());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblCancionFavoritoA, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
+        
         try{
         if(buscarFavorito(favoritos, canciones.get(indiceCancionA).getIdCancion())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionA).getNombreCancion()+ "?",
@@ -1426,10 +1529,35 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblCancionFavoritoAMouseClicked
 
     private void jblCancionFavoritoBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavoritoBMouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(canciones.get(indiceCancionB).getIdCancion());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblCancionFavoritoB, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        
+        else{
         try{
         if(buscarFavorito(favoritos, canciones.get(indiceCancionB).getIdCancion())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionB).getNombreCancion()+ "?",
@@ -1472,11 +1600,35 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblCancionFavoritoBMouseClicked
 
     private void jblCancionFavoritoCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCancionFavoritoCMouseClicked
         // TODO add your handling code here:
-                        try{
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(canciones.get(indiceCancionC).getIdCancion());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblCancionFavoritoC, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
+        try{
         if(buscarFavorito(favoritos, canciones.get(indiceCancionC).getIdCancion())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + canciones.get(indiceCancionC).getNombreCancion()+ "?",
             "Confirmación",
@@ -1518,10 +1670,34 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
     }//GEN-LAST:event_jblCancionFavoritoCMouseClicked
 
     private void jblArtistaFavoritoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblArtistaFavoritoMouseClicked
         // TODO add your handling code here:
+        if(favoritos.size() == 0){
+            
+                FavoritosDTO favoritoDTO = new FavoritosDTO();
+
+                FavoritoDTO favo = new FavoritoDTO();
+
+                favo.setFechaAgregacion(new Date());
+                favo.setIdFavorito(artista.getIdDos());
+                System.out.println(favo.getIdFavorito());
+                System.out.println(usuarioDTO.getId());
+
+                List<FavoritoDTO> lista = new ArrayList<>();
+                lista.add(favo);
+
+                favoritoDTO.setIdUsuario(usuarioDTO.getId().toString());
+                favoritoDTO.setFavorito(lista);
+
+                favoritosNegocio.agregarFavoritos(favoritoDTO);
+                setImagenLabel(jblArtistaFavorito, "src/main/java/ImagenesProyecto/FavoritoSi.png");
+                System.out.println("Favorito agregado");
+                favoritos.add(favo);
+        }
+        else{
         try{
         if(buscarFavorito(favoritos, artista.getIdDos())){
            int opcion = JOptionPane.showConfirmDialog(null,"¿Estás seguro de quitar de favoritos a: " + artista.getNombreArtista() + "?",
@@ -1563,6 +1739,7 @@ public class FrmPerfilArtista extends javax.swing.JFrame {
         }
         catch(Exception e){
             System.out.println(e.getMessage());
+        }
         }
     }//GEN-LAST:event_jblArtistaFavoritoMouseClicked
 
